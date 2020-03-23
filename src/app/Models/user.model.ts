@@ -1,3 +1,5 @@
+import { Role } from './role.model';
+
 export class Account{
     id:number;
     fistname:string;
@@ -7,6 +9,6 @@ export class Account{
 	passport:string;
 	username:string;
 	password:string;
-	role: string[];
+	role: Role;
 	constructor(){}	
 }

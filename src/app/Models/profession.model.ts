@@ -1,0 +1,3 @@
+export enum Profession {
+	JOBLESS, RETIRED, PHYSICAL, INTELLECTUAL
+}

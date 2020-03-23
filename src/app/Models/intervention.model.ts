@@ -2,7 +2,8 @@ import { Patient } from './patient.model';
 
 export class Intervention{
     id:number;
-    commentaire:string;
+    description:string;
+    date:Date;
     patient:Patient;
     constructor(){}
 }

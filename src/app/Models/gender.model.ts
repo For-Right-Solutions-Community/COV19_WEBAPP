@@ -1,6 +1,3 @@
-export class Gender{
-  id:number;
-  code:string;
-  name:string;
-  constructor(){}
+export enum Gender {
+	MALE, FEMALE
 }
