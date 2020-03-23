@@ -7,10 +7,23 @@ import { PatientListComponent } from './patient-list/patient-list.component';
 import { CreatePatientComponent } from './create-patient/create-patient.component';
 import { UpdatePatientComponent } from './update-patient/update-patient.component';
 import { CriticalPatientComponent } from './critical-patient/critical-patient.component';
+import { NbInputModule, NbCardModule, NbButtonModule, NbActionsModule, NbUserModule, NbCheckboxModule, NbRadioModule, NbDatepickerModule, NbSelectModule, NbIconModule } from '@nebular/theme';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 @NgModule({
     imports: [
       ThemeModule,
       PatientRoutingModule,
+      NbInputModule,
+      NbCardModule,
+      NbButtonModule,
+      NbActionsModule,
+      NbUserModule,
+      NbCheckboxModule,
+      NbRadioModule,
+      NbDatepickerModule,
+      NbSelectModule,
+      NbIconModule,
+      Ng2SmartTableModule,
     ],
     declarations: [
         PatientComponent, 

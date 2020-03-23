@@ -1,3 +1,190 @@
-<p>
-  update-patient works!
-</p>
+<nb-card>
+  <nb-card-header>Modifier la fiche patient</nb-card-header>
+  <nb-card-body>
+    <form action="">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="label">Nom</label>
+          <input type="text" nbInput fullWidth  placeholder="Nom">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label  class="label">Prénom</label>
+          <input type="text" nbInput fullWidth  placeholder="Prénom">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label  class="label">CIN</label>
+          <input type="text" nbInput fullWidth  placeholder="CIN">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputWebsite" class="label">Téléphone</label>
+          <input type="tel" nbInput fullWidth  placeholder="Téléphone">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+          <div class="form-group">
+            <label  class="label">Genre</label>
+            <nb-select selected="1" fullWidth>
+              <nb-option value="1">Option 1</nb-option>
+            </nb-select>
+          </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label  class="label">Age</label>
+          <input type="number" nbInput fullWidth  placeholder="Age">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label  class="label">Poids</label>
+          <input type="text" nbInput fullWidth  placeholder="Poids">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label  class="label">Longueur</label>
+          <input type="text" nbInput fullWidth  placeholder="Longueur">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputLastName" class="label">Etat civil</label>
+          <nb-select selected="1" fullWidth>
+            <nb-option value="1">Option 1</nb-option>
+          </nb-select>
+        </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="inputLastName" class="label">Profession</label>
+        <nb-select selected="1" fullWidth>
+          <nb-option value="1">Option 1</nb-option>
+        </nb-select>
+      </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="form-group">
+        <nb-checkbox>Handicapé</nb-checkbox>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <nb-checkbox>Handicape Physique</nb-checkbox>
+        <nb-checkbox>Handicape intellectuelle</nb-checkbox>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 label">Est ce que vous habitez ?</label>
+    <div class="col-sm-2">
+      <nb-radio-group>
+        <nb-radio>Seul(e)</nb-radio>
+        <nb-radio>Avec la famille</nb-radio>
+      </nb-radio-group>  
+    </div>
+    </div>
+    <div class="form-group row">
+      <label f class="label col-sm-2 col-form-label">Nombre de personnes :</label>
+      <div class="col-sm-4">
+        <input type="number" nbInput fullWidth  placeholder="Nombre de personnes">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="label">Est ce que vous avez dans votre maison ?</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <nb-checkbox>Eau courante</nb-checkbox>
+          <nb-checkbox>Eau chaude</nb-checkbox>
+          <nb-checkbox>Evacuation des eaux usées (ONAS)</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 label">Possibilité d’avoir une chambre seule ?</label>
+      <div class="col-sm-4">
+        <nb-radio-group>
+          <nb-radio>Oui (avec porte fermée/fenêtre/douche)</nb-radio>
+          <nb-radio>Non</nb-radio>
+        </nb-radio-group>  
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <nb-checkbox>J'était en voyage au cours du moi dernier</nb-checkbox>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="form-group">
+            <input type="text" nbInput fullWidth  placeholder="Pays">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="form-group">
+            <nb-checkbox>J'était en contact avec une personne qui revient d’un voyage</nb-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <nb-checkbox>Habite avec nous à la maison</nb-checkbox>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="form-group">
+            <input type="text" nbInput fullWidth  placeholder="du quel pays ?">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <nb-checkbox>J'ai subi le test de dépistage du virus corona</nb-checkbox>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="form-group">
+            <input type="text" nbInput fullWidth  placeholder="Resultat">
+          </div>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <button type="submit" nbButton>Modifier</button>
+      </div>
+      <div class="col-sm-1">
+        <button type="submit" nbButton status="danger">Annuler</button>
+      </div>  
+    </div>
+  </form>
+  </nb-card-body>
+</nb-card>
+

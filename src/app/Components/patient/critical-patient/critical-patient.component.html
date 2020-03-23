@@ -1,3 +1,9 @@
-<p>
-  critical-patient works!
-</p>
+<nb-card>
+  <nb-card-header>
+    Liste des cas critiques
+  </nb-card-header>
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

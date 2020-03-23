@@ -1,3 +1,109 @@
-<p>
-  create-symptom works!
-</p>
+<nb-card>
+  <nb-card-header>Ajouter les symptômes d'un patient</nb-card-header>
+  <nb-card-body>
+    <form>
+      <div class="form-group row">
+        <label  class="label col-sm-2 col-form-label">Patient :</label>
+        <div class="col-sm-10">
+          <nb-select selected="1" fullWidth>
+            <nb-option value="1">Option 1</nb-option>
+          </nb-select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="label col-sm-2 col-form-label">Date de mise à jour des symptômes :</label>
+        <div class="col-sm-10">
+          <input nbInput
+               placeholder=""
+               [nbDatepicker]="formpicker" fullWidth>
+            <nb-datepicker #formpicker></nb-datepicker>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Exposition</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Fièvre</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Toux</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Dyspnée</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Mal de gorge</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Nausée</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Vomissements</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Diarrhée</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Insuffisance rénale</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Insuffisance cardiaque</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Insuffisance respiratoire chronique</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <button type="submit" nbButton>Ajouter</button>
+      </div>
+      <div class="col-sm-1">
+        <button type="submit" nbButton status="danger">Annuler</button>
+      </div>  
+    </div>
+    </form>
+  </nb-card-body>
+</nb-card>

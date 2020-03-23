@@ -1,3 +1,170 @@
-<p>
-  update-antecedent works!
-</p>
+<nb-card>
+  <nb-card-header>Modifier les antécédents d'un patient</nb-card-header>
+  <nb-card-body>
+    <form>
+      <div class="row">
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label  class="label">Patient :</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <nb-select selected="1" fullWidth>
+              <nb-option value="1">Option 1</nb-option>
+            </nb-select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Maladies associées :</label>
+          </div>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Respiratoire</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <nb-checkbox>Asthme</nb-checkbox>
+          <nb-checkbox>Bronchopneumopathies obstructives (BPCO)</nb-checkbox>
+          <nb-checkbox>Opéré sur le thorax</nb-checkbox>
+          <nb-checkbox>Autres</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Diabète</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputDiabeteNbMonths" class="label col-sm-2 col-form-label">Nombre de mois :</label>
+      <div class="col-sm-10">
+        <input type="number" nbInput fullWidth id="inputDiabeteNbMonths" placeholder="Depuis quand ?">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Complications</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <nb-checkbox>Yeux</nb-checkbox>
+          <nb-checkbox>Cœur</nb-checkbox>
+          <nb-checkbox>Reins</nb-checkbox>
+          <nb-checkbox>Pieds</nb-checkbox>
+          <nb-checkbox>Autres</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Hypertension artérielle</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputHypertensionNbMonths" class="label col-sm-2 col-form-label">Nombre de mois :</label>
+      <div class="col-sm-10">
+        <input type="number" nbInput fullWidth id="inputHypertensionNbMonths" placeholder="Depuis quand ?">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Cardiaques</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <nb-checkbox>Coronarien</nb-checkbox>
+          <nb-checkbox>Insuffisance cardiaque</nb-checkbox>
+          <nb-checkbox>Autres</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Rénales</nb-checkbox>
+          <nb-checkbox>Hémodialyse</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Cancer</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="label">Siège :</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <nb-checkbox>Poumon</nb-checkbox>
+          <nb-checkbox>Foie</nb-checkbox>
+          <nb-checkbox>ORL</nb-checkbox>
+          <nb-checkbox>Autres</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="label">Traitement :</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <nb-checkbox>Chimiothérapie</nb-checkbox>
+          <nb-checkbox>Radiothérapie</nb-checkbox>
+          <nb-checkbox>Chirurgie</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox>Maladie immunitaire</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <button type="submit" nbButton>Modifier</button>
+      </div>
+      <div class="col-sm-1">
+        <button type="submit" nbButton status="danger">Annuler</button>
+      </div>  
+    </div>
+    </form>
+  </nb-card-body>
+</nb-card>

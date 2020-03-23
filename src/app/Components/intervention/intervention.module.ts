@@ -6,11 +6,24 @@ import { InterventionListComponent } from './intervention-list/intervention-list
 import { CreateInterventionComponent } from './create-intervention/create-intervention.component';
 import { UpdateInterventionComponent } from './update-intervention/update-intervention.component';
 import { InterventionRoutingModule } from './intervention-routing.module';
+import { NbInputModule, NbCardModule, NbButtonModule, NbActionsModule, NbUserModule, NbCheckboxModule, NbRadioModule, NbDatepickerModule, NbSelectModule, NbIconModule } from '@nebular/theme';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
     imports: [
       ThemeModule,
       InterventionRoutingModule,
+      NbInputModule,
+      NbCardModule,
+      NbButtonModule,
+      NbActionsModule,
+      NbUserModule,
+      NbCheckboxModule,
+      NbRadioModule,
+      NbDatepickerModule,
+      NbSelectModule,
+      NbIconModule,
+      Ng2SmartTableModule,
     ],
     declarations: [
         InterventionComponent, 
