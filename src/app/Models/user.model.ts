@@ -1,6 +1,6 @@
 import { Role } from './role.model';
 
-export class Account{
+export class User{
     id:number;
     fistname:string;
 	lastname:string;
