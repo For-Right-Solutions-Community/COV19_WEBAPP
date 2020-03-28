@@ -1,7 +1,60 @@
 <nb-card>
-  <nb-card-header>Signes vitaux du patient x à la date x</nb-card-header>
+  <nb-card-header>Détails des mesures des signes vitaux du patient {{vital.patient.firstname}} {{vital.patient.lastname}}</nb-card-header>
   <nb-card-body>
-    <p>Détails.....</p>
+    <form [formGroup]="registerForm" novalidate>
+      <div class="form-group row">
+        <label  class="label col-sm-2 col-form-label">Patient :</label>
+        <div class="col-sm-10">
+          <nb-select formControlName="patient" fullWidth  name="patient" [(ngModel)]="vital.patient" required 
+          [ngClass]="{ 'is-invalid': submitted && f.patient.errors }">
+          <nb-option *ngFor="let pat of patients" [value]="pat.id">{{pat.firstname}} {{pat.lastname}}</nb-option>
+        </nb-select>
+        <div *ngIf="submitted && f.patient.errors">
+          <div style="color:red;" *ngIf="f.patient.errors.required">Le patient est requis !</div>
+        </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="label col-sm-2 col-form-label">Date de prélèvement des mesures :</label>
+        <div class="col-sm-10">
+          <input formControlName="measurementDate" nbInput
+               placeholder=""
+               [nbDatepicker]="formpicker" fullWidth
+               name="measurementDate" [(ngModel)]="vital.measurementDate"
+              [ngClass]="{ 'is-invalid': submitted && f.measurementDate.errors }"  required/>
+            <nb-datepicker #formpicker></nb-datepicker>
+            <div *ngIf="submitted && f.measurementDate.errors">
+              <div style="color:red;" *ngIf="f.measurementDate.errors.required">La date est requise !</div>
+            </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label  class="label col-sm-2 col-form-label">Température :</label>
+        <div class="col-sm-10">
+          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="temperature" [(ngModel)]="vital.temperature">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="label col-sm-2 col-form-label">Pression artérielle :</label>
+        <div class="col-sm-10">
+          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth placeholder="" name="bloodPressure" [(ngModel)]="vital.bloodPressure">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label  class="label col-sm-2 col-form-label">Impulsion :</label>
+        <div class="col-sm-10">
+          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="pulse" [(ngModel)]="vital.pulse">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label  class="label col-sm-2 col-form-label">Fréquence respiratoire :</label>
+        <div class="col-sm-10">
+          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="respiratoryRate" [(ngModel)]="vital.respiratoryRate">
+        </div>
+      </div>
+    </form>
   </nb-card-body>
 </nb-card>
+
+
 

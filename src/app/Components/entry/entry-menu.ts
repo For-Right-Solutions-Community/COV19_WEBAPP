@@ -88,10 +88,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/menu/users/userList',
       },
     ],
-  },
+  }/*,
   {
     title: 'Localisation des patients',
     icon: 'home-outline',
     link: '/menu/localisation',
-  },
+  },*/
 ];

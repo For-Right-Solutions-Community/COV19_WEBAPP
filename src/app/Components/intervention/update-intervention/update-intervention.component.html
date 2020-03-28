@@ -1,22 +1,34 @@
 <nb-card>
   <nb-card-header>Modifier une intervention pour un patient</nb-card-header>
   <nb-card-body>
-    <form>
+    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
+      l'intervention est modifiée avec succès !
+    </nb-alert>
+    <form [formGroup]="registerForm" novalidate>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Patient :</label>
         <div class="col-sm-10">
-          <nb-select selected="1" fullWidth>
-            <nb-option value="1">Option 1</nb-option>
-          </nb-select>
+          <nb-select formControlName="patient" fullWidth  name="patient" [(ngModel)]="intervention.patient" required 
+          [ngClass]="{ 'is-invalid': submitted && f.patient.errors }">
+          <nb-option *ngFor="let pat of patients" [value]="pat">{{pat.firstname}} {{pat.lastname}}</nb-option>
+        </nb-select>
+        <div *ngIf="submitted && f.patient.errors">
+          <div style="color:red;" *ngIf="f.patient.errors.required">Le patient est requis !</div>
+        </div>
         </div>
       </div>
       <div class="form-group row">
         <label class="label col-sm-2 col-form-label">Date de l'intervention :</label>
         <div class="col-sm-10">
-          <input nbInput
+          <input formControlName="date" nbInput
                placeholder=""
-               [nbDatepicker]="formpicker" fullWidth>
+               [nbDatepicker]="formpicker" fullWidth
+               name="date" [(ngModel)]="intervention.date"
+              [ngClass]="{ 'is-invalid': submitted && f.date.errors }"  required/>
             <nb-datepicker #formpicker></nb-datepicker>
+            <div *ngIf="submitted && f.date.errors">
+              <div style="color:red;" *ngIf="f.date.errors.required">La date est requise !</div>
+            </div>
         </div>
       </div>
       <div class="row">
@@ -29,16 +41,26 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group">
-            <textarea rows="20" nbInput fullWidth shape="round"  placeholder="Détails de l'intervention..."></textarea>
+            <textarea formControlName="description" rows="20" nbInput fullWidth shape="round"  placeholder="Détails de l'intervention..." 
+            name="description" [(ngModel)]="intervention.description"
+              [ngClass]="{ 'is-invalid': submitted && f.date.errors }"  required></textarea>
+            <div *ngIf="submitted && f.description.errors">
+              <div style="color:red;" *ngIf="f.description.errors.required">La description est requise !</div>
+            </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-2">
-          <button type="submit" nbButton>Modifier</button>
+          <button type="button" nbButton (click)="onSubmit()">Modifier</button>
+            <br>
+            <br>
+            <div *ngIf="submitted && isSignUpFailed" class="alert alert-warning">              
+              La Modification a échouée !<br/>{{errorMessage}}
+            </div>
         </div>
         <div class="col-sm-1">
-          <button type="submit" nbButton status="danger">Annuler</button>
+          <button type="button" nbButton status="danger" (click)="reset()">Annuler</button>
         </div>  
       </div>
     </form>

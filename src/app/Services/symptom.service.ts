@@ -7,13 +7,11 @@ import { Symptom } from '../Models/symptom.model';
   providedIn: 'root'
 })
 export class SymptomService {
-
-  private baseUrl = environment.apiurl+'symptoms';
-
   public showlist = true;
-  public showadd = false ;
-  public showdetails = false ;
-  public showedit = false ;
+  public showedit = false;
+  public  showadd = false;
+  public showdetails = false;
+  private baseUrl = environment.apiurl+'symptomRecords';
 
   constructor(private http: HttpClient) { }
 

@@ -7,9 +7,7 @@ import { Localisation } from '../Models/localisation.model';
 })
 export class LocalisationService {
 
-  private baseUrl = environment.apiurl+'localisations';
-
-  public showlist = true;
+  private baseUrl = environment.apiurl+'locations';
   constructor(private http: HttpClient) { }
 
   getLocalisationsList() {

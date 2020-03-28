@@ -1,18 +1,31 @@
 <nb-card>
   <nb-card-header>Fiche patient</nb-card-header>
   <nb-card-body>
-    <form action="">
+    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
+      Fiche Patient enregistrée avec succès !
+    </nb-alert> 
+    <form [formGroup]="registerForm" novalidate>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label class="label">Nom</label>
-          <input type="text" nbInput fullWidth  placeholder="Nom">
+          <label class="label">Prénom</label>
+          <input formControlName="firstname" type="text" nbInput fullWidth  placeholder="Prénom" 
+          name="firstname" [(ngModel)]="patient.firstname"  
+          [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" required />
+          <div *ngIf="submitted && f.firstname.errors">
+            <div style="color:red;" *ngIf="f.firstname.errors.required">Le prénom est requis !</div>
+          </div>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label  class="label">Prénom</label>
-          <input type="text" nbInput fullWidth  placeholder="Prénom">
+          <label  class="label">Nom</label>
+          <input formControlName="lastname" type="text" nbInput fullWidth 
+          placeholder="Nom" name="lastname" [(ngModel)]="patient.lastname"  
+          [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"required />
+          <div *ngIf="submitted && f.lastname.errors">
+            <div style="color:red;" *ngIf="f.lastname.errors.required">Le nom est requis !</div>
+          </div>
         </div>
       </div>
     </div>
@@ -20,13 +33,15 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label  class="label">CIN</label>
-          <input type="text" nbInput fullWidth  placeholder="CIN">
+          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  
+          placeholder="CIN" name="cin" [(ngModel)]="patient.cin">
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="inputWebsite" class="label">Téléphone</label>
-          <input type="tel" nbInput fullWidth  placeholder="Téléphone">
+          <label  class="label">Téléphone</label>
+          <input type="tel" nbInput fullWidth  placeholder="Téléphone"
+          name="phone" [(ngModel)]="patient.phone" [ngModelOptions]="{standalone: true}"/>
         </div>
       </div>
     </div>
@@ -35,15 +50,24 @@
       <div class="col-sm-6">
           <div class="form-group">
             <label  class="label">Genre</label>
-            <nb-select selected="1" fullWidth>
-              <nb-option value="1">Option 1</nb-option>
-            </nb-select>
+            <nb-select  formControlName="gender" fullWidth  name="gender" [(ngModel)]="patient.gender" required 
+          [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+            <nb-option *ngFor="let key of genderOptions" [value]="key">{{key}}</nb-option>
+          </nb-select>
+          <div *ngIf="submitted && f.gender.errors">
+            <div style="color:red;" *ngIf="f.gender.errors.required">Le genre est requis !</div>
+          </div>
           </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label  class="label">Age</label>
-          <input type="number" nbInput fullWidth  placeholder="Age">
+          <input formControlName="age" type="number" nbInput fullWidth 
+          placeholder="Age" name="age" [(ngModel)]="patient.age"  
+          [ngClass]="{ 'is-invalid': submitted && f.age.errors }"required />
+          <div *ngIf="submitted && f.age.errors">
+            <div style="color:red;" *ngIf="f.age.errors.required">L'age' est requis !</div>
+          </div>
         </div>
       </div>
     </div>
@@ -51,13 +75,15 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label  class="label">Poids</label>
-          <input type="text" nbInput fullWidth  placeholder="Poids">
+          <input type="number" nbInput fullWidth  placeholder="Poids" name="weight" 
+          [(ngModel)]="patient.weight" [ngModelOptions]="{standalone: true}">
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label  class="label">Longueur</label>
-          <input type="text" nbInput fullWidth  placeholder="Longueur">
+          <input type="number" nbInput fullWidth  placeholder="Longueur" name="height" 
+          [(ngModel)]="patient.height" [ngModelOptions]="{standalone: true}">
         </div>
       </div>
     </div>
@@ -66,46 +92,51 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="inputLastName" class="label">Etat civil</label>
-          <nb-select selected="1" fullWidth>
-            <nb-option value="1">Option 1</nb-option>
+          <nb-select  formControlName="civilStatus" fullWidth  name="civilStatus" [(ngModel)]="patient.civilStatus" required 
+          [ngClass]="{ 'is-invalid': submitted && f.civilStatus.errors }">
+            <nb-option *ngFor="let key of civilOptions" [value]="key">{{key}}</nb-option>
           </nb-select>
+          <div *ngIf="submitted && f.civilStatus.errors">
+            <div style="color:red;" *ngIf="f.civilStatus.errors.required">L'état civil est requis !</div>
+          </div>
         </div>
     </div>
     <div class="col-sm-6">
       <div class="form-group">
         <label for="inputLastName" class="label">Profession</label>
-        <nb-select selected="1" fullWidth>
-          <nb-option value="1">Option 1</nb-option>
-        </nb-select>
+        <nb-select  [ngModelOptions]="{standalone: true}" fullWidth  name="profession" [(ngModel)]="patient.profession">
+            <nb-option *ngFor="let key of professionOptions" [value]="key">{{key}}</nb-option>
+          </nb-select>
       </div>
   </div>
   </div>
   <div class="row">
     <div class="col-sm-2">
       <div class="form-group">
-        <nb-checkbox>Handicapé</nb-checkbox>
+        <nb-checkbox [(checked)]="handicape" >Handicapé</nb-checkbox>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div *ngIf="handicape" class="col-sm-6">
       <div class="form-group">
-        <nb-checkbox>Handicape Physique</nb-checkbox>
-        <nb-checkbox>Handicape intellectuelle</nb-checkbox>
+        <nb-checkbox [(checked)]="patient.physicalHandicap" >Handicape Physique</nb-checkbox>
+        <nb-checkbox [(checked)]="patient.intellecHandicap" >Handicape intellectuelle</nb-checkbox>
       </div>
     </div>
   </div>
   <div class="form-group row">
     <label class="col-sm-4 label">Est ce que vous habitez ?</label>
     <div class="col-sm-2">
-      <nb-radio-group>
-        <nb-radio>Seul(e)</nb-radio>
-        <nb-radio>Avec la famille</nb-radio>
+      <nb-radio-group name="g1">
+        <nb-radio [(ngModel)]="patient.liveAlone">Seul(e)</nb-radio>
+        <nb-radio [(ngModel)]="patient.liveWithFamily">Avec la famille</nb-radio>
       </nb-radio-group>  
     </div>
     </div>
     <div class="form-group row">
-      <label f class="label col-sm-2 col-form-label">Nombre de personnes :</label>
+      <label f class="label col-sm-2 col-form-label">Nombre des personnes du famille:</label>
       <div class="col-sm-4">
-        <input type="number" nbInput fullWidth  placeholder="Nombre de personnes">
+        <input type="number" nbInput fullWidth  placeholder="Nombre de personnes du famille"
+        [(ngModel)]="patient.familySize" [ngModelOptions]="{standalone: true}">
       </div>
     </div>
     <div class="row">
@@ -118,17 +149,17 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="form-group">
-          <nb-checkbox>Eau courante</nb-checkbox>
-          <nb-checkbox>Eau chaude</nb-checkbox>
-          <nb-checkbox>Evacuation des eaux usées (ONAS)</nb-checkbox>
+          <nb-checkbox [(checked)]="patient.runningWater" >Eau courante</nb-checkbox>
+          <nb-checkbox [(checked)]="patient.hotWater" >Eau chaude</nb-checkbox>
+          <nb-checkbox [(checked)]="patient.sewageDisposal">Evacuation des eaux usées (ONAS)</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="form-group row">
       <label class="col-sm-4 label">Possibilité d’avoir une chambre seule ?</label>
       <div class="col-sm-4">
-        <nb-radio-group>
-          <nb-radio>Oui (avec porte fermée/fenêtre/douche)</nb-radio>
+        <nb-radio-group name="g2">
+          <nb-radio [(ngModel)]="patient.singleRoom">Oui (avec porte fermée/fenêtre/douche)</nb-radio>
           <nb-radio>Non</nb-radio>
         </nb-radio-group>  
       </div>
@@ -136,54 +167,59 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            <nb-checkbox>J'était en voyage au cours du moi dernier</nb-checkbox>
+            <nb-checkbox [(checked)]="visitCountry">J'était en voyage au cours du moi dernier</nb-checkbox>
           </div>
         </div>
-        <div class="col-sm-8">
+        <div *ngIf="visitCountry" class="col-sm-8">
           <div class="form-group">
-            <input type="text" nbInput fullWidth  placeholder="Pays">
+            <input [(ngModel)]="patient.visitedCountry" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="Pays">
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-8">
           <div class="form-group">
-            <nb-checkbox>J'était en contact avec une personne qui revient d’un voyage</nb-checkbox>
+            <nb-checkbox [(checked)]="contact">J'était en contact avec une personne qui revient d’un voyage</nb-checkbox>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="contact" class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="patient.sameHomePersonReturningFromTrip">Habite avec nous à la maison</nb-checkbox>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="form-group">
+            <input [(ngModel)]="patient.countryPersonReturningFromTrip" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="du quel pays ?">
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            <nb-checkbox>Habite avec nous à la maison</nb-checkbox>
+            <nb-checkbox [(checked)]="covidTest">J'ai subi le test de dépistage du virus corona</nb-checkbox>
           </div>
         </div>
-        <div class="col-sm-8">
+        <div *ngIf="covidTest" class="col-sm-8">
           <div class="form-group">
-            <input type="text" nbInput fullWidth  placeholder="du quel pays ?">
+            <input [(ngModel)]="patient.covidTestResult" [ngModelOptions]="{standalone: true}"type="text" nbInput fullWidth  placeholder="Resultat">
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-4">
-          <div class="form-group">
-            <nb-checkbox>J'ai subi le test de dépistage du virus corona</nb-checkbox>
-          </div>
+        <div class="col-sm-2">
+          <button type="button" nbButton (click)="onSubmit()">Ajouter</button>
+            <br>
+            <br>
+            <div *ngIf="submitted && isSignUpFailed" class="alert alert-warning">              
+              L'ajout a échoué !<br/>{{errorMessage}}
+            </div>
         </div>
-        <div class="col-sm-8">
-          <div class="form-group">
-            <input type="text" nbInput fullWidth  placeholder="Resultat">
-          </div>
-        </div>
+        <div class="col-sm-1">
+          <button type="button" nbButton status="danger" (click)="reset()">Annuler</button>
+        </div>  
       </div>
-    <div class="row">
-      <div class="col-sm-2">
-        <button type="submit" nbButton>Ajouter</button>
-      </div>
-      <div class="col-sm-1">
-        <button type="submit" nbButton status="danger">Annuler</button>
-      </div>  
-    </div>
   </form>
   </nb-card-body>
 </nb-card>

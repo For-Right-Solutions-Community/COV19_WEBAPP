@@ -7,14 +7,11 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AntecedentService {
-
-  private baseUrl = environment.apiurl+'antecedents';
-
   public showlist = true;
-  public showadd = false ;
-  public showdetails = false ;
-  public showedit = false ;
-
+  public showedit = false;
+  public  showadd = false;
+  public showdetails = false;
+  private baseUrl = environment.apiurl+'antecedentRecords';
   constructor(private http: HttpClient) { }
 
   getAntecedent(id: number): Observable<Object> {

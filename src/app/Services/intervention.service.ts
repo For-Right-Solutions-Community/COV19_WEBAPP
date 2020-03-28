@@ -7,14 +7,11 @@ import { Intervention } from '../Models/intervention.model';
   providedIn: 'root'
 })
 export class InterventionService {
-
-  private baseUrl = environment.apiurl+'interventions';
-
   public showlist = true;
-  public showadd = false ;
-  public showdetails = false ;
-  public showedit = false ;
-
+  public showedit = false;
+  public  showadd = false;
+  public showdetails = false;
+  private baseUrl = environment.apiurl+'interventions';
   constructor(private http: HttpClient) { }
 
   getIntervention(id: number): Observable<Object> {

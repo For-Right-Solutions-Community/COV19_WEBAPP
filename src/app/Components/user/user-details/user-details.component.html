@@ -1,53 +1,84 @@
 <nb-card>
-  <nb-card-header>Détails de l'utilisateur</nb-card-header>
+  <nb-card-header>Détails de l'utilisateur {{user.firstname}} {{user.lastname}}</nb-card-header>
   <nb-card-body>
-    <form>
+    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
+      Utilisateur modifer avec succès !
+    </nb-alert>  
+    <form  [formGroup]="registerForm" novalidate>
       <div class="form-group row">
-        <label  class="label col-sm-2 col-form-label">Nom :</label>
+        <label  class="label col-sm-2 col-form-label">Prénom :</label>
         <div class="col-sm-10">
-          <input type="text" nbInput fullWidth  placeholder="" READONLY>
+          <input formControlName="firstname" type="text" nbInput fullWidth  placeholder="Prénom" name="firstname" [(ngModel)]="user.firstname"  
+          [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" required />
+          <div *ngIf="submitted && f.firstname.errors">
+            <div style="color:red;" *ngIf="f.firstname.errors.required">Le prénom est requis !</div>
+          </div>
         </div>
       </div>
       <div class="form-group row">
-        <label class="label col-sm-2 col-form-label">Prénom :</label>
+        <label class="label col-sm-2 col-form-label">Nom :</label>
         <div class="col-sm-10">
-          <input type="text" nbInput fullWidth placeholder="" READONLY>
+          <input formControlName="lastname" type="text" nbInput fullWidth placeholder="Nom" name="lastname" [(ngModel)]="user.lastname"  
+          [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"required />
+          <div *ngIf="submitted && f.lastname.errors">
+            <div style="color:red;" *ngIf="f.lastname.errors.required">Le nom est requis !</div>
+          </div>
         </div>
       </div>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">CIN :</label>
         <div class="col-sm-10">
-          <input type="text" nbInput fullWidth  placeholder="" READONLY>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label  class="label col-sm-2 col-form-label">Passport :</label>
-        <div class="col-sm-10">
-          <input type="text" nbInput fullWidth  placeholder="" READONLY>
+          <input formControlName="cin" type="text" nbInput fullWidth  placeholder="CIN" name="cin" [(ngModel)]="user.cin" 
+          [ngClass]="{ 'is-invalid': submitted && f.cin.errors }" required />
+          <div *ngIf="submitted && f.cin.errors">
+            <div style="color:red;" *ngIf="f.cin.errors.required">Le CIN est requis !</div>
+          </div>
         </div>
       </div>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Email :</label>
         <div class="col-sm-10">
-          <input type="email" nbInput fullWidth  placeholder="" READONLY>
+          <input formControlName="email" type="email" nbInput fullWidth  placeholder="Email" name="email" [(ngModel)]="user.email" 
+          [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required/>
+          <div *ngIf="submitted && f.email.errors">
+            <div style="color:red;" *ngIf="f.email.errors.required">L'email est requis !</div>
+            <div style="color:red;" *ngIf="f.email.errors.email">Entrez une adresse email valide !</div>
+          </div>
         </div>
       </div>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Login :</label>
         <div class="col-sm-10">
-          <input type="text" nbInput fullWidth  placeholder="" READONLY>
+          <input type="text" formControlName="username" nbInput fullWidth  placeholder="Login" name="username" [(ngModel)]="user.username"
+          [ngClass]="{ 'is-invalid': submitted && f.username.errors }"  required />
+        <div *ngIf="submitted && f.username.errors">
+          <div style="color:red;" *ngIf="f.username.errors.required">Le login est requis !</div>
+        </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="label col-sm-2 col-form-label">Mot de passe :</label>
+        <div class="col-sm-10">
+          <input formControlName="password" type="password" nbInput fullWidth placeholder="Mot de passe" name="password" [(ngModel)]="user.password"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required minlength="6" />
+        <div *ngIf="submitted && f.password.invalid">
+          <div style="color:red;" *ngIf="f.password.errors.required">Le mot de passe est requis !</div>
+          <div style="color:red;" *ngIf="f.password.errors.minlength">Le mot de passe doit contenir au moins 6 caractères !</div>
+        </div>
         </div>
       </div>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Role :</label>
         <div class="col-sm-10">
-          <nb-select selected="1" fullWidth READONLY>
-            <nb-option value="1">Option 1</nb-option>
+          <nb-select  formControlName="role" fullWidth  name="role" [(ngModel)]="user.role" required 
+          [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+            <nb-option *ngFor="let key of roleOptions" [value]="key">{{key}}</nb-option>
           </nb-select>
+          <div *ngIf="submitted && f.role.errors">
+            <div style="color:red;" *ngIf="f.role.errors.required">Le rôle est requis !</div>
+          </div>
         </div>
       </div>
     </form>
   </nb-card-body>
 </nb-card>
-
-

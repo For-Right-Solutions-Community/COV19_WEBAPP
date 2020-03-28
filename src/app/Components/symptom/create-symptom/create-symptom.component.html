@@ -1,107 +1,124 @@
 <nb-card>
   <nb-card-header>Ajouter les symptômes d'un patient</nb-card-header>
   <nb-card-body>
-    <form>
+    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
+      la fiche des symptômes vitaux est enregistrée avec succès !
+    </nb-alert>
+    <form [formGroup]="registerForm" novalidate>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Patient :</label>
         <div class="col-sm-10">
-          <nb-select selected="1" fullWidth>
-            <nb-option value="1">Option 1</nb-option>
-          </nb-select>
+          <nb-select formControlName="patient" fullWidth  name="patient" [(ngModel)]="symptom.patient" required 
+          [ngClass]="{ 'is-invalid': submitted && f.patient.errors }">
+          <nb-option *ngFor="let pat of patients" [value]="pat">{{pat.firstname}} {{pat.lastname}}</nb-option>
+        </nb-select>
+        <div *ngIf="submitted && f.patient.errors">
+          <div style="color:red;" *ngIf="f.patient.errors.required">Le patient est requis !</div>
+        </div>
         </div>
       </div>
       <div class="form-group row">
         <label class="label col-sm-2 col-form-label">Date de mise à jour des symptômes :</label>
         <div class="col-sm-10">
-          <input nbInput
+          <input formControlName="date" nbInput
                placeholder=""
-               [nbDatepicker]="formpicker" fullWidth>
+               [nbDatepicker]="formpicker" fullWidth
+               name="date" [(ngModel)]="symptom.date"
+              [ngClass]="{ 'is-invalid': submitted && f.date.errors }"  required/>
             <nb-datepicker #formpicker></nb-datepicker>
+            <div *ngIf="submitted && f.date.errors">
+              <div style="color:red;" *ngIf="f.date.errors.required">La date est requise !</div>
+            </div>
         </div>
       </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Exposition</nb-checkbox>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <nb-checkbox>Fièvre</nb-checkbox>
+          <nb-checkbox [(checked)]="symptom.exposure">Exposition</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Toux</nb-checkbox>
+          <nb-checkbox [(checked)]="symptom.fever">Fièvre</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Dyspnée</nb-checkbox>
+          <nb-checkbox [(checked)]="symptom.cough">Toux</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Mal de gorge</nb-checkbox>
+          <nb-checkbox [(checked)]="symptom.physicalHandicap">dyspnea</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Nausée</nb-checkbox>
+          <nb-checkbox [(checked)]="symptom.soreThroat">Mal de gorge</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Vomissements</nb-checkbox>
+          <nb-checkbox [(checked)]="symptom.nausea">Nausée</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Diarrhée</nb-checkbox>
+          <nb-checkbox [(checked)]="symptom.vomiting">Vomissements</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Insuffisance rénale</nb-checkbox>
+          <nb-checkbox [(checked)]="symptom.diarrhea">Diarrhée</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Insuffisance cardiaque</nb-checkbox>
+          <nb-checkbox [(checked)]="symptom.renalFailure">Insuffisance rénale</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Insuffisance respiratoire chronique</nb-checkbox>
+          <nb-checkbox [(checked)]="symptom.heartFailure">Insuffisance cardiaque</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="symptom.chronicRespiratory">Insuffisance respiratoire chronique</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-2">
-        <button type="submit" nbButton>Ajouter</button>
+        <button type="button" nbButton (click)="onSubmit()">Ajouter</button>
+          <br>
+          <br>
+          <div *ngIf="submitted && isSignUpFailed" class="alert alert-warning">              
+            L'ajout a échoué !<br/>{{errorMessage}}
+          </div>
       </div>
       <div class="col-sm-1">
-        <button type="submit" nbButton status="danger">Annuler</button>
+        <button type="button" nbButton status="danger" (click)="reset()">Annuler</button>
       </div>  
     </div>
     </form>

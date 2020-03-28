@@ -1,10 +1,30 @@
-<nb-card>
+<nb-card *ngIf="patientService.showlist">
   <nb-card-header>
     Liste des patients
   </nb-card-header>
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
-    </ng2-smart-table>
+    <div class="row">
+      <div class="col-md-10">
+        <input class="form-control" #search type="text" placeholder="Search" aria-label="Search" (keydown.enter)="onSearch(search.value)">
+      </div>
+     <div class="col-md-2" >
+        <button  class="btn btn-info" (click)="showedit()"  ><i class="fas fa-edit"></i></button>
+        &nbsp;
+        <button  class="btn btn-info" (click)="showdetails()"  ><i class="fas fa-search-plus"></i></button>
+        &nbsp;
+        <button  class="btn btn-info" (click)="onDeleteConfirm()"  ><i class="fas fa-trash-alt"></i></button>
+    </div>
+    </div>
+    <br>
+    <ng2-smart-table
+         [settings]="settings" 
+         [source]="source"
+         (userRowSelect)="onPatientRowSelect($event)">
+      </ng2-smart-table>
   </nb-card-body>
 </nb-card>
+<ngx-patient-details *ngIf="patientService.showdetails" [patient]="patient"  (createdPatient)='doRefreshData($event)'>
+</ngx-patient-details>
+<ngx-update-patient *ngIf="patientService.showedit" [patient]="patient"  (createdPatient)='doRefreshData($event)'>
+</ngx-update-patient>
 

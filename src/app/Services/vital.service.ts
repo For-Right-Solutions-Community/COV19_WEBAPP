@@ -7,13 +7,11 @@ import { Vital } from '../Models/vital.model';
   providedIn: 'root'
 })
 export class VitalService {
-
-  private baseUrl = environment.apiurl+'vitals';
-
   public showlist = true;
-  public showadd = false ;
-  public showdetails = false ;
-  public showedit = false ;
+  public showedit = false;
+  public  showadd = false;
+  public showdetails = false;
+  private baseUrl = environment.apiurl+'vitalsRecords';
 
   constructor(private http: HttpClient) { }
 

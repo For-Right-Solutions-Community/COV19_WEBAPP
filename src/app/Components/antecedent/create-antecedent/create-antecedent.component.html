@@ -1,7 +1,10 @@
 <nb-card>
   <nb-card-header>Ajouter les antécédents d'un patient</nb-card-header>
   <nb-card-body>
-    <form>
+    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
+      Fiche des antécédents enregistrée avec succès !
+    </nb-alert> 
+    <form [formGroup]="registerForm" novalidate>
       <div class="row">
         <div class="col-sm-2">
           <div class="form-group">
@@ -12,9 +15,13 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group">
-            <nb-select selected="1" fullWidth>
-              <nb-option value="1">Option 1</nb-option>
-            </nb-select>
+            <nb-select formControlName="patient" fullWidth  name="patient" [(ngModel)]="antecedent.patient" required 
+          [ngClass]="{ 'is-invalid': submitted && f.patient.errors }">
+          <nb-option *ngFor="let pat of patients" [value]="pat">{{pat.firstname}} {{pat.lastname}}</nb-option>
+        </nb-select>
+        <div *ngIf="submitted && f.patient.errors">
+          <div style="color:red;" *ngIf="f.patient.errors.required">Le patient est requis !</div>
+        </div>
           </div>
         </div>
       </div>
@@ -28,95 +35,101 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Respiratoire</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.respiratory">Respiratoire</nb-checkbox>
         </div>
       </div>
     </div>
-    <div class="row">
+    <div *ngIf="antecedent.respiratory" class="row">
       <div class="col-sm-12">
         <div class="form-group">
-          <nb-checkbox>Asthme</nb-checkbox>
-          <nb-checkbox>Bronchopneumopathies obstructives (BPCO)</nb-checkbox>
-          <nb-checkbox>Opéré sur le thorax</nb-checkbox>
-          <nb-checkbox>Autres</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.respiratoryAsthma">Asthme</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.respiratoryBPCO">Bronchopneumopathies obstructives (BPCO)</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.respiratoryThorax">Opéré sur le thorax</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.respiratoryOther">Autres</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Diabète</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.diabetic">Diabète</nb-checkbox>
         </div>
       </div>
     </div>
+    <div *ngIf="antecedent.diabetic">
     <div class="form-group row">
-      <label for="inputDiabeteNbMonths" class="label col-sm-2 col-form-label">Nombre de mois :</label>
+      <label class="label col-sm-2 col-form-label">Nombre de mois :</label>
       <div class="col-sm-10">
-        <input type="number" nbInput fullWidth id="inputDiabeteNbMonths" placeholder="Depuis quand ?">
+        <input type="number" nbInput fullWidth  placeholder="Depuis quand ?"
+        [(ngModel)]="antecedent.diabeticMonths" [ngModelOptions]="{standalone: true}">
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Complications</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.diabeticComplications">Complications</nb-checkbox>
         </div>
       </div>
     </div>
-    <div class="row">
+    <div *ngIf="antecedent.diabeticComplications" class="row">
       <div class="col-sm-12">
         <div class="form-group">
-          <nb-checkbox>Yeux</nb-checkbox>
-          <nb-checkbox>Cœur</nb-checkbox>
-          <nb-checkbox>Reins</nb-checkbox>
-          <nb-checkbox>Pieds</nb-checkbox>
-          <nb-checkbox>Autres</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.diabeticComplicationsEyes">Yeux</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.diabeticComplicationsHeart">Cœur</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.diabeticComplicationsKidneys">Reines</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.diabeticComplicationsFeet">Pieds</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.diabeticComplicationsNerves">Nerfs</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.diabeticComplicationsOther">Autres</nb-checkbox>
         </div>
       </div>
+    </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Hypertension artérielle</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.hypertension">Hypertension artérielle</nb-checkbox>
         </div>
       </div>
     </div>
-    <div class="form-group row">
-      <label for="inputHypertensionNbMonths" class="label col-sm-2 col-form-label">Nombre de mois :</label>
+    <div *ngIf="antecedent.hypertension" class="form-group row">
+      <label  class="label col-sm-2 col-form-label">Nombre de mois :</label>
       <div class="col-sm-10">
-        <input type="number" nbInput fullWidth id="inputHypertensionNbMonths" placeholder="Depuis quand ?">
+        <input type="number" nbInput fullWidth placeholder="Depuis quand ?"
+        [(ngModel)]="antecedent.hypertensionMonths" [ngModelOptions]="{standalone: true}">
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Cardiaques</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.heartDisease">Cardiaques</nb-checkbox>
         </div>
       </div>
     </div>
-    <div class="row">
+    <div *ngIf="antecedent.heartDisease" class="row">
       <div class="col-sm-12">
         <div class="form-group">
-          <nb-checkbox>Coronarien</nb-checkbox>
-          <nb-checkbox>Insuffisance cardiaque</nb-checkbox>
-          <nb-checkbox>Autres</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.heartDiseaseCoronarien">Coronarien</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.heartDiseaseFailure">Insuffisance cardiaque</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.heartDiseaseOther">Autres</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Rénales</nb-checkbox>
-          <nb-checkbox>Hémodialyse</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.renalFailure">Rénales</nb-checkbox>
+          <nb-checkbox *ngIf="antecedent.renalFailure" [(checked)]="antecedent.renalFailureHemodialysis">Hémodialyse</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Cancer</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.cancer">Cancer</nb-checkbox>
         </div>
       </div>
     </div>
+    <div *ngIf="antecedent.cancer">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
@@ -127,10 +140,10 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="form-group">
-          <nb-checkbox>Poumon</nb-checkbox>
-          <nb-checkbox>Foie</nb-checkbox>
-          <nb-checkbox>ORL</nb-checkbox>
-          <nb-checkbox>Autres</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.cancerTypeLung">Poumon</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.cancerTypeLiver">Foie</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.cancerTypeORL">ORL</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.cancerTypeOther">Autres</nb-checkbox>
         </div>
       </div>
     </div>
@@ -144,25 +157,31 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="form-group">
-          <nb-checkbox>Chimiothérapie</nb-checkbox>
-          <nb-checkbox>Radiothérapie</nb-checkbox>
-          <nb-checkbox>Chirurgie</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.cancerTreatmentChemotherapy">Chimiothérapie</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.cancerTreatmentRadiotherapy">Radiothérapie</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.cancerTreatmentSurgery">Chirurgie</nb-checkbox>
         </div>
       </div>
     </div>
+  </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox>Maladie immunitaire</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.immuneDisease">Maladie immunitaire</nb-checkbox>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-2">
-        <button type="submit" nbButton>Ajouter</button>
+        <button type="button" nbButton (click)="onSubmit()">Ajouter</button>
+          <br>
+          <br>
+          <div *ngIf="submitted && isSignUpFailed" class="alert alert-warning">              
+            L'ajout a échoué !<br/>{{errorMessage}}
+          </div>
       </div>
       <div class="col-sm-1">
-        <button type="submit" nbButton status="danger">Annuler</button>
+        <button type="button" nbButton status="danger" (click)="reset()">Annuler</button>
       </div>  
     </div>
     </form>

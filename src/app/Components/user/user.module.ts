@@ -6,8 +6,11 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
-import { NbInputModule, NbCardModule, NbButtonModule, NbActionsModule, NbUserModule, NbCheckboxModule, NbRadioModule, NbDatepickerModule, NbSelectModule, NbIconModule } from '@nebular/theme';
+import { NbInputModule, NbCardModule, NbButtonModule, NbActionsModule, NbUserModule, NbCheckboxModule, NbRadioModule, NbDatepickerModule, NbSelectModule, NbIconModule, NbAlertModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
     imports: [
       ThemeModule,
@@ -22,7 +25,12 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
       NbDatepickerModule,
       NbSelectModule,
       NbIconModule,
-      Ng2SmartTableModule,
+      Ng2SmartTableModule,  
+      NbAlertModule,
+      FormsModule,
+      ReactiveFormsModule,
+      MatSortModule,
+      MatPaginatorModule,
     ],
     declarations: [
         UserComponent, 

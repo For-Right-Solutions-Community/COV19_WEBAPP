@@ -6,8 +6,10 @@ import { SymptomDetailsComponent } from './symptom-details/symptom-details.compo
 import { SymptomListComponent } from './symptom-list/symptom-list.component';
 import { CreateSymptomComponent } from './create-symptom/create-symptom.component';
 import { UpdateSymptomComponent } from './update-symptom/update-symptom.component';
-import { NbInputModule, NbCardModule, NbButtonModule, NbActionsModule, NbUserModule, NbCheckboxModule, NbRadioModule, NbDatepickerModule, NbSelectModule, NbIconModule } from '@nebular/theme';
+import { NbInputModule, NbCardModule, NbButtonModule, NbActionsModule, NbUserModule, NbCheckboxModule, NbRadioModule, NbDatepickerModule, NbSelectModule, NbIconModule, NbAlertModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSortModule, MatPaginatorModule } from '@angular/material';
 @NgModule({
     imports: [
       ThemeModule,
@@ -22,7 +24,12 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
       NbDatepickerModule,
       NbSelectModule,
       NbIconModule,
-      Ng2SmartTableModule,
+      Ng2SmartTableModule,  
+      NbAlertModule,
+      FormsModule,
+      ReactiveFormsModule,
+      MatSortModule,
+      MatPaginatorModule,
     ],
     declarations: [
         SymptomComponent, 

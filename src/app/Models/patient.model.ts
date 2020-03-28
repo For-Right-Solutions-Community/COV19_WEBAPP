@@ -21,7 +21,7 @@ export class Patient{
 
     liveAlone:boolean;
     liveWithFamily:boolean;
-    familyMembers:number;
+    familySize:number;
 
     runningWater:boolean;
     hotWater:boolean;
@@ -29,18 +29,18 @@ export class Patient{
 
     singleRoom:boolean;
 
-    handicap:boolean;
-    handicap_physical:boolean;
-    handicap_intellectual:boolean;
+    //handicap:boolean;
+    physicalHandicap:boolean;
+    intellecHandicap:boolean;
 
-    traveled:boolean;
-    country:string;
-    contactPersonReturningFromTrip:boolean;
+    //traveled:boolean;
+    visitedCountry:string;
+    //contactPersonReturningFromTrip:boolean;
     countryPersonReturningFromTrip:string;
     sameHomePersonReturningFromTrip:boolean;
 
-    COVIDtested:boolean;
-    CVIDtestedResult:string;
+    //COVIDtested:boolean;
+    covidTestResult:string;
 
     account:Account;
     constructor(){}
