@@ -4,6 +4,6 @@ export class Intervention{
     id:number;
     description:string;
     date:Date;
-    patient:Patient;
+    patient:any;
     constructor(){}
 }

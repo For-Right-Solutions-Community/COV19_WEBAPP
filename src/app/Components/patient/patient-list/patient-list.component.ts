@@ -107,6 +107,7 @@ export class PatientListComponent implements OnInit {
           return;
         }
         this.source = new LocalDataSource(result);
+        console.log(result)
       });
   }
 

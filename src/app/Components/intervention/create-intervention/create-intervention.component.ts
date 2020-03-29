@@ -45,6 +45,8 @@ export class CreateInterventionComponent implements OnInit {
       return;
   }
     console.log(this.intervention);
+    this.intervention.patient = this.intervention.patient._links.self.href;
+    console.log(this.intervention);
     this.interventionService.createIntervention(this.intervention).subscribe(
       data => {
         console.log(data);
@@ -83,7 +85,7 @@ export class CreateInterventionComponent implements OnInit {
   getPatientsList() {
     this.patientService.getPatientsList()
     .subscribe(result => {
-     this.patients = result ;
+     this.patients = result._embedded.patients ;
   },
   err => console.log("Message erreur" +  err.message  ))
   }
