@@ -3,10 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Patient } from '../Models/patient.model';
-
-const httpOptions = {
-  headers : new HttpHeaders({'Content-Type': 'application/json'})
- };
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +13,7 @@ export class PatientService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
+  patients: Patient[];
   private baseUrl = environment.apiurl+'patient';
   private baseUrlRest = environment.apiurl+'patients';
   constructor(private http: HttpClient) { }
@@ -38,5 +36,17 @@ export class PatientService {
 
   getPatientsList() {
     return this.http.get<Patient[]>(`${this.baseUrl}/`);
+  }
+
+  getCriticalPatientsList() { 
+    return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
+    for(let p of dataX){
+      if(p.condition==1){
+        this.patients.push(p);
+      }
+    }
+    console.log(this.patients)
+    return this.patients;
+  }));
   }
 }

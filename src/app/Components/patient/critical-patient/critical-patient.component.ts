@@ -80,7 +80,7 @@ export class CriticalPatientComponent implements OnInit {
   }
 
   reloadData() {
-    this.patientService.getPatientsList()
+    this.patientService.getCriticalPatientsList()
       .subscribe(result => {
         if (!result) {
           return;
