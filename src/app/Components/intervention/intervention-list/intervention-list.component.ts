@@ -5,6 +5,7 @@ import { MatSort, MatPaginator } from '@angular/material';
 import { InterventionService } from '../../../Services/intervention.service';
 import Swal from 'sweetalert2';
 import { Patient } from '../../../Models/patient.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'ngx-intervention-list',
@@ -52,7 +53,12 @@ export class InterventionListComponent implements OnInit {
       },
       date: {
         title: 'Date',
-        type: 'Date',  
+        type: 'Date',
+        valuePrepareFunction: (value) => {
+          if (!value) return '';
+          const date=moment(value);
+          return date.format('DD/MM/YYYY');
+      }  
       }
     },
     hideSubHeader: true,
@@ -130,7 +136,8 @@ export class InterventionListComponent implements OnInit {
    }error => { console.log("Error while gettig Users details") };
 }
 //details
-showdetails() {    
+showdetails() {  
+  console.log(this.selectedRows);   
   if(this.selectedRows[0] == null )
  {
   Swal.fire('','Il faut sélectionner une ligne !');
@@ -145,6 +152,7 @@ showdetails() {
 }
 onInterventionRowSelect(event) {
   this.selectedRows = event.selected;
+  console.log(event.selected);
 }
 
 }

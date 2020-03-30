@@ -4,6 +4,7 @@ import { Vital } from '../../../Models/vital.model';
 import { MatPaginator, MatSort } from '@angular/material';
 import { VitalService } from '../../../Services/vital.service';
 import Swal from 'sweetalert2';
+import * as moment from 'moment';
 
 @Component({
   selector: 'ngx-vital-list',
@@ -41,12 +42,20 @@ export class VitalListComponent implements OnInit {
     columns: {
       patient: {
         title: 'Patient',
-        type: 'Patient',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value.firstname+" "+value.lastname;
+        }
       },
       measurementDate: {
         title: 'Date',
         type: 'Date',
-      },
+        valuePrepareFunction: (value) => {
+          if (!value) return '';
+          const date=moment(value);
+          return date.format('DD/MM/YYYY');
+      }},
       temperature: {
         title: 'Température',
         type: 'string',

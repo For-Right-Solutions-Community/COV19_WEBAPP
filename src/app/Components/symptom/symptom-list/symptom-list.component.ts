@@ -5,6 +5,7 @@ import { Symptom } from '../../../Models/symptom.model';
 import { MatSort, MatPaginator } from '@angular/material';
 import { SymptomService } from '../../../Services/symptom.service';
 import Swal from 'sweetalert2';
+import * as moment from 'moment';
 
 @Component({
   selector: 'ngx-symptom-list',
@@ -51,6 +52,11 @@ export class SymptomListComponent implements OnInit {
       date: {
         title: 'Date',
         type: 'Date',
+        valuePrepareFunction: (value) => {
+          if (!value) return '';
+          const date=moment(value);
+          return date.format('DD/MM/YYYY');
+      }
       },
     },
     hideSubHeader: true,
@@ -131,7 +137,8 @@ export class SymptomListComponent implements OnInit {
    }error => { console.log("Error while gettig Users details") };
 }
 //details
-showdetails() {    
+showdetails() { 
+  console.log(this.selectedRows);   
   if(this.selectedRows[0] == null )
  {
   Swal.fire('','Il faut sélectionner une ligne !');
@@ -146,6 +153,7 @@ showdetails() {
 }
 onSymptomRowSelect(event) {
   this.selectedRows = event.selected;
+  console.log(event.selected);
 }
 
 }

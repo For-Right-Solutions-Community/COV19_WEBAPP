@@ -28,8 +28,9 @@ export class InterventionDetailsComponent implements OnInit {
   registerForm: FormGroup;
   constructor(private interventionService: InterventionService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
-    this.getInterventionsList();
+    console.log(this.intervention);
     this.getPatientsList();
+    
     this.registerForm = this.formBuilder.group({
     patient: ['', Validators.required],
     date: ['', Validators.required],

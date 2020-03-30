@@ -5,7 +5,7 @@
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Patient :</label>
         <div class="col-sm-10">
-          <nb-select formControlName="patient" fullWidth  name="patient" [(ngModel)]="intervention.patient" required 
+          <nb-select  selected="intervention.patient" formControlName="patient" fullWidth [(ngModel)]="intervention.patient" required 
           [ngClass]="{ 'is-invalid': submitted && f.patient.errors }">
           <nb-option *ngFor="let pat of patients" [value]="pat">{{pat.firstname}} {{pat.lastname}}</nb-option>
         </nb-select>
