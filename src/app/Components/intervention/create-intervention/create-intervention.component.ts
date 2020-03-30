@@ -24,6 +24,7 @@ export class CreateInterventionComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
   @Input()intervention:Intervention;
+  @Input()patient: Patient;
   submitted = false;
   registerForm: FormGroup;
   constructor(private interventionService: InterventionService,private patientService: PatientService,private formBuilder: FormBuilder) { }
@@ -44,9 +45,6 @@ export class CreateInterventionComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
   }
-    console.log(this.intervention);
-    this.intervention.patient = this.intervention.patient._links.self.href;
-    console.log(this.intervention);
     this.interventionService.createIntervention(this.intervention).subscribe(
       data => {
         console.log(data);
@@ -85,7 +83,7 @@ export class CreateInterventionComponent implements OnInit {
   getPatientsList() {
     this.patientService.getPatientsList()
     .subscribe(result => {
-     this.patients = result._embedded.patients ;
+     this.patients = result;
   },
   err => console.log("Message erreur" +  err.message  ))
   }

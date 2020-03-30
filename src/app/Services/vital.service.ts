@@ -11,7 +11,7 @@ export class VitalService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = environment.apiurl+'vitalsRecords';
+  private baseUrl = environment.apiurl+'vital';
 
   constructor(private http: HttpClient) { }
 
@@ -19,12 +19,12 @@ export class VitalService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  createVital(produit: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, produit);
+  createVital(vital: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}/create`, vital);
   }
 
-  updateVital(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/${id}`, value);
+  updateVital(id: number, vital: any): Observable<Object> {
+    return this.http.put(`${this.baseUrl}/${id}`, vital);
   }
 
   deleteVital(id: number): Observable<any> {
@@ -32,6 +32,6 @@ export class VitalService {
   }
 
   getVitalsList() {
-    return this.http.get<Vital[]>(`${this.baseUrl}`);
+    return this.http.get<Vital[]>(`${this.baseUrl}/`);
   }
 }

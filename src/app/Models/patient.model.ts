@@ -3,7 +3,6 @@ import { Gender } from './gender.model';
 import { Account } from './account.model';
 import { CivilStatus } from './civil-status.model';
 import { Profession } from './profession.model';
-import { Intervention } from './intervention.model';
 
 export class Patient{
     id:number;
@@ -42,7 +41,6 @@ export class Patient{
 
     //COVIDtested:boolean;
     covidTestResult:string;
-    interventions: Intervention[]
 
     account:Account;
     constructor(){}

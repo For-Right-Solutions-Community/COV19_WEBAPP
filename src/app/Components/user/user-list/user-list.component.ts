@@ -153,7 +153,13 @@ export class UserListComponent implements OnInit {
    {
    this.userService.showedit = true ;
    this.userService.showlist = false; 
-   this.user = this.selectedRows[0];
+   this.user.id = this.selectedRows[0].id;
+   this.user.firstname = this.selectedRows[0].firstname;
+   this.user.lastname = this.selectedRows[0].lastname;
+   this.user.email = this.selectedRows[0].email;
+   this.user.username = this.selectedRows[0].username;
+   this.user.role = this.selectedRows[0].role;
+   this.user.cin = this.selectedRows[0].cin;
    }error => { console.log("Error while gettig Users details") };
 }
 //details

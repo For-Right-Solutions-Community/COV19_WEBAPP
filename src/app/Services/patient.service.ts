@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Patient } from '../Models/patient.model';
-import { map } from 'rxjs/operators';
 
 const httpOptions = {
   headers : new HttpHeaders({'Content-Type': 'application/json'})
@@ -29,8 +28,8 @@ export class PatientService {
     return this.http.post(this.baseUrl, patient);
   }
 
-  updatePatient(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/${id}`, value);
+  updatePatient(id: number, patient: any): Observable<Object> {
+    return this.http.put(`${this.baseUrl}/${id}`, patient);
   }
 
   deletePatient(id: number): Observable<any> {
@@ -38,8 +37,6 @@ export class PatientService {
   }
 
   getPatientsList() {
-    return this.http.get<Object>(`${this.baseUrl}/`).pipe(map(data => {
-      return data._embedded.patients
-    }));
+    return this.http.get<Patient[]>(`${this.baseUrl}/`);
   }
 }

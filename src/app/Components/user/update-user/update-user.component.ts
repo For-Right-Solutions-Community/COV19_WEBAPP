@@ -35,8 +35,7 @@ export class UpdateUserComponent implements OnInit {
     lastname: ['', Validators.required],
     role: ['', Validators.required],
     cin: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+    email: ['', [Validators.required, Validators.email]]
 });
   }
   get f() { return this.registerForm.controls; }
@@ -44,6 +43,7 @@ export class UpdateUserComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (this.registerForm.invalid) {
+      console.log(this.user);
       return;
   }
     console.log(this.user);

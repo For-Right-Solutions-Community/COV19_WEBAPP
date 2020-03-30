@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, Output } from '@angular/core';
-import { SmartTableData } from '../../../@core/data/smart-table';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Antecedent } from '../../../Models/antecedent.model';
 import { MatSort, MatPaginator } from '@angular/material';
@@ -41,35 +40,67 @@ export class AntecedentListComponent implements OnInit {
     columns: {
       patient: {
         title: 'Patient',
-        type: 'Patient',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value.firstname+" "+value.lastname;
+        }
       },
       diabetic: {
         title: 'Diabétique',
-        type: 'boolean',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value==true?"Oui":"Non";
+        }
       },
       cancer: {
         title: 'Cancer',
-        type: 'boolean',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value==true?"Oui":"Non";
+        }
       },
       hypertension: {
         title: 'Hypertension',
-        type: 'boolean',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value==true?"Oui":"Non";
+        }
       },
       renalFailure: {
         title: 'Insuffisance rénale',
-        type: 'boolean',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value==true?"Oui":"Non";
+        }
       },
       immuneDisease: {
         title: 'Maladie immunitaire',
-        type: 'boolean',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value==true?"Oui":"Non";
+        }
       },
       heartDisease: {
         title: 'Insuffisance Cardiaque',
-        type: 'boolean',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value==true?"Oui":"Non";
+        }
       },
       respiratory: {
         title: 'Insuffisance Respiratoire',
-        type: 'boolean',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value==true?"Oui":"Non";
+        }
       },
     },
     hideSubHeader: true,
@@ -102,7 +133,6 @@ export class AntecedentListComponent implements OnInit {
 
   ngOnInit() {
     this.reloadData();
-    console.log(this.antecedents);
   }
 
   reloadData() {
@@ -111,11 +141,11 @@ export class AntecedentListComponent implements OnInit {
         if (!result) {
           return;
         }
+        console.log(result);
         this.source = new LocalDataSource(result);
       });
   }
 
-  
   doRefreshData(event){
     this.antecedentService.showlist = true;
     this.reloadData();
@@ -134,6 +164,7 @@ export class AntecedentListComponent implements OnInit {
   }
   //edit
   showedit(event) {  
+    console.log(this.selectedRows);
     if(this.selectedRows[0] == null )
    {
     Swal.fire('','Il faut sélectionner une ligne !');

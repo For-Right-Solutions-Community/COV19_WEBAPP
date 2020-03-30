@@ -11,7 +11,7 @@ export class SymptomService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = environment.apiurl+'symptomRecords';
+  private baseUrl = environment.apiurl+'symptom';
 
   constructor(private http: HttpClient) { }
 
@@ -19,12 +19,12 @@ export class SymptomService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  createSymptom(produit: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, produit);
+  createSymptom(symptom: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}/create`, symptom);
   }
 
-  updateSymptom(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/${id}`, value);
+  updateSymptom(id: number, symptom: any): Observable<Object> {
+    return this.http.put(`${this.baseUrl}/${id}`, symptom);
   }
 
   deleteSymptom(id: number): Observable<any> {
@@ -32,6 +32,6 @@ export class SymptomService {
   }
 
   getSymptomsList() {
-    return this.http.get<Symptom[]>(`${this.baseUrl}`);
+    return this.http.get<Symptom[]>(`${this.baseUrl}/`);
   }
 }

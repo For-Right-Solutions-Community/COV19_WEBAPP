@@ -42,7 +42,11 @@ export class SymptomListComponent implements OnInit {
     columns: {
       patient: {
         title: 'Patient',
-        type: 'Patient',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value.firstname+" "+value.lastname;
+        }
       },
       date: {
         title: 'Date',

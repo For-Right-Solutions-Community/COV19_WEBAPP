@@ -4,6 +4,7 @@ import { Intervention } from '../../../Models/intervention.model';
 import { MatSort, MatPaginator } from '@angular/material';
 import { InterventionService } from '../../../Services/intervention.service';
 import Swal from 'sweetalert2';
+import { Patient } from '../../../Models/patient.model';
 
 @Component({
   selector: 'ngx-intervention-list',
@@ -16,6 +17,7 @@ export class InterventionListComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   dataSource;
+  @Output()patient: Patient;
   @Output()intervention : Intervention= new Intervention() ;
   source: LocalDataSource = new LocalDataSource();
   data: any;
@@ -41,11 +43,16 @@ export class InterventionListComponent implements OnInit {
     columns: {
       patient: {
         title: 'Patient',
-        type: 'Patient',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          console.log(value);
+          if (value==undefined) return '';
+          return value.firstname+" "+value.lastname;
+        }
       },
       date: {
         title: 'Date',
-        type: 'Date',
+        type: 'Date',  
       }
     },
     hideSubHeader: true,
@@ -105,15 +112,12 @@ export class InterventionListComponent implements OnInit {
       {
         field: 'patient',
         search: query
-      },
-      {
-        field: 'measurementDate',
-        search: query
       }
     ], false);
   }
   //edit
   showedit(event) {  
+    console.log(this.selectedRows);
     if(this.selectedRows[0] == null )
    {
     Swal.fire('','Il faut sélectionner une ligne !');
