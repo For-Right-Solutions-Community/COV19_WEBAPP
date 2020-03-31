@@ -4,6 +4,8 @@ import { Patient } from '../../../Models/patient.model';
 import { MatSort, MatPaginator } from '@angular/material';
 import { PatientService } from '../../../Services/patient.service';
 import Swal from 'sweetalert2';
+import { NbWindowService } from '@nebular/theme';
+import { ChangeStatusComponent } from '../change-status/change-status.component';
 
 @Component({
   selector: 'ngx-patient-list',
@@ -71,7 +73,7 @@ export class PatientListComponent implements OnInit {
     hideSubHeader: true,
   };
 
-  constructor(public patientService: PatientService) {
+  constructor(public patientService: PatientService,private windowService: NbWindowService) {
     this.source = new LocalDataSource(this.patients);
   }
   onDeleteConfirm(): void {
@@ -178,6 +180,23 @@ showdetails() {
 }
 onPatientRowSelect(event) {
   this.selectedRows = event.selected;
+}
+
+openWindowForm() {
+  const context = { patient: this.patient };
+  this.windowService.open(ChangeStatusComponent, { title: `Changer l'état du patient`, context}); 
+}
+
+confirmChangeState(){
+  if(this.selectedRows==undefined ||this.selectedRows[0]==null )
+ {
+  Swal.fire('','Il faut sélectionner un patient !');
+ } 
+ else 
+ {
+ this.patient = this.selectedRows[0];
+ this.openWindowForm();
+ }
 }
 
 }

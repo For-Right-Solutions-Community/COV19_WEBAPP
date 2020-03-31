@@ -15,6 +15,12 @@
         <button  class="btn btn-info" (click)="onDeleteConfirm()"  ><i class="fas fa-trash-alt"></i></button>
     </div>
     </div>
+   <br>
+    <div class="row">
+      <div class="col-md-12">
+        <button (click)="confirmChangeState()" nbButton>Changer l'état du patient</button>
+      </div>
+    </div>
     <br>
     <ng2-smart-table
          [settings]="settings" 

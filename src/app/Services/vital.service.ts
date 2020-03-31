@@ -11,7 +11,7 @@ export class VitalService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = environment.apiurl+'vital';
+  private baseUrl = environment.apiurl+'m/vital';
 
   constructor(private http: HttpClient) { }
 

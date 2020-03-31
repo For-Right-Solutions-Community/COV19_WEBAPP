@@ -11,7 +11,7 @@ export class InterventionService {
   public showedit = false;
   public showadd = false;
   public showdetails = false;
-  private baseUrl = environment.apiurl+'intervention';
+  private baseUrl = environment.apiurl+'m/intervention';
   constructor(private http: HttpClient) { }
 
   getIntervention(id: number): Observable<Object> {

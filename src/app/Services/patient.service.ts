@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Patient } from '../Models/patient.model';
@@ -14,7 +14,7 @@ export class PatientService {
   public  showadd = false;
   public showdetails = false;
   patients: Patient[];
-  private baseUrl = environment.apiurl+'patient';
+  private baseUrl = environment.apiurl+'m/patient';
   private baseUrlRest = environment.apiurl+'patients';
   constructor(private http: HttpClient) { }
 
@@ -23,7 +23,7 @@ export class PatientService {
   }
 
   createPatient(patient: Object): Observable<Object> {
-    return this.http.post(this.baseUrl, patient);
+    return this.http.post(`${this.baseUrl}/create`, patient);
   }
 
   updatePatient(id: number, patient: any): Observable<Object> {

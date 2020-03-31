@@ -11,7 +11,7 @@ export class AntecedentService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = environment.apiurl+'antecedent';
+  private baseUrl = environment.apiurl+'m/antecedent';
   constructor(private http: HttpClient) { }
 
   getAntecedent(id: number): Observable<Object> {

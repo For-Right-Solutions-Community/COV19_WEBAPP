@@ -1,0 +1,19 @@
+<form class="form">
+    <div class="row">
+      <div class="col-sm-1">
+        <label  class="label">Etat</label>
+      </div>
+      <div class="col-sm-6">
+        <nb-select name="condition" required fullWidth [(ngModel)]="condition">
+          <nb-option *ngFor="let key of conditionOptions" [value]="key">{{key}}</nb-option>
+        </nb-select>
+      </div>  
+      <div class="col-sm-2">
+        <button type="button" nbButton (click)="onSubmit()">Changer</button>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>       
+  </div>  
+</form>

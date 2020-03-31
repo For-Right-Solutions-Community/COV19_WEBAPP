@@ -11,7 +11,7 @@ export class SymptomService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = environment.apiurl+'symptom';
+  private baseUrl = environment.apiurl+'m/symptom';
 
   constructor(private http: HttpClient) { }
 

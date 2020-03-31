@@ -12,7 +12,7 @@ export class UserService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = environment.apiurl+'user';
+  private baseUrl = environment.apiurl+'m/user';
   private baseUrlRest = environment.apiurl+'users';
 
   constructor(private http: HttpClient) { }
