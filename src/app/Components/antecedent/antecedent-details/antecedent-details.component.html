@@ -12,10 +12,10 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group">
-            <nb-select formControlName="patient" fullWidth  name="patient" [(ngModel)]="antecedent.patient" required 
+            <select class="form-control" selected="antecedent.patient" formControlName="patient" fullWidth  name="patient" [(ngModel)]="antecedent.patient" required 
           [ngClass]="{ 'is-invalid': submitted && f.patient.errors }">
-          <nb-option *ngFor="let pat of patients" [value]="pat">{{pat.firstname}} {{pat.lastname}}</nb-option>
-        </nb-select>
+          <option *ngFor="let pat of patients" [value]="pat">{{pat.firstname}} {{pat.lastname}}</option>
+        </select>
         <div *ngIf="submitted && f.patient.errors">
           <div style="color:red;" *ngIf="f.patient.errors.required">Le patient est requis !</div>
         </div>

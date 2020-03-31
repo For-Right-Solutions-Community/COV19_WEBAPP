@@ -9,7 +9,7 @@ import { UpdateVitalComponent } from './update-vital/update-vital.component';
 import { NbInputModule, NbCardModule, NbButtonModule, NbActionsModule, NbUserModule, NbCheckboxModule, NbRadioModule, NbDatepickerModule, NbSelectModule, NbIconModule, NbAlertModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatSortModule, MatPaginatorModule } from '@angular/material';
+import { MatSortModule, MatPaginatorModule, MatSelectModule } from '@angular/material';
 @NgModule({
     imports: [
       ThemeModule,

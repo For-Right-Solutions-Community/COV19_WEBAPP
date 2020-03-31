@@ -40,6 +40,7 @@ export class CreateInterventionComponent implements OnInit {
   }
   get f() { return this.registerForm.controls; }
   onSubmit() {
+    console.log(this.intervention);
     this.submitted = true;
     // stop here if form is invalid
     if (this.registerForm.invalid) {

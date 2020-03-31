@@ -13,7 +13,7 @@ export class PatientService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  patients: Patient[];
+  patients: Patient[]=[];
   private baseUrl = environment.apiurl+'m/patient';
   private baseUrlRest = environment.apiurl+'patients';
   constructor(private http: HttpClient) { }
@@ -41,11 +41,10 @@ export class PatientService {
   getCriticalPatientsList() { 
     return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
     for(let p of dataX){
-      if(p.condition==1){
+      if(p.condition!=null && p.condition.toString()==="SEVERE"){
         this.patients.push(p);
       }
     }
-    console.log(this.patients)
     return this.patients;
   }));
   }
