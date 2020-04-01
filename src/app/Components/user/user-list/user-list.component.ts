@@ -70,7 +70,7 @@ export class UserListComponent implements OnInit {
     this.source = new LocalDataSource(this.users);
   }
   onDeleteConfirm(): void {
-    if(this.selectedRows[0] == null )
+    if(this.selectedRows==undefined||this.selectedRows[0] == null )
    {
     Swal.fire('','Il faut sélectionner un utilsateur !');
    } 
@@ -145,7 +145,7 @@ export class UserListComponent implements OnInit {
   }
   //edit
   showedit(event) {  
-    if(this.selectedRows[0] == null )
+    if(this.selectedRows==undefined||this.selectedRows[0] == null )
    {
     Swal.fire('','Il faut sélectionner un utilsateur !');
    } 
@@ -164,7 +164,7 @@ export class UserListComponent implements OnInit {
 }
 //details
 showdetails() {    
-  if(this.selectedRows[0] == null )
+  if(this.selectedRows==undefined||this.selectedRows[0] == null )
  {
   Swal.fire('','Il faut sélectionner un utilsateur !');
  } 

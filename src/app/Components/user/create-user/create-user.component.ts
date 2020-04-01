@@ -5,6 +5,7 @@ import { Role } from '../../../Models/role.model';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { LocalDataSource } from 'ng2-smart-table';
 import { MatSort,MatPaginator } from '@angular/material';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'ngx-create-user',
   templateUrl: './create-user.component.html',
@@ -51,8 +52,7 @@ export class CreateUserComponent implements OnInit {
         this.createdUser.emit(1);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
-        this.userService.showlist = true;
-        this.userService.showadd = false ;
+        Swal.fire('','L\'utilisateur est ajouté avec succés !');
         this.reset();
         this.reloadUserListData();
       },
@@ -68,11 +68,6 @@ export class CreateUserComponent implements OnInit {
    this.submitted = false;
    this.registerForm.reset();
   } 
-  @Output() close = new EventEmitter();
-  onClose() {
-    this.close.emit();
-  }
-
   getUsersList() {
     this.userService.getUsersList()
     .subscribe(result => {
@@ -88,10 +83,5 @@ export class CreateUserComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
-  }
-  doRefreshData(){
-    this.userService.showlist = true;
-    this.userService.showadd = false ;
-    this.reloadUserListData();
   }
 }

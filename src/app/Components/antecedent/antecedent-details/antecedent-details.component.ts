@@ -64,5 +64,9 @@ export class AntecedentDetailsComponent implements OnInit {
     this.antecedentService.showdetails = false ;
     this.reloadAntecedentListData();
   }
+  goBackToList(){
+    this.antecedentService.showlist = true;
+    this.antecedentService.showdetails = false ;
+  }
 
 }

@@ -1,5 +1,13 @@
 <nb-card>
-  <nb-card-header>Détails des antécédents d'un patient</nb-card-header>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-11">
+        Détails des antécédents du patient {{antecedent.patient.firstname}} {{antecedent.patient.lastname}}</div>
+     <div class="col-md-1" >
+        <button  class="btn btn-info" (click)="goBackToList()"  ><i class="fas fa-arrow-left"></i></button>
+    </div>
+    </div>
+  </nb-card-header>
   <nb-card-body>
     <form [formGroup]="registerForm" novalidate>
       <div class="row">

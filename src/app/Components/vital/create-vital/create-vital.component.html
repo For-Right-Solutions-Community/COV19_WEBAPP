@@ -1,9 +1,6 @@
 <nb-card>
   <nb-card-header>Ajouter les mesures des signes vitaux d'un patient</nb-card-header>
   <nb-card-body>
-    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
-      la fiche des signes vitaux est enregistrée avec succès !
-    </nb-alert>
     <form [formGroup]="registerForm" novalidate>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Patient :</label>

@@ -1,9 +1,6 @@
 <nb-card>
   <nb-card-header>Ajouter les antécédents d'un patient</nb-card-header>
   <nb-card-body>
-    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
-      Fiche des antécédents enregistrée avec succès !
-    </nb-alert> 
     <form [formGroup]="registerForm" novalidate>
       <div class="row">
         <div class="col-sm-2">

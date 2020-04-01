@@ -65,4 +65,9 @@ export class SymptomDetailsComponent implements OnInit {
     this.reloadSymptomListData();
   }
 
+  goBackToList(){
+    this.symptomService.showlist = true;
+    this.symptomService.showdetails = false ;
+  }
+
 }

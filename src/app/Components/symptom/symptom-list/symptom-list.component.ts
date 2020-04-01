@@ -57,6 +57,38 @@ export class SymptomListComponent implements OnInit {
           const date=moment(value);
           return date.format('DD/MM/YYYY');
       }
+    },
+      fever: {
+        title: 'Fièvre',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value==true?"Oui":"Non";
+        }
+      },
+      cough: {
+        title: 'Toux',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value==true?"Oui":"Non";
+        }
+      },
+      exposure: {
+        title: 'Exposition',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value==true?"Oui":"Non";
+        }
+      },
+      dyspnea: {
+        title: 'Dyspnea',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value==true?"Oui":"Non";
+        }
       },
     },
     hideSubHeader: true,
@@ -66,7 +98,7 @@ export class SymptomListComponent implements OnInit {
     this.source = new LocalDataSource(this.symptoms);
   }
   onDeleteConfirm(): void {
-    if(this.selectedRows[0] == null )
+    if(this.selectedRows==undefined||this.selectedRows[0] == null )
    {
     Swal.fire('','Il faut sélectionner une ligne !');
    } 
@@ -125,7 +157,7 @@ export class SymptomListComponent implements OnInit {
   }
   //edit
   showedit(event) {  
-    if(this.selectedRows[0] == null )
+    if(this.selectedRows==undefined||this.selectedRows[0] == null )
    {
     Swal.fire('','Il faut sélectionner une ligne !');
    } 
@@ -139,7 +171,7 @@ export class SymptomListComponent implements OnInit {
 //details
 showdetails() { 
   console.log(this.selectedRows);   
-  if(this.selectedRows[0] == null )
+  if(this.selectedRows==undefined||this.selectedRows[0] == null )
  {
   Swal.fire('','Il faut sélectionner une ligne !');
  } 

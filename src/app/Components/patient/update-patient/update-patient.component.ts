@@ -8,6 +8,7 @@ import { Gender } from '../../../Models/gender.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-update-patient',
@@ -60,10 +61,11 @@ export class UpdatePatientComponent implements OnInit {
         this.createdPatient.emit(1);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
-        this.patientService.showlist = true;
-        this.patientService.showedit = false ;
+        Swal.fire('','La fiche patient est modifiée avec succés !');
         this.reset();
         this.reloadPatientListData();
+        this.patientService.showedit = false ;
+        this.patientService.showlist = true;
       },
       error => {
         console.log(error);
@@ -77,10 +79,6 @@ export class UpdatePatientComponent implements OnInit {
    this.submitted = false;
    this.registerForm.reset();
   } 
-  @Output() close = new EventEmitter();
-  onClose() {
-    this.close.emit();
-  }
 
   getPatientsList() {
     this.patientService.getPatientsList()
@@ -102,6 +100,10 @@ export class UpdatePatientComponent implements OnInit {
     this.patientService.showlist = true;
     this.patientService.showedit = false ;
     this.reloadPatientListData();
+  }
+  goBackToList(){
+    this.patientService.showlist = true;
+    this.patientService.showedit = false ;
   }
 
 }

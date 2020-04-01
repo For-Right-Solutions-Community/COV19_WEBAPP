@@ -1,9 +1,6 @@
 <nb-card>
   <nb-card-header>Fiche patient</nb-card-header>
-  <nb-card-body>
-    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
-      Fiche Patient enregistrée avec succès !
-    </nb-alert> 
+  <nb-card-body> 
     <form [formGroup]="registerForm" novalidate>
     <div class="row">
       <div class="col-sm-6">

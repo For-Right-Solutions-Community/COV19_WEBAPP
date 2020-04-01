@@ -68,7 +68,7 @@ export class InterventionListComponent implements OnInit {
     this.source = new LocalDataSource(this.interventions);
   }
   onDeleteConfirm(): void {
-    if(this.selectedRows[0] == null )
+    if(this.selectedRows==undefined||this.selectedRows[0] == null )
    {
     Swal.fire('','Il faut sélectionner une ligne !');
    } 
@@ -124,7 +124,7 @@ export class InterventionListComponent implements OnInit {
   //edit
   showedit(event) {  
     console.log(this.selectedRows);
-    if(this.selectedRows[0] == null )
+    if(this.selectedRows==undefined||this.selectedRows[0] == null )
    {
     Swal.fire('','Il faut sélectionner une ligne !');
    } 
@@ -138,7 +138,7 @@ export class InterventionListComponent implements OnInit {
 //details
 showdetails() {  
   console.log(this.selectedRows);   
-  if(this.selectedRows[0] == null )
+  if(this.selectedRows==undefined||this.selectedRows[0] == null )
  {
   Swal.fire('','Il faut sélectionner une ligne !');
  } 

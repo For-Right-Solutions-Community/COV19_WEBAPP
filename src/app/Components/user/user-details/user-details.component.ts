@@ -58,8 +58,12 @@ export class UserDetailsComponent implements OnInit {
   }
   doRefreshData(){
     this.userService.showlist = true;
-    this.userService.showadd = false ;
+    this.userService.showdetails = false ;
     this.reloadUserListData();
+  }
+  goBackToList(){
+    this.userService.showlist = true;
+    this.userService.showdetails = false ;
   }
 
 }

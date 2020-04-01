@@ -77,7 +77,7 @@ export class PatientListComponent implements OnInit {
     this.source = new LocalDataSource(this.patients);
   }
   onDeleteConfirm(): void {
-    if(this.selectedRows[0] == null )
+    if(this.selectedRows==undefined||this.selectedRows[0] == null )
    {
     Swal.fire('','Il faut sélectionner un patient !');
    } 
@@ -153,7 +153,7 @@ export class PatientListComponent implements OnInit {
   }
   //edit
   showedit(event) {  
-    if(this.selectedRows[0] == null )
+    if(this.selectedRows==undefined||this.selectedRows[0] == null )
    {
     Swal.fire('','Il faut sélectionner un patient !');
    } 
@@ -166,7 +166,7 @@ export class PatientListComponent implements OnInit {
 }
 //details
 showdetails() {    
-  if(this.selectedRows[0] == null )
+  if(this.selectedRows==undefined||this.selectedRows[0] == null )
  {
   Swal.fire('','Il faut sélectionner un patient !');
  } 

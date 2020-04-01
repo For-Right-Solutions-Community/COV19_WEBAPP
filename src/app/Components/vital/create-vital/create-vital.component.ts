@@ -6,6 +6,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { VitalService } from '../../../Services/vital.service';
 import { Vital } from '../../../Models/vital.model';
 import { PatientService } from '../../../Services/patient.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-create-vital',
@@ -50,8 +51,7 @@ export class CreateVitalComponent implements OnInit {
         this.createdVital.emit(1);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
-        this.vitalService.showlist = true;
-        this.vitalService.showadd = false ;
+        Swal.fire('','La fiche des signes vitaux est ajoutée avec succés !');
         this.reset();
         this.reloadVitalListData();
       },
@@ -66,12 +66,7 @@ export class CreateVitalComponent implements OnInit {
    this.vital=new Vital();
    this.submitted = false;
    this.registerForm.reset();
-  } 
-  @Output() close = new EventEmitter();
-  onClose() {
-    this.close.emit();
   }
-
   getVitalsList() {
     this.vitalService.getVitalsList()
     .subscribe(result => {
@@ -94,11 +89,6 @@ export class CreateVitalComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
-  }
-  doRefreshData(){
-    this.vitalService.showlist = true;
-    this.vitalService.showadd = false ;
-    this.reloadVitalListData();
   }
 
 }
