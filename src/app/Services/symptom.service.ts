@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 import { Symptom } from '../Models/symptom.model';
+import { AppConfig } from '../app.config';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +11,7 @@ export class SymptomService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = environment.apiurl+'m/symptom';
+  private baseUrl = AppConfig.settings.apiServer+'m/symptom';
 
   constructor(private http: HttpClient) { }
 

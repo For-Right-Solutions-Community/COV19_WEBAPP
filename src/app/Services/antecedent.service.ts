@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Antecedent } from '../Models/antecedent.model';
-import { environment } from '../../environments/environment';
+import { AppConfig } from '../app.config';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +11,7 @@ export class AntecedentService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = environment.apiurl+'m/antecedent';
+  private baseUrl = AppConfig.settings.apiServer+'m/antecedent';
   constructor(private http: HttpClient) { }
 
   getAntecedent(id: number): Observable<Object> {

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 import { Patient } from '../Models/patient.model';
 import { map } from 'rxjs/operators';
+import { AppConfig } from '../app.config';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class PatientService {
   public  showadd = false;
   public showdetails = false;
   patients: Patient[]=[];
-  private baseUrl = environment.apiurl+'m/patient';
-  private baseUrlRest = environment.apiurl+'patients';
+  private baseUrl = AppConfig.settings.apiServer+'m/patient';
+  private baseUrlRest = AppConfig.settings.apiServer+'patients';
   constructor(private http: HttpClient) { }
 
   getPatient(id: number): Observable<Object> {

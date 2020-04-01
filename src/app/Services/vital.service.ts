@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 import { Vital } from '../Models/vital.model';
+import { AppConfig } from '../app.config';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +11,7 @@ export class VitalService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = environment.apiurl+'m/vital';
+  private baseUrl = AppConfig.settings.apiServer+'m/vital';
 
   constructor(private http: HttpClient) { }
 

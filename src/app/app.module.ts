@@ -5,7 +5,7 @@
  */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
@@ -21,6 +21,14 @@ import {
   NbWindowModule,
 } from '@nebular/theme';
 import { NgxAuthModule } from './Components/auth/auth.module';
+import { httpInterceptorProviders } from './Components/auth/services/auth-interceptor';
+import { AuthGuard } from './Components/auth/services/auth-guard.service';
+import { APP_BASE_HREF } from '@angular/common';
+import { AppConfig } from './app.config';
+
+export function initializeApp(appConfig: AppConfig) {
+  return () => appConfig.load();
+}
 
 @NgModule({
   declarations: [AppComponent, 
@@ -44,6 +52,13 @@ import { NgxAuthModule } from './Components/auth/auth.module';
     NgxAuthModule,
   ],
   bootstrap: [AppComponent],
+  providers: [httpInterceptorProviders,AuthGuard,
+    AppConfig,
+    { provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [AppConfig], multi: true },
+    { provide: APP_BASE_HREF, useValue: '/' }
+  ],
 })
 export class AppModule {
 }

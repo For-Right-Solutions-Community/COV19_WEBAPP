@@ -4,7 +4,7 @@ import { Observable} from 'rxjs';
 import { JwtResponse } from '../models/jwt-response';
 import { AuthLoginInfo } from '../models/login.model';
 import { TokenStorageService } from './token-storage.service';
-import { environment } from '../../../../environments/environment';
+import { AppConfig } from '../../../app.config';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' ,
@@ -17,7 +17,7 @@ observe:'body'},
 })
 export class AuthService {
   //dev mode
-  private loginUrl = environment.apiurl+'/v2/register';
+  private loginUrl = AppConfig.settings.apiServer+'/v2/register';
   
   constructor(private http: HttpClient,private storage:TokenStorageService) {
     

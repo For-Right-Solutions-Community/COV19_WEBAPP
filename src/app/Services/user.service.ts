@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AppUser } from '../Models/user.model';
+import { AppConfig } from '../app.config';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class UserService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = environment.apiurl+'m/user';
-  private baseUrlRest = environment.apiurl+'users';
+  private baseUrl = AppConfig.settings.apiServer+'m/user';
+  private baseUrlRest = AppConfig.settings.apiServer+'users';
 
   constructor(private http: HttpClient) { }
 
