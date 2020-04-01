@@ -14,8 +14,8 @@ export class PatientService {
   public  showadd = false;
   public showdetails = false;
   patients: Patient[]=[];
-  private baseUrl = AppConfig.settings.apiServer+'m/patient';
-  private baseUrlRest = AppConfig.settings.apiServer+'patients';
+  private baseUrl = AppConfig.settings.apiServer.metadata+'m/patient';
+  private baseUrlRest = AppConfig.settings.apiServer.metadata+'patients';
   constructor(private http: HttpClient) { }
 
   getPatient(id: number): Observable<Object> {

@@ -11,7 +11,7 @@ export class VitalService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = AppConfig.settings.apiServer+'m/vital';
+  private baseUrl = AppConfig.settings.apiServer.metadata+'m/vital';
 
   constructor(private http: HttpClient) { }
 

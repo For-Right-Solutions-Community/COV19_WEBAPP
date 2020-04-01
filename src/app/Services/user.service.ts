@@ -13,8 +13,8 @@ export class UserService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = AppConfig.settings.apiServer+'m/user';
-  private baseUrlRest = AppConfig.settings.apiServer+'users';
+  private baseUrl = AppConfig.settings.apiServer.metadata+'m/user';
+  private baseUrlRest = AppConfig.settings.apiServer.metadata+'users';
 
   constructor(private http: HttpClient) { }
 

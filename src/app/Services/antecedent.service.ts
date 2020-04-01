@@ -11,7 +11,7 @@ export class AntecedentService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = AppConfig.settings.apiServer+'m/antecedent';
+  private baseUrl = AppConfig.settings.apiServer.metadata+'m/antecedent';
   constructor(private http: HttpClient) { }
 
   getAntecedent(id: number): Observable<Object> {

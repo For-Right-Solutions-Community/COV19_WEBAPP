@@ -8,7 +8,7 @@ import { AppConfig } from '../app.config';
 })
 export class LocalisationService {
 
-  private baseUrl = AppConfig.settings.apiServer+'locations';
+  private baseUrl = AppConfig.settings.apiServer.metadata+'locations';
   constructor(private http: HttpClient) { }
 
   getLocalisationsList() {

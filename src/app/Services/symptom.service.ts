@@ -11,7 +11,7 @@ export class SymptomService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
-  private baseUrl = AppConfig.settings.apiServer+'m/symptom';
+  private baseUrl = AppConfig.settings.apiServer.metadata+'m/symptom';
 
   constructor(private http: HttpClient) { }
 

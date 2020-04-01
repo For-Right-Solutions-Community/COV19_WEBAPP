@@ -12,7 +12,7 @@ export class InterventionService {
   public showedit = false;
   public showadd = false;
   public showdetails = false;
-  private baseUrl = AppConfig.settings.apiServer+'m/intervention';
+  private baseUrl = AppConfig.settings.apiServer.metadata+'m/intervention';
   constructor(private http: HttpClient) { }
 
   getIntervention(id: number): Observable<Object> {
