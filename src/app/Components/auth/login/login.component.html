@@ -30,11 +30,20 @@
         <a ><button nbButton
           fullWidth
           [disabled]="loading"
-          (click)="onSubmit()"> Connecter</button></a> 
+          (click)="onSubmit()"> Connecter</button></a>
       </div>
       <br>
       <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
           erreur de connexion : {{errorMessage}}
+      </div>
+      <div class="form-group">
+        <br>
+
+        <small>ou créer un compte</small>
+        <a ><button nbButton
+          fullWidth
+          [disabled]="loading"
+          (click)="register()"> S'inscrire</button></a>
       </div>
     </form>
 </div>

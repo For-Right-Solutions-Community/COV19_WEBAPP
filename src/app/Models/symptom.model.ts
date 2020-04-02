@@ -19,12 +19,6 @@ export class Symptom{
     //vomiting_score:number=1;
     diarrhea:boolean;
     //diarrhea_score:number=1;
-    renalFailure:boolean;
-    //renalFailure_score:number=1;
-    heartFailure:boolean;
-    //heartFailure_score:number=1;
-    chronicRespiratory:boolean;
-    //chronicRespiratory_score:number=1;
     date:Date;
     patient:Patient;
     constructor(){}

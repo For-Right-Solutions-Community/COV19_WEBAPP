@@ -21,10 +21,14 @@ import {
   NbWindowModule,
 } from '@nebular/theme';
 import { NgxAuthModule } from './Components/auth/auth.module';
+import { httpInterceptorProviders } from './Components/auth/services/auth-interceptor';
 
 @NgModule({
   declarations: [AppComponent, 
     ],
+  providers:[
+    httpInterceptorProviders
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -17,7 +17,7 @@ observe:'body'},
 })
 export class AuthService {
   //dev mode
-  private loginUrl = environment.apiurl+'/v2/register';
+  private loginUrl = environment.apiurl+'v2/register';
   
   constructor(private http: HttpClient,private storage:TokenStorageService) {
     
