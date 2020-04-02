@@ -1,24 +1,24 @@
 import { Patient } from './patient.model';
+import { Exposure } from './exposure.model';
 
 export class Symptom{
     id:number;
-
     fever:boolean;
-    //fever_score:number=2;
     cough:boolean;
-    //cough_score:number=2;
     dyspnea:boolean;
-    //dyspnea_score:number=2;
-    exposure:boolean;
-    //exposure_score:number=2;
+    severeDyspnea:boolean;
     soreThroat:boolean;
-    //soreThroat_score:number=1;
-    nausea:boolean;
-    //nausea_score:number=1;
-    vomiting:boolean;
-    //vomiting_score:number=1;
+    nauseaOrVomiting:boolean;
+    unableToSpeak:boolean;
     diarrhea:boolean;
-    //diarrhea_score:number=1;
+    deteriorationOfGC:boolean;
+    chestPain:boolean;
+    epigastralgia:boolean;
+    senseDisorder:boolean;
+    arthalgia:boolean;
+	temperature:number;
+	duration:number;
+    exposure:Exposure;
     date:Date;
     patient:Patient;
     constructor(){}

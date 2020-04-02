@@ -7,6 +7,7 @@ import { SymptomService } from '../../../Services/symptom.service';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import Swal from 'sweetalert2';
+import { Exposure } from '../../../Models/exposure.model';
 
 @Component({
   selector: 'ngx-create-symptom',
@@ -14,7 +15,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./create-symptom.component.scss']
 })
 export class CreateSymptomComponent implements OnInit {
-
+  checkexposure:boolean=false;
+  visitCountry:boolean=false;
+  covidTest:boolean=false;
+  visitRegion:boolean=false;
+  exposure:Exposure;
   patients: Patient[] = [];
   symptoms: Symptom[] = [];
   dataSource;
@@ -31,6 +36,7 @@ export class CreateSymptomComponent implements OnInit {
   ngOnInit() {
     this.getSymptomsList();
     this.symptom=new Symptom();
+    this.exposure=new Exposure();
     this.getPatientsList();
     this.registerForm = this.formBuilder.group({
     patient: ['', Validators.required],
@@ -45,6 +51,7 @@ export class CreateSymptomComponent implements OnInit {
       return;
   }
     console.log(this.symptom);
+    this.symptom.exposure=this.exposure;
     this.symptomService.createSymptom(this.symptom).subscribe(
       data => {
         console.log(data);

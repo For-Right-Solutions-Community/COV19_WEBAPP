@@ -34,11 +34,36 @@
           placeholder="CIN" name="cin" [(ngModel)]="patient.cin">
         </div>
       </div>
+    </div>
+    <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
           <label  class="label">Téléphone</label>
           <input type="tel" nbInput fullWidth  placeholder="Téléphone"
           name="phone" [(ngModel)]="patient.phone" [ngModelOptions]="{standalone: true}"/>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label  class="label">Téléphone proche</label>
+          <input type="tel" nbInput fullWidth  placeholder="Téléphone proche"
+           [(ngModel)]="patient.backupPhone" [ngModelOptions]="{standalone: true}"/>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label  class="label">Ville</label>
+          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  
+          placeholder="Ville" [(ngModel)]="address.city">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label  class="label">Gouvernorat</label>
+          <input type="text" nbInput fullWidth  placeholder="Gouvernorat"
+           [(ngModel)]="address.state" [ngModelOptions]="{standalone: true}"/>
         </div>
       </div>
     </div>
@@ -130,7 +155,7 @@
     </div>
     </div>
     <div class="form-group row">
-      <label f class="label col-sm-2 col-form-label">Nombre des personnes du famille:</label>
+      <label class="label col-sm-2 col-form-label">Nombre des personnes du famille:</label>
       <div class="col-sm-4">
         <input type="number" nbInput fullWidth  placeholder="Nombre de personnes du famille"
         [(ngModel)]="patient.familySize" [ngModelOptions]="{standalone: true}">
@@ -162,48 +187,19 @@
       </div>
       </div>
       <div class="row">
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label class="label">Couverture sociale ?</label>
+          </div>
+        </div>
         <div class="col-sm-4">
-          <div class="form-group">
-            <nb-checkbox [(checked)]="visitCountry">J'était en voyage au cours du moi dernier</nb-checkbox>
-          </div>
-        </div>
-        <div *ngIf="visitCountry" class="col-sm-8">
-          <div class="form-group">
-            <input [(ngModel)]="patient.visitedCountry" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="Pays">
-          </div>
-        </div>
+          <nb-select  [ngModelOptions]="{standalone: true}" fullWidth [(ngModel)]="patient.socialCoverage">
+            <nb-option *ngFor="let key of socialOptions" [value]="key">{{key}}</nb-option>
+          </nb-select>
       </div>
-      <div class="row">
-        <div class="col-sm-8">
-          <div class="form-group">
-            <nb-checkbox [(checked)]="contact">J'était en contact avec une personne qui revient d’un voyage</nb-checkbox>
-          </div>
-        </div>
       </div>
-      <div *ngIf="contact" class="row">
-        <div class="col-sm-4">
-          <div class="form-group">
-            <nb-checkbox [(checked)]="patient.sameHomePersonReturningFromTrip">Habite avec nous à la maison</nb-checkbox>
-          </div>
-        </div>
-        <div class="col-sm-8">
-          <div class="form-group">
-            <input [(ngModel)]="patient.countryPersonReturningFromTrip" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="du quel pays ?">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="form-group">
-            <nb-checkbox [(checked)]="covidTest">J'ai subi le test de dépistage du virus corona</nb-checkbox>
-          </div>
-        </div>
-        <div *ngIf="covidTest" class="col-sm-8">
-          <div class="form-group">
-            <input [(ngModel)]="patient.covidTestResult" [ngModelOptions]="{standalone: true}"type="text" nbInput fullWidth  placeholder="Resultat">
-          </div>
-        </div>
-      </div>
+      <br>
+      <br>
       <div class="row">
         <div class="col-sm-2">
           <button type="button" nbButton (click)="onSubmit()">Ajouter</button>
@@ -216,7 +212,7 @@
         <div class="col-sm-1">
           <button type="button" nbButton status="danger" (click)="reset()">Annuler</button>
         </div>  
-      </div>
+      </div>      
   </form>
   </nb-card-body>
 </nb-card>

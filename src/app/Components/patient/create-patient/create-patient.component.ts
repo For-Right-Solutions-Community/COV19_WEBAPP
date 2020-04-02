@@ -9,6 +9,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import Swal from 'sweetalert2';
+import { Address } from '../../../Models/address.model';
+import { SocialCoverage } from '../../../Models/social-coverage.model';
 
 @Component({
   selector: 'ngx-create-patient',
@@ -16,10 +18,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./create-patient.component.scss']
 })
 export class CreatePatientComponent implements OnInit {
+  address:Address;
+  socialOptions : SocialCoverage[]= Object.keys(SocialCoverage).map(key => SocialCoverage[key]).filter(value => typeof(value) === "string");
   handicape:boolean=false;
-  visitCountry:boolean=false;
-  contact:boolean=false;
-  covidTest:boolean=false;
   patients: Patient[] = [];
   dataSource;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -40,6 +41,7 @@ export class CreatePatientComponent implements OnInit {
   ngOnInit() {
     this.getPatientsList();
     this.patient=new Patient();
+    this.address=new Address();
     this.registerForm = this.formBuilder.group({
     gender: ['', Validators.required],
     firstname: ['', Validators.required],
@@ -55,6 +57,7 @@ export class CreatePatientComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
   }
+    this.patient.address=this.address;
     this.patientService.createPatient(this.patient).subscribe(
       data => {
         console.log(data);

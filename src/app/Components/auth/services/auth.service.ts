@@ -17,7 +17,7 @@ observe:'body'},
 })
 export class AuthService {
   //dev mode
-  private loginUrl = AppConfig.settings.apiServer+'/v2/register';
+  private loginUrl = AppConfig.settings.apiServer.metadata+'v2/register';
   
   constructor(private http: HttpClient,private storage:TokenStorageService) {
     

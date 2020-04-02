@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SymptomService } from '../../../Services/symptom.service';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import { Exposure } from '../../../Models/exposure.model';
 
 @Component({
   selector: 'ngx-symptom-details',
@@ -13,7 +14,11 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./symptom-details.component.scss']
 })
 export class SymptomDetailsComponent implements OnInit {
-
+  checkexposure:boolean=false;
+  visitCountry:boolean=false;
+  covidTest:boolean=false;
+  visitRegion:boolean=false;
+  exposure:Exposure;
   patients: Patient[] = [];
   symptoms: Symptom[] = [];
   dataSource;
@@ -28,6 +33,7 @@ export class SymptomDetailsComponent implements OnInit {
   registerForm: FormGroup;
   constructor(private symptomService: SymptomService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
+    this.exposure=this.symptom.exposure;
     this.getSymptomsList();
     this.getPatientsList();
     this.registerForm = this.formBuilder.group({

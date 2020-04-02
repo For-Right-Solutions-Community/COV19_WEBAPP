@@ -3,6 +3,9 @@ import { Gender } from './gender.model';
 import { Account } from './account.model';
 import { CivilStatus } from './civil-status.model';
 import { Profession } from './profession.model';
+import { SocialCoverage } from './social-coverage.model';
+import { Address } from './address.model';
+import { AppUser } from './user.model';
 
 export class Patient{
     id:number;
@@ -18,30 +21,17 @@ export class Patient{
     condition:Condition;
     civilStatus:CivilStatus;
     profession:Profession;
-
     liveAlone:boolean;
     liveWithFamily:boolean;
     familySize:number;
-
     runningWater:boolean;
     hotWater:boolean;
     sewageDisposal:boolean;
-
     singleRoom:boolean;
-
-    //handicap:boolean;
     physicalHandicap:boolean;
-    intellecHandicap:boolean;
-
-    //traveled:boolean;
-    visitedCountry:string;
-    //contactPersonReturningFromTrip:boolean;
-    countryPersonReturningFromTrip:string;
-    sameHomePersonReturningFromTrip:boolean;
-
-    //COVIDtested:boolean;
-    covidTestResult:string;
-
-    account:Account;
+	socialCoverage:SocialCoverage;
+    backupPhone:string;
+    address:Address;
+    user:AppUser;
     constructor(){}
 }

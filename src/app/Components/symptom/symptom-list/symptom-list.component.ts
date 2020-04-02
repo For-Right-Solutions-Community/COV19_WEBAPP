@@ -58,38 +58,6 @@ export class SymptomListComponent implements OnInit {
           return date.format('DD/MM/YYYY');
       }
     },
-      fever: {
-        title: 'Fièvre',
-        type: 'string',
-        valuePrepareFunction: (value) => {
-          if (value==undefined) return '';
-          return value==true?"Oui":"Non";
-        }
-      },
-      cough: {
-        title: 'Toux',
-        type: 'string',
-        valuePrepareFunction: (value) => {
-          if (value==undefined) return '';
-          return value==true?"Oui":"Non";
-        }
-      },
-      exposure: {
-        title: 'Exposition',
-        type: 'string',
-        valuePrepareFunction: (value) => {
-          if (value==undefined) return '';
-          return value==true?"Oui":"Non";
-        }
-      },
-      dyspnea: {
-        title: 'Dyspnea',
-        type: 'string',
-        valuePrepareFunction: (value) => {
-          if (value==undefined) return '';
-          return value==true?"Oui":"Non";
-        }
-      },
     },
     hideSubHeader: true,
   };

@@ -1,0 +1,3 @@
+export enum SocialCoverage {
+	UNCOVERED, ASSURANCE_GROUP, WHITE_NOTEBOOK, CNRPS, CNSS
+}

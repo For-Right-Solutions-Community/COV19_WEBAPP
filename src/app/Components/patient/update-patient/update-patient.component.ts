@@ -9,6 +9,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import Swal from 'sweetalert2';
+import { SocialCoverage } from '../../../Models/social-coverage.model';
+import { Address } from '../../../Models/address.model';
 
 @Component({
   selector: 'ngx-update-patient',
@@ -16,11 +18,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./update-patient.component.scss']
 })
 export class UpdatePatientComponent implements OnInit {
-
+  address:Address;
+  socialOptions : SocialCoverage[]= Object.keys(SocialCoverage).map(key => SocialCoverage[key]).filter(value => typeof(value) === "string");
   handicape:boolean=false;
-  visitCountry:boolean=false;
-  contact:boolean=false;
-  covidTest:boolean=false;
   patients: Patient[] = [];
   dataSource;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -39,6 +39,7 @@ export class UpdatePatientComponent implements OnInit {
   registerForm: FormGroup;
   constructor(private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
+    this.address=this.patient.address;
     this.getPatientsList();
     this.registerForm = this.formBuilder.group({
     gender: ['', Validators.required],
@@ -55,6 +56,7 @@ export class UpdatePatientComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
   }
+    this.patient.address=this.address;
     this.patientService.updatePatient(this.patient.id,this.patient).subscribe(
       data => {
         console.log(data);
