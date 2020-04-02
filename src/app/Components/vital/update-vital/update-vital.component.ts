@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { VitalService } from '../../../Services/vital.service';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-update-vital',
@@ -48,10 +49,11 @@ export class UpdateVitalComponent implements OnInit {
         this.createdVital.emit(1);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
-        this.vitalService.showlist = true;
-        this.vitalService.showadd = false ;
+        Swal.fire('','La fiche des signes vitaux est modifiée avec succés !');
         this.reset();
         this.reloadVitalListData();
+        this.vitalService.showedit = false ;
+        this.vitalService.showlist = true;
       },
       error => {
         console.log(error);
@@ -65,11 +67,6 @@ export class UpdateVitalComponent implements OnInit {
    this.submitted = false;
    this.registerForm.reset();
   } 
-  @Output() close = new EventEmitter();
-  onClose() {
-    this.close.emit();
-  }
-
   getVitalsList() {
     this.vitalService.getVitalsList()
     .subscribe(result => {
@@ -95,8 +92,12 @@ export class UpdateVitalComponent implements OnInit {
   }
   doRefreshData(){
     this.vitalService.showlist = true;
-    this.vitalService.showadd = false ;
+    this.vitalService.showedit = false ;
     this.reloadVitalListData();
+  }
+  goBackToList(){
+    this.vitalService.showlist = true;
+    this.vitalService.showedit = false ;
   }
 
 }

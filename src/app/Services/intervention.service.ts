@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Intervention } from '../Models/intervention.model';
+import { AppConfig } from '../app.config';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +12,7 @@ export class InterventionService {
   public showedit = false;
   public showadd = false;
   public showdetails = false;
-  private baseUrl = environment.apiurl+'m/intervention';
+  private baseUrl = AppConfig.settings.apiServer.metadata+'m/intervention';
   constructor(private http: HttpClient) { }
 
   getIntervention(id: number): Observable<Object> {

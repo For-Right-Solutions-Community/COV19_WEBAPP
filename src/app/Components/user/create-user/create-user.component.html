@@ -1,9 +1,6 @@
 <nb-card>
   <nb-card-header>Ajouter un utilisateur</nb-card-header>
-  <nb-card-body>
-    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
-      Utilisateur enregistré avec succès !
-    </nb-alert>  
+  <nb-card-body>  
     <form  [formGroup]="registerForm" novalidate>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Prénom :</label>

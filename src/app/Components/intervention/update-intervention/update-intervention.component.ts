@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InterventionService } from '../../../Services/intervention.service';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-update-intervention',
@@ -50,10 +51,11 @@ export class UpdateInterventionComponent implements OnInit {
         this.createdIntervention.emit(1);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
-        this.interventionService.showlist = true;
-        this.interventionService.showedit = false ;
+        Swal.fire('','L\'intervention est modifée avec succés !');
         this.reset();
         this.reloadInterventionListData();
+        this.interventionService.showedit = false ;
+        this.interventionService.showlist = true;
       },
       error => {
         console.log(error);
@@ -66,10 +68,6 @@ export class UpdateInterventionComponent implements OnInit {
    this.intervention=new Intervention();
    this.submitted = false;
    this.registerForm.reset();
-  } 
-  @Output() close = new EventEmitter();
-  onClose() {
-    this.close.emit();
   }
 
   getInterventionsList() {
@@ -99,6 +97,11 @@ export class UpdateInterventionComponent implements OnInit {
     this.interventionService.showlist = true;
     this.interventionService.showedit = false ;
     this.reloadInterventionListData();
+  }
+
+  goBackToList(){
+    this.interventionService.showlist = true;
+    this.interventionService.showedit = false ;
   }
 
 }

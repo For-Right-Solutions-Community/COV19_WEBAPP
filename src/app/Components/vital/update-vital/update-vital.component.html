@@ -1,9 +1,14 @@
 <nb-card>
-  <nb-card-header>Modifier les mesures des signes vitaux</nb-card-header>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-11">
+        Modifier les mesures des signes vitaux du patient {{vital.patient.firstname}} {{vital.patient.lastname}}</div>
+     <div class="col-md-1" >
+      <button  class="btn btn-info" (click)="goBackToList()"  ><i class="fas fa-arrow-left"></i></button>
+    </div>
+    </div>
+  </nb-card-header>
   <nb-card-body>
-    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
-      la fiche des signes vitaux est modifiée avec succès !
-    </nb-alert>
     <form [formGroup]="registerForm" novalidate>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Patient :</label>

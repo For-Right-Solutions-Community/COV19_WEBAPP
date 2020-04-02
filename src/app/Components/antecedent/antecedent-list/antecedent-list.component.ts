@@ -110,7 +110,7 @@ export class AntecedentListComponent implements OnInit {
     this.source = new LocalDataSource(this.antecedents);
   }
   onDeleteConfirm(): void {
-    if(this.selectedRows[0] == null )
+    if(this.selectedRows==undefined||this.selectedRows[0] == null )
    {
     Swal.fire('','Il faut sélectionner une ligne !');
    } 
@@ -165,7 +165,7 @@ export class AntecedentListComponent implements OnInit {
   //edit
   showedit(event) {  
     console.log(this.selectedRows);
-    if(this.selectedRows[0] == null )
+    if(this.selectedRows==undefined||this.selectedRows[0] == null )
    {
     Swal.fire('','Il faut sélectionner une ligne !');
    } 
@@ -178,7 +178,7 @@ export class AntecedentListComponent implements OnInit {
 }
 //details
 showdetails() {    
-  if(this.selectedRows[0] == null )
+  if(this.selectedRows==undefined|| this.selectedRows[0] == null )
  {
   Swal.fire('','Il faut sélectionner une ligne !');
  } 

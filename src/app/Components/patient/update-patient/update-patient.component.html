@@ -1,9 +1,14 @@
 <nb-card>
-  <nb-card-header>Fiche patient</nb-card-header>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-11">
+        Modifier la fiche patient de {{patient.firstname}} {{patient.lastname}}</div>
+     <div class="col-md-1" >
+      <button  class="btn btn-info" (click)="goBackToList()"  ><i class="fas fa-arrow-left"></i></button>
+    </div>
+    </div>
+  </nb-card-header>
   <nb-card-body>
-    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
-      Fiche Patient modifiée avec succès !
-    </nb-alert> 
     <form [formGroup]="registerForm" novalidate>
     <div class="row">
       <div class="col-sm-6">

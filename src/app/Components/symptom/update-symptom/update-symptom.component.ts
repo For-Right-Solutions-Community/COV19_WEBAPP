@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SymptomService } from '../../../Services/symptom.service';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-update-symptom',
@@ -49,10 +50,11 @@ export class UpdateSymptomComponent implements OnInit {
         this.createdSymptom.emit(1);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
-        this.symptomService.showlist = true;
-        this.symptomService.showedit = false ;
+        Swal.fire('','La fiche des symptômes est modifiée avec succés !');
         this.reset();
         this.reloadSymptomListData();
+        this.symptomService.showedit = false ;
+        this.symptomService.showlist = true;
       },
       error => {
         console.log(error);
@@ -65,10 +67,6 @@ export class UpdateSymptomComponent implements OnInit {
    this.symptom=new Symptom();
    this.submitted = false;
    this.registerForm.reset();
-  } 
-  @Output() close = new EventEmitter();
-  onClose() {
-    this.close.emit();
   }
 
   getSymptomsList() {
@@ -98,6 +96,11 @@ export class UpdateSymptomComponent implements OnInit {
     this.symptomService.showlist = true;
     this.symptomService.showedit = false ;
     this.reloadSymptomListData();
+  }
+
+  goBackToList(){
+    this.symptomService.showlist = true;
+    this.symptomService.showedit = false ;
   }
 
 }

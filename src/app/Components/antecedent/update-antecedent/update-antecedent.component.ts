@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AntecedentService } from '../../../Services/antecedent.service';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-update-antecedent',
@@ -48,10 +49,11 @@ export class UpdateAntecedentComponent implements OnInit {
         this.createdAntecedent.emit(1);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
-        this.antecedentService.showlist = true;
-        this.antecedentService.showedit = false ;
+        Swal.fire('','La fiche des antécédents est modifiée avec succés !');
         this.reset();
         this.reloadAntecedentListData();
+        this.antecedentService.showedit = false ;  
+        this.antecedentService.showlist = true;
       },
       error => {
         console.log(error);
@@ -64,12 +66,7 @@ export class UpdateAntecedentComponent implements OnInit {
    this.antecedent=new Antecedent();
    this.submitted = false;
    this.registerForm.reset();
-  } 
-  @Output() close = new EventEmitter();
-  onClose() {
-    this.close.emit();
   }
-
   getAntecedentsList() {
     this.antecedentService.getAntecedentsList()
     .subscribe(result => {
@@ -97,6 +94,11 @@ export class UpdateAntecedentComponent implements OnInit {
     this.antecedentService.showlist = true;
     this.antecedentService.showedit = false ;
     this.reloadAntecedentListData();
+  }
+
+  goBackToList(){
+    this.antecedentService.showlist = true;
+    this.antecedentService.showedit = false ;
   }
 
 }

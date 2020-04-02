@@ -62,8 +62,12 @@ export class VitalDetailsComponent implements OnInit {
   }
   doRefreshData(){
     this.vitalService.showlist = true;
-    this.vitalService.showadd = false ;
+    this.vitalService.showdetails = false ;
     this.reloadVitalListData();
+  }
+  goBackToList(){
+    this.vitalService.showlist = true;
+    this.vitalService.showdetails = false ;
   }
 
 }

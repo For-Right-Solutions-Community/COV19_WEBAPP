@@ -71,4 +71,9 @@ export class PatientDetailsComponent implements OnInit {
     this.reloadPatientListData();
   }
 
+  goBackToList(){
+    this.patientService.showlist = true;
+    this.patientService.showdetails = false ;
+  }
+
 }

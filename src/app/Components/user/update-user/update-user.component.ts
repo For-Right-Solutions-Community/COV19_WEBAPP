@@ -5,6 +5,7 @@ import { Role } from '../../../Models/role.model';
 import { AppUser } from '../../../Models/user.model';
 import { LocalDataSource } from 'ng2-smart-table';
 import { UserService } from '../../../Services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-update-user',
@@ -51,10 +52,11 @@ export class UpdateUserComponent implements OnInit {
       data => {
         this.isSignedUp = true;
         this.isSignUpFailed = false;
-        this.userService.showlist = true;
-        this.userService.showedit = false ;
+        Swal.fire('','L\'utilisateur est modifié avec succés !');
         this.reset();
         this.reloadUserListData();
+        this.userService.showedit = false ;
+        this.userService.showlist = true;
       },
       error => {
         console.log(error);
@@ -67,12 +69,7 @@ export class UpdateUserComponent implements OnInit {
    this.user=new AppUser();
    this.submitted = false;
    this.registerForm.reset();
-  } 
-  @Output() close = new EventEmitter();
-  onClose() {
-    this.close.emit();
   }
-
   getUsersList() {
     this.userService.getUsersList()
     .subscribe(result => {
@@ -91,8 +88,13 @@ export class UpdateUserComponent implements OnInit {
   }
   doRefreshData(){
     this.userService.showlist = true;
-    this.userService.showadd = false ;
+    this.userService.showedit = false ;
     this.reloadUserListData();
+  }
+
+  goBackToList(){
+    this.userService.showlist = true;
+    this.userService.showedit = false ;
   }
 
 }

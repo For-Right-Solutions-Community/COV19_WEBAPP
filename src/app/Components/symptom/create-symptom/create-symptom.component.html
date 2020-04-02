@@ -1,9 +1,6 @@
 <nb-card>
   <nb-card-header>Ajouter les symptômes d'un patient</nb-card-header>
   <nb-card-body>
-    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
-      la fiche des symptômes vitaux est enregistrée avec succès !
-    </nb-alert>
     <form [formGroup]="registerForm" novalidate>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Patient :</label>
@@ -55,7 +52,7 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <nb-checkbox [(checked)]="symptom.physicalHandicap">dyspnea</nb-checkbox>
+          <nb-checkbox [(checked)]="symptom.dyspnea">dyspnea</nb-checkbox>
         </div>
       </div>
     </div>

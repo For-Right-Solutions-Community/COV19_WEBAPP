@@ -1,9 +1,14 @@
 <nb-card>
-  <nb-card-header>Modifier une intervention pour un patient</nb-card-header>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-11">
+        Modifier l'intervention du patient {{intervention.patient.firstname}} {{intervention.patient.lastname}}</div>
+     <div class="col-md-1" >
+      <button  class="btn btn-info" (click)="goBackToList()"  ><i class="fas fa-arrow-left"></i></button>
+    </div>
+    </div>
+  </nb-card-header>
   <nb-card-body>
-    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
-      l'intervention est modifiée avec succès !
-    </nb-alert>
     <form [formGroup]="registerForm" novalidate>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Patient :</label>

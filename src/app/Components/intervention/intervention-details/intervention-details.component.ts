@@ -68,4 +68,9 @@ export class InterventionDetailsComponent implements OnInit {
     this.reloadInterventionListData();
   }
 
+  goBackToList(){
+    this.interventionService.showlist = true;
+    this.interventionService.showdetails = false ;
+  }
+
 }

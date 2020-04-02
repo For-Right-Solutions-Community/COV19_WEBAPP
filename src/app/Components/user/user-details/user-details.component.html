@@ -1,9 +1,14 @@
 <nb-card>
-  <nb-card-header>Détails de l'utilisateur {{user.firstname}} {{user.lastname}}</nb-card-header>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-11">
+        Détails de l'utilisateur {{user.firstname}} {{user.lastname}}</div>
+     <div class="col-md-1" >
+      <button  class="btn btn-info" (click)="goBackToList()"  ><i class="fas fa-arrow-left"></i></button>
+    </div>
+    </div>
+  </nb-card-header>
   <nb-card-body>
-    <nb-alert status="success" closable (close)="onClose()" *ngIf="isSignedUp">
-      Utilisateur modifer avec succès !
-    </nb-alert>  
     <form  [formGroup]="registerForm" novalidate>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Prénom :</label>
