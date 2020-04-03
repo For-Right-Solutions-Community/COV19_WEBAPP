@@ -1,11 +1,12 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { LoginComponent } from './Components/auth/login/login.component';
-import { RegisterComponent } from './Components/auth/register/register.component';
+import { AuthGuard } from './Components/auth/services/auth-guard.service';
 
 const routes: Routes = [
   {
     path: 'menu',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./Components/entry/entry.module')
       .then(m => m.EntryModule),
   },
@@ -13,11 +14,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-  {
-    path: 'register',
-    component: RegisterComponent
-  },
-  { path: '', redirectTo: 'menu', pathMatch: 'full' },
+  { path: '', 
+  canActivate: [AuthGuard],
+  redirectTo: 'menu',
+  pathMatch: 'full' },
   { path: '**', redirectTo: 'menu' },
 ];
 

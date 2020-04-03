@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.scss'],
   template: `
     <span class="created-by">
-      Développer par l'équipe de <b><a href="http://www.frsdev.com/" target="_blank">FRS</a></b> 2020
+      Développé par l'équipe de <b><a href="http://www.frsdev.com/" target="_blank">FRS</a></b> 2020
     </span>
     <div class="socials">
       <a href="https://github.com/For-Right-Solutions-Community" target="_blank" class="ion ion-social-github"></a>
