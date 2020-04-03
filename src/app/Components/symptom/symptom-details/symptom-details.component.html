@@ -13,10 +13,11 @@
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Patient :</label>
         <div class="col-sm-10">
-          <nb-select formControlName="patient" fullWidth  name="patient" [(ngModel)]="symptom.patient" required 
+          <select class="form-control" selected="symptom.patient" formControlName="patient"  fullWidth
+            name="patient" [(ngModel)]="symptom.patient" required 
           [ngClass]="{ 'is-invalid': submitted && f.patient.errors }">
-          <nb-option *ngFor="let pat of patients" [value]="pat">{{pat.firstname}} {{pat.lastname}}</nb-option>
-        </nb-select>
+          <option *ngFor="let pat of patients" [value]="pat">{{pat.firstname}} {{pat.lastname}}</option>
+        </select>
         <div *ngIf="submitted && f.patient.errors">
           <div style="color:red;" *ngIf="f.patient.errors.required">Le patient est requis !</div>
         </div>
@@ -25,7 +26,7 @@
       <div class="form-group row">
         <label class="label col-sm-2 col-form-label">Date de mise à jour des symptômes :</label>
         <div class="col-sm-10">
-          <input formControlName="date" nbInput
+          <input formControlName="date" nbInput id="id1"
                placeholder=""
                [nbDatepicker]="formpicker" fullWidth
                name="date" [(ngModel)]="symptom.date"
@@ -101,7 +102,7 @@
         <div class="col-sm-6">
           <div class="form-group">
             <input nbInput [ngModelOptions]="{standalone: true}"
-               placeholder="Date de voyage"
+               placeholder="Date de voyage" id="id2"
                [nbDatepicker]="formpicker" fullWidth
                [(ngModel)]="exposure.visitDate"/>
           </div>

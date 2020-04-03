@@ -58,6 +58,7 @@ export class CreatePatientComponent implements OnInit {
       return;
   }
     this.patient.address=this.address;
+    console.log(this.patient);
     this.patientService.createPatient(this.patient).subscribe(
       data => {
         console.log(data);

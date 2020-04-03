@@ -8,6 +8,8 @@ import { Gender } from '../../../Models/gender.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import { SocialCoverage } from '../../../Models/social-coverage.model';
+import { Address } from '../../../Models/address.model';
 
 @Component({
   selector: 'ngx-patient-details',
@@ -15,7 +17,8 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./patient-details.component.scss']
 })
 export class PatientDetailsComponent implements OnInit {
-
+  address:Address;
+  socialOptions : SocialCoverage[]= Object.keys(SocialCoverage).map(key => SocialCoverage[key]).filter(value => typeof(value) === "string");
   handicape:boolean=false;
   visitCountry:boolean=false;
   contact:boolean=false;
@@ -38,6 +41,7 @@ export class PatientDetailsComponent implements OnInit {
   registerForm: FormGroup;
   constructor(private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
+    this.address=this.patient.address;
     this.getPatientsList();
     this.registerForm = this.formBuilder.group({
     gender: ['', Validators.required],

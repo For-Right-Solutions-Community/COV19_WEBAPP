@@ -34,6 +34,19 @@ export class SymptomDetailsComponent implements OnInit {
   constructor(private symptomService: SymptomService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
     this.exposure=this.symptom.exposure;
+    console.log(this.exposure);
+    if(this.exposure!=null){
+      this.checkexposure=true;
+      if(this.exposure.visitedCoutry!=null){
+         this.visitCountry=true;
+      }
+      if(this.exposure.contactedTravellerTestResult!=null){
+        this.covidTest=true;
+     }
+     if(this.exposure.visitedRegion!=null){
+      this.visitRegion=true;
+   }
+    }
     this.getSymptomsList();
     this.getPatientsList();
     this.registerForm = this.formBuilder.group({
