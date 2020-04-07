@@ -1,11 +1,13 @@
 import { Condition } from './condition.model';
 import { Gender } from './gender.model';
-import { Account } from './account.model';
 import { CivilStatus } from './civil-status.model';
 import { Profession } from './profession.model';
 import { SocialCoverage } from './social-coverage.model';
 import { Address } from './address.model';
 import { AppUser } from './user.model';
+import { Antecedent } from './antecedent.model';
+import { Exposure } from './exposure.model';
+import { Localisation } from './localisation.model';
 
 export class Patient{
     id:number;
@@ -33,5 +35,8 @@ export class Patient{
     backupPhone:string;
     address:Address;
     user:AppUser;
+    antecedentRecord:Antecedent;
+    exposure:Exposure;
+    localisatient:Localisation;
     constructor(){}
 }

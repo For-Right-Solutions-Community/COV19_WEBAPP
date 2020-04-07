@@ -33,7 +33,7 @@ export class SymptomDetailsComponent implements OnInit {
   registerForm: FormGroup;
   constructor(private symptomService: SymptomService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
-    this.exposure=this.symptom.exposure;
+    //this.exposure=this.symptom.exposure;
     console.log(this.exposure);
     if(this.exposure!=null){
       this.checkexposure=true;

@@ -95,7 +95,10 @@ export class PatientListComponent implements OnInit {
         data => {
           this.reloadData();      
         },  
-        error => console.log(error));
+        error => {
+          console.log(error);
+          Swal.fire('','Vous ne pouvez pas supprimer ce patient car il a des symptomes et/ou des signes vitaux !');
+        });
   }
 
   ngOnInit() {

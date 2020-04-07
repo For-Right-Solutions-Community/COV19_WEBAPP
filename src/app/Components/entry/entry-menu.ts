@@ -34,20 +34,6 @@ export const MENU_ITEM_ADMIN: NbMenuItem[] = [
     ],
   },
   {
-    title: 'Antécédents',
-    icon: 'edit-2-outline',
-    children: [
-      {
-        title: 'Ajouter un antécédent',
-        link: '/menu/antecedents/createAntecedent',
-      },
-      {
-        title: 'Liste des antécédents',
-        link: '/menu/antecedents/antecedentList',
-      },
-    ],
-  },
-  {
     title: 'Symptômes',
     icon: 'keypad-outline',
     children: [
@@ -88,12 +74,7 @@ export const MENU_ITEM_ADMIN: NbMenuItem[] = [
         link: '/menu/users/userList',
       },
     ],
-  }/*,
-  {
-    title: 'Localisation des patients',
-    icon: 'home-outline',
-    link: '/menu/localisation',
-  },*/
+  }
 ];
 
 export const MENU_ITEM_BENEVOLENT: NbMenuItem[] = [ 
@@ -126,20 +107,6 @@ export const MENU_ITEM_BENEVOLENT: NbMenuItem[] = [
       {
         title: 'Liste des fiches de suivi',
         link: '/menu/interventions/interventionList',
-      },
-    ],
-  },
-  {
-    title: 'Antécédents',
-    icon: 'edit-2-outline',
-    children: [
-      {
-        title: 'Ajouter un antécédent',
-        link: '/menu/antecedents/createAntecedent',
-      },
-      {
-        title: 'Liste des antécédents',
-        link: '/menu/antecedents/antecedentList',
       },
     ],
   },

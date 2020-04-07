@@ -7,11 +7,15 @@ import { PatientListComponent } from './patient-list/patient-list.component';
 import { CreatePatientComponent } from './create-patient/create-patient.component';
 import { UpdatePatientComponent } from './update-patient/update-patient.component';
 import { CriticalPatientComponent } from './critical-patient/critical-patient.component';
-import { NbInputModule, NbCardModule, NbButtonModule, NbActionsModule, NbUserModule, NbCheckboxModule, NbRadioModule, NbDatepickerModule, NbSelectModule, NbIconModule, NbAlertModule, NbWindowModule } from '@nebular/theme';
+import { NbInputModule, NbCardModule, NbButtonModule, NbActionsModule, NbUserModule, NbCheckboxModule, NbRadioModule, NbDatepickerModule, NbSelectModule, NbIconModule, NbAlertModule, NbWindowModule, NbTabsetModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSortModule, MatPaginatorModule } from '@angular/material';
 import { ChangeStatusComponent } from './change-status/change-status.component';
+import { GlobalPatientComponent } from './global-patient/global-patient.component';
+import { DetailsPatientTabComponent } from './global-patient/details-patient-tab/details-patient-tab.component';
+import { UpdatePatientTabComponent } from './global-patient/update-patient-tab/update-patient-tab.component';
+import { CreatePatientTabComponent } from './global-patient/create-patient-tab/create-patient-tab.component';
 
 const ENTRY_COMPONENTS = [
   ChangeStatusComponent
@@ -37,7 +41,8 @@ const ENTRY_COMPONENTS = [
       ReactiveFormsModule,
       MatSortModule,
       MatPaginatorModule,
-      NbWindowModule.forRoot()
+      NbWindowModule.forRoot(),
+      NbTabsetModule,
     ],
     declarations: [
         PatientComponent, 
@@ -46,7 +51,11 @@ const ENTRY_COMPONENTS = [
         CreatePatientComponent,
         UpdatePatientComponent,
         CriticalPatientComponent,
-        ChangeStatusComponent
+        ChangeStatusComponent,
+        GlobalPatientComponent,
+        DetailsPatientTabComponent,
+        UpdatePatientTabComponent,
+        CreatePatientTabComponent,
     ],
     entryComponents: [
       ...ENTRY_COMPONENTS,

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PatientComponent } from './patient.component';
-import { CreatePatientComponent } from './create-patient/create-patient.component';
 import { PatientListComponent } from './patient-list/patient-list.component';
 import { CriticalPatientComponent } from './critical-patient/critical-patient.component';
+import { CreatePatientTabComponent } from './global-patient/create-patient-tab/create-patient-tab.component';
 const routes: Routes = [
     {
       path: '',
@@ -11,7 +11,7 @@ const routes: Routes = [
       children: [
         {
           path: 'createPatient',
-          component: CreatePatientComponent,
+          component: CreatePatientTabComponent,
         },
         {
           path: 'patientList',

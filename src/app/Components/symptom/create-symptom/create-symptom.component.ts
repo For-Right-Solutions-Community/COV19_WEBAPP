@@ -51,7 +51,6 @@ export class CreateSymptomComponent implements OnInit {
       return;
   }
     console.log(this.symptom);
-    this.symptom.exposure=this.exposure;
     this.symptomService.createSymptom(this.symptom).subscribe(
       data => {
         console.log(data);

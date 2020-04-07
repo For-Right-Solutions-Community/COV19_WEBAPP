@@ -18,7 +18,6 @@ export class Symptom{
     arthalgia:boolean;
 	temperature:number;
 	duration:number;
-    exposure:Exposure;
     date:Date;
     patient:Patient;
     constructor(){}

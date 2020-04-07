@@ -1,10 +1,11 @@
-import { Account } from './account.model';
+import { AppUser } from './user.model';
+
 export class Localisation{
     id:number;
     longitude:number;
 	latitude:number;
 	accuaracy:number;
     date:Date;
-    account:Account;
+    user:AppUser;
     constructor(){}
 }

@@ -34,7 +34,7 @@ export class UpdateSymptomComponent implements OnInit {
   registerForm: FormGroup;
   constructor(private symptomService: SymptomService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
-    this.exposure=this.symptom.exposure;
+    //this.exposure=this.symptom.exposure;
     console.log(this.exposure);
     if(this.exposure!=null){
       this.checkexposure=true;
@@ -62,7 +62,7 @@ export class UpdateSymptomComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
   }
-   this.symptom.exposure=this.exposure;
+   //this.symptom.exposure=this.exposure;
     console.log(this.symptom);
     this.symptomService.createSymptom(this.symptom).subscribe(
       data => {
