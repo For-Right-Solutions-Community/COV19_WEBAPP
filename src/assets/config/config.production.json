@@ -15,7 +15,7 @@
   "clientId": "#{aadClientId}"
   },
   "apiServer": {
-    "metadata": "http://coronna.frsdev.ovh:8081/",
-    "rules": "http://coronna.frsdev.ovh:8081/"
+    "metadata": "https://api.amu190.maodao.xyz/",
+    "rules": "https://api.amu190.maodao.xyz/"
   }
 }
