@@ -209,6 +209,8 @@ updatingSymptoms(){
  else 
  {
  this.patient = this.selectedRows[0];
+ this.patientService.showcreatesymptom = true ;
+ this.patientService.showlist = false;
  }
 }
 updatingVitals(){
@@ -219,6 +221,8 @@ updatingVitals(){
  else 
  {
  this.patient = this.selectedRows[0];
+ this.patientService.showcreatevital = true ;
+ this.patientService.showlist = false;
  }
 }
 showSymptoms(){
@@ -229,6 +233,8 @@ showSymptoms(){
   else 
   {
   this.patient = this.selectedRows[0];
+  this.patientService.showlistsymptom = true ;
+ this.patientService.showlist = false;
   }
 }
 }

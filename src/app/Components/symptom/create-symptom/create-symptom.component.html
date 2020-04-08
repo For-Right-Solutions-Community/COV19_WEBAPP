@@ -1,212 +1,195 @@
 <nb-card>
-  <nb-card-header>Ajouter les symptômes d'un patient</nb-card-header>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-11">
+        Mise à jour des symptômes du patient {{patient.firstname}} {{patient.lastname}}</div>
+     <div class="col-md-1" >
+      <button  class="btn btn-info" (click)="goBackToList()"  ><i class="fas fa-arrow-left"></i></button>
+    </div>
+    </div>
+  </nb-card-header>
   <nb-card-body>
     <form [formGroup]="registerForm" novalidate>
-      <div class="form-group row">
-        <label  class="label col-sm-2 col-form-label">Patient :</label>
-        <div class="col-sm-10">
-          <nb-select formControlName="patient" fullWidth  name="patient" [(ngModel)]="symptom.patient" required 
-          [ngClass]="{ 'is-invalid': submitted && f.patient.errors }">
-          <nb-option *ngFor="let pat of patients" [value]="pat">{{pat.firstname}} {{pat.lastname}}</nb-option>
-        </nb-select>
-        <div *ngIf="submitted && f.patient.errors">
-          <div style="color:red;" *ngIf="f.patient.errors.required">Le patient est requis !</div>
-        </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="checkexposure">Exposition</nb-checkbox>
+          </div>
         </div>
       </div>
-      <div class="form-group row">
-        <label class="label col-sm-2 col-form-label">Date de mise à jour des symptômes :</label>
-        <div class="col-sm-10">
-          <input formControlName="date" nbInput
-               placeholder=""
-               [nbDatepicker]="formpicker" fullWidth
-               name="date" [(ngModel)]="symptom.date"
-              [ngClass]="{ 'is-invalid': submitted && f.date.errors }"  required/>
-            <nb-datepicker #formpicker></nb-datepicker>
-            <div *ngIf="submitted && f.date.errors">
-              <div style="color:red;" *ngIf="f.date.errors.required">La date est requise !</div>
+      <div *ngIf="checkexposure">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.Traveler">J'était en voyage au cours du moi dernier</nb-checkbox>
             </div>
+          </div>
+          <div *ngIf="exposure.Traveler" class="col-sm-8">
+            <div class="form-group">
+              <input [(ngModel)]="exposure.visitedCoutry" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="Pays">
+            </div>
+          </div>
         </div>
-      </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <nb-checkbox [(checked)]="checkexposure">Exposition</nb-checkbox>
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.contactWithTraveler">J'était en contact avec une personne qui revient d’un voyage</nb-checkbox>
+            </div>
+          </div>
         </div>
+      <div *ngIf="exposure.contactWithTraveler" class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.sameHomePersonReturningFromTrip">Habite avec vous à la maison</nb-checkbox>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div class="form-group">
+              <input [(ngModel)]="exposure.countryPersonReturningFromTrip" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="du quel pays ?">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.hasmakingtest">J'ai subi (ou la personne contactée) le test de dépistage du virus corona</nb-checkbox>
+            </div>
+          </div>
+          <div *ngIf="exposure.hasmakingtest" class="col-sm-6">
+            <div class="form-group">
+              <nb-select fullWidth  [ngModelOptions]="{standalone: true}" [(ngModel)]="exposure.contactedTravellerTestResult"placeholder="Resultat">
+              <nb-option value="true">Positif</nb-option>
+              <nb-option value="false">Négatif</nb-option>
+            </nb-select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.visitRegion">J'ai voyagé dans une ville qui contient un foyer local</nb-checkbox>
+            </div>
+          </div>
+        </div>
+      <div *ngIf="exposure.visitRegion" class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input nbInput [ngModelOptions]="{standalone: true}"
+                 placeholder="Date de voyage"
+                 [nbDatepicker]="formpicker" fullWidth
+                 [(ngModel)]="exposure.visitDate"/>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input [(ngModel)]="exposure.visitedRegion" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="Quelle ville ?">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.contactWithInfectedPerson">J'ai contacté une personne infectée (dans les deux semaines passées)</nb-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.withSuspiciousGroup">J'ai contacté des personnes qui ont des symptômes (des signes respiratoires,fievre,...)</nb-checkbox>
+            </div>
+          </div>
+        </div>  
       </div>
-    </div>
-    <div *ngIf="checkexposure">
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-2">
           <div class="form-group">
-            <nb-checkbox [(checked)]="visitCountry">J'était en voyage au cours du moi dernier</nb-checkbox>
+            <nb-checkbox [(checked)]="symptom.fever">Fièvre</nb-checkbox>
           </div>
         </div>
-        <div *ngIf="visitCountry" class="col-sm-8">
-          <div class="form-group">
-            <input [(ngModel)]="exposure.visitedCoutry" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="Pays">
-          </div>
+        <div *ngIf="symptom.fever" class="col-sm-8">
+          <input type="number" nbInput fullWidth  placeholder="Température"
+          [(ngModel)]="symptom.temperature" [ngModelOptions]="{standalone: true}">
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="exposure.contactWithTraveler">J'était en contact avec une personne qui revient d’un voyage</nb-checkbox>
-          </div>
-        </div>
-      </div>
-	  <div *ngIf="exposure.contactWithTraveler" class="row">
-        <div class="col-sm-4">
-          <div class="form-group">
-            <nb-checkbox [(checked)]="exposure.sameHomePersonReturningFromTrip">Habite avec vous à la maison</nb-checkbox>
-          </div>
-        </div>
-        <div class="col-sm-8">
-          <div class="form-group">
-            <input [(ngModel)]="exposure.countryPersonReturningFromTrip" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="du quel pays ?">
+            <nb-checkbox [(checked)]="symptom.cough">Toux</nb-checkbox>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="covidTest">J'ai subi (ou la personne contactée) le test de dépistage du virus corona</nb-checkbox>
-          </div>
-        </div>
-        <div *ngIf="covidTest" class="col-sm-6">
-          <div class="form-group">
-            <nb-select fullWidth  [ngModelOptions]="{standalone: true}" [(ngModel)]="exposure.contactedTravellerTestResult"placeholder="Resultat">
-            <nb-option value="Positif">Positif</nb-option>
-            <nb-option value="Négatif">Négatif</nb-option>
-          </nb-select>
+            <nb-checkbox [(checked)]="symptom.dyspnea">dyspnea</nb-checkbox>
+            <nb-checkbox [(checked)]="symptom.severeDyspnea">dyspnea extrème</nb-checkbox>
+            <nb-checkbox [(checked)]="symptom.unableToSpeak">Ne peut pas parler</nb-checkbox>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-3">
           <div class="form-group">
-            <nb-checkbox [(checked)]="visitRegion">J'ai voyagé dans une ville aui contient un foyer local</nb-checkbox>
+            <nb-checkbox [(checked)]="symptom.deteriorationOfGC">Altération de l'état général</nb-checkbox>
           </div>
         </div>
+        <div *ngIf="symptom.deteriorationOfGC" class="col-sm-8">
+          <input type="number" nbInput fullWidth  placeholder="Depuis combien de jours ?"
+          [(ngModel)]="symptom.duration" [ngModelOptions]="{standalone: true}">
+        </div>
       </div>
-	  <div *ngIf="visitRegion" class="row">
+      <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <input nbInput [ngModelOptions]="{standalone: true}"
-               placeholder="Date de voyage"
-               [nbDatepicker]="formpicker" fullWidth
-               [(ngModel)]="exposure.visitDate"/>
+            <nb-checkbox [(checked)]="symptom.diarrhea">Diarrhée</nb-checkbox>
           </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <input [(ngModel)]="exposure.visitedRegion" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="Quelle ville ?">
+            <nb-checkbox [(checked)]="symptom.nauseaOrVomiting">Nausée/Vomissements</nb-checkbox>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="exposure.contactWithInfectedPerson">J'ai contacté une personne infectée (dans les deux semaines passées)</nb-checkbox>
+            <nb-checkbox [(checked)]="symptom.chestPain">Douleur thoracique</nb-checkbox>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="exposure.withSuspiciousGroup">J'ai contacté des personnes qui ont des symptômes (des signes respiratoires,fievre,...)</nb-checkbox>
+            <nb-checkbox [(checked)]="symptom.epigastralgia">Epigastralgie</nb-checkbox>
           </div>
         </div>
-      </div>  
-    </div>
-    <div class="row">
-      <div class="col-sm-2">
-        <div class="form-group">
-          <nb-checkbox [(checked)]="symptom.fever">Fièvre</nb-checkbox>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.soreThroat">Mal de gorge</nb-checkbox>
+          </div>
+        </div>
+      </div> 
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.arthalgia">Arthralgies/Myalgie</nb-checkbox>
+          </div>
         </div>
       </div>
-      <div *ngIf="symptom.fever" class="col-sm-8">
-        <input type="number" nbInput fullWidth  placeholder="Température"
-        [(ngModel)]="symptom.temperature" [ngModelOptions]="{standalone: true}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <nb-checkbox [(checked)]="symptom.cough">Toux</nb-checkbox>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.senseDisorder">Perte du goût/Anosmie</nb-checkbox>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <nb-checkbox [(checked)]="symptom.dyspnea">dyspnea</nb-checkbox>
-          <nb-checkbox [(checked)]="symptom.severeDyspnea">dyspnea extrème</nb-checkbox>
-          <nb-checkbox [(checked)]="symptom.unableToSpeak">Ne peut pas parler</nb-checkbox>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="form-group">
-          <nb-checkbox [(checked)]="symptom.deteriorationOfGC">Altération de l'état général</nb-checkbox>
-        </div>
-      </div>
-      <div *ngIf="symptom.deteriorationOfGC" class="col-sm-8">
-        <input type="number" nbInput fullWidth  placeholder="Depuis combien de jours ?"
-        [(ngModel)]="symptom.duration" [ngModelOptions]="{standalone: true}">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <nb-checkbox [(checked)]="symptom.diarrhea">Diarrhée</nb-checkbox>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <nb-checkbox [(checked)]="symptom.nauseaOrVomiting">Nausée/Vomissements</nb-checkbox>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <nb-checkbox [(checked)]="symptom.chestPain">Douleur thoracique</nb-checkbox>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <nb-checkbox [(checked)]="symptom.epigastralgia">Epigastralgie</nb-checkbox>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <nb-checkbox [(checked)]="symptom.soreThroat">Mal de gorge</nb-checkbox>
-        </div>
-      </div>
-    </div> 
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <nb-checkbox [(checked)]="symptom.arthalgia">Arthralgies/Myalgie</nb-checkbox>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <nb-checkbox [(checked)]="symptom.senseDisorder">Perte du goût/Anosmie</nb-checkbox>
-        </div>
-      </div>
-    </div>
-    
+      <br>
+      <br>
     <div class="row">
       <div class="col-sm-2">
         <button type="button" nbButton (click)="onSubmit()">Ajouter</button>

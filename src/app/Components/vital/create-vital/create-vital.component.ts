@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./create-vital.component.scss']
 })
 export class CreateVitalComponent implements OnInit {
-
+  @Input()patient:Patient;
   patients: Patient[] = [];
   vitals: Vital[] = [];
   dataSource;
@@ -24,26 +24,28 @@ export class CreateVitalComponent implements OnInit {
   isSignedUp = false;
   isSignUpFailed = false;
   errorMessage = '';
-  @Input()vital:Vital;
+  @Input()vital:Vital=new Vital();
   submitted = false;
-  registerForm: FormGroup;
-  constructor(private vitalService: VitalService,private patientService: PatientService,private formBuilder: FormBuilder) { }
+  constructor(private vitalService: VitalService,private patientService: PatientService) { }
   ngOnInit() {
     this.getVitalsList();
-    this.vital=new Vital();
     this.getPatientsList();
-    this.registerForm = this.formBuilder.group({
-    patient: ['', Validators.required],
-    measurementDate: ['', Validators.required]
-});
+    if(this.patient!=undefined){
+      this.getLastPatientVitals(this.patient.id);
+    }
   }
-  get f() { return this.registerForm.controls; }
+  getLastPatientVitals(id:number) {
+    this.vitalService.getLastPatientVitals(id)
+    .subscribe(result => {
+     this.vital = result ;
+  },
+  err => console.log("Message erreur" +  err.message  ))
+  }
   onSubmit() {
     this.submitted = true;
-    // stop here if form is invalid
-    if (this.registerForm.invalid) {
-      return;
-  }
+    
+    this.vital.patient=this.patient;
+    this.vital.measurementDate=new Date();
     console.log(this.vital);
     this.vitalService.createVital(this.vital).subscribe(
       data => {
@@ -51,9 +53,11 @@ export class CreateVitalComponent implements OnInit {
         this.createdVital.emit(1);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
-        Swal.fire('','La fiche des signes vitaux est ajoutée avec succés !');
+        Swal.fire('','Les signes vitaux du patient sont mises à jour avec succés !');
         this.reset();
         this.reloadVitalListData();
+        this.patientService.showcreatevital = false ;
+        this.patientService.showlist = true;
       },
       error => {
         console.log(error);
@@ -65,7 +69,6 @@ export class CreateVitalComponent implements OnInit {
   reset(){
    this.vital=new Vital();
    this.submitted = false;
-   this.registerForm.reset();
   }
   getVitalsList() {
     this.vitalService.getVitalsList()
@@ -89,6 +92,11 @@ export class CreateVitalComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
+  }
+
+  goBackToList(){
+    this.patientService.showlist = true;
+    this.patientService.showcreatevital = false ;
   }
 
 }

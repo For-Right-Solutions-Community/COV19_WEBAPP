@@ -13,6 +13,9 @@ export class PatientService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
+  public showcreatesymptom = false;
+  public  showcreatevital = false;
+  public showlistsymptom = false;
   patients: Patient[]=[];
   private baseUrl = AppConfig.settings.apiServer.metadata+'m/patient';
   private baseUrlRest = AppConfig.settings.apiServer.metadata+'patients';

@@ -15,10 +15,8 @@ import { Exposure } from '../../../Models/exposure.model';
   styleUrls: ['./create-symptom.component.scss']
 })
 export class CreateSymptomComponent implements OnInit {
+  @Input()patient:Patient;
   checkexposure:boolean=false;
-  visitCountry:boolean=false;
-  covidTest:boolean=false;
-  visitRegion:boolean=false;
   exposure:Exposure;
   patients: Patient[] = [];
   symptoms: Symptom[] = [];
@@ -29,27 +27,49 @@ export class CreateSymptomComponent implements OnInit {
   isSignedUp = false;
   isSignUpFailed = false;
   errorMessage = '';
-  @Input()symptom:Symptom;
+  @Input()symptom:Symptom=new Symptom();
   submitted = false;
-  registerForm: FormGroup;
-  constructor(private symptomService: SymptomService,private patientService: PatientService,private formBuilder: FormBuilder) { }
+  constructor(private symptomService: SymptomService,private patientService: PatientService) { }
   ngOnInit() {
     this.getSymptomsList();
-    this.symptom=new Symptom();
-    this.exposure=new Exposure();
+    this.exposure=this.patient.exposure;
     this.getPatientsList();
-    this.registerForm = this.formBuilder.group({
-    patient: ['', Validators.required],
-    date: ['', Validators.required]
-});
+    if(this.patient!=undefined){
+      this.getLastPatientSymptoms(this.patient.id);
+    }
+    
+    if(this.exposure!=undefined){
+      this.checkexposure=true;
+    }
   }
-  get f() { return this.registerForm.controls; }
+
+  
+  getLastPatientSymptoms(id:number) {
+    this.symptomService.getLastPatientSymptoms(id)
+    .subscribe(result => {
+     this.symptom = result ;
+  },
+  err => console.log("Message erreur" +  err.message  ))
+  }
+
+  
   onSubmit() {
-    this.submitted = true;
-    // stop here if form is invalid
-    if (this.registerForm.invalid) {
-      return;
-  }
+  this.submitted = true;
+  this.patient.exposure=this.exposure;
+  this.patientService.updatePatient(this.patient.id,this.patient).subscribe(
+    data => {
+      console.log(data);
+      this.isSignedUp = true;
+      this.isSignUpFailed = false;
+    },
+    error => {
+      console.log(error);
+      this.errorMessage = error.error.message;
+      this.isSignUpFailed = true;
+    }
+  ); 
+    this.symptom.patient=this.patient;
+    this.symptom.date=new Date();
     console.log(this.symptom);
     this.symptomService.createSymptom(this.symptom).subscribe(
       data => {
@@ -57,9 +77,11 @@ export class CreateSymptomComponent implements OnInit {
         this.createdSymptom.emit(1);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
-        Swal.fire('','La fiche des symptômes est ajoutée avec succés !');
+        Swal.fire('','Les symptômes du patient sont mises à jour avec succés !');
         this.reset();
         this.reloadSymptomListData();
+        this.patientService.showcreatesymptom = false ;
+        this.patientService.showlist = true;
       },
       error => {
         console.log(error);
@@ -68,10 +90,11 @@ export class CreateSymptomComponent implements OnInit {
       }
     ); 
   }
+
+
   reset(){
    this.symptom=new Symptom();
    this.submitted = false;
-   this.registerForm.reset();
   } 
   getSymptomsList() {
     this.symptomService.getSymptomsList()
@@ -95,6 +118,11 @@ export class CreateSymptomComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
+  }
+
+  goBackToList(){
+    this.patientService.showlist = true;
+    this.patientService.showcreatesymptom = false ;
   }
 
 }

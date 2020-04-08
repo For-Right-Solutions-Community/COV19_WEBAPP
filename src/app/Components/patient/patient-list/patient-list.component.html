@@ -1,6 +1,6 @@
 <nb-card *ngIf="patientService.showlist">
   <nb-card-header>
-    Liste des cas critiques
+    Liste des patients
   </nb-card-header>
   <nb-card-body>
     <div class="row">
@@ -42,4 +42,10 @@
 </ngx-details-patient-tab>
 <ngx-update-patient-tab *ngIf="patientService.showedit" [patient]="patient"  (createdPatient)='doRefreshData($event)'>
 </ngx-update-patient-tab>
+
+<ngx-create-symptom *ngIf="patientService.showcreatesymptom" [patient]="patient">
+</ngx-create-symptom>
+
+<ngx-create-vital *ngIf="patientService.showcreatevital" [patient]="patient">
+</ngx-create-vital>
 
