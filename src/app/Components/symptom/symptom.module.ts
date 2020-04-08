@@ -37,9 +37,7 @@ import { PatientSymptomHistoricComponent } from './patient-symptom-historic/pati
         SymptomComponent, 
         SymptomDetailsComponent,
         SymptomListComponent,
-        CreateSymptomComponent,
         UpdateSymptomComponent,
-        PatientSymptomHistoricComponent,
     ],
   })
   export class SymptomModule { }
