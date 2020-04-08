@@ -234,7 +234,7 @@ showSymptoms(){
   {
   this.patient = this.selectedRows[0];
   this.patientService.showlistsymptom = true ;
- this.patientService.showlist = false;
+  this.patientService.showlist = false;
   }
 }
 }

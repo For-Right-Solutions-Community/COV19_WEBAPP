@@ -45,7 +45,6 @@ export class SymptomService {
         this.symptoms.push(s);
       }
     }
-    console.log(this.symptoms);
     return this.symptoms;
   }));
   }

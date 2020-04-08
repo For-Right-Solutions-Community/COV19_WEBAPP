@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { Patient } from '../../../Models/patient.model';
 import { MatSort, MatPaginator } from '@angular/material';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LocalDataSource } from 'ng2-smart-table';
 import { VitalService } from '../../../Services/vital.service';
 import { Vital } from '../../../Models/vital.model';
@@ -46,6 +45,7 @@ export class CreateVitalComponent implements OnInit {
     
     this.vital.patient=this.patient;
     this.vital.measurementDate=new Date();
+    this.vital.id=null;
     console.log(this.vital);
     this.vitalService.createVital(this.vital).subscribe(
       data => {

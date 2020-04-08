@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angu
 import { Symptom } from '../../../Models/symptom.model';
 import { Patient } from '../../../Models/patient.model';
 import { MatSort, MatPaginator } from '@angular/material';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SymptomService } from '../../../Services/symptom.service';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -70,6 +69,7 @@ export class CreateSymptomComponent implements OnInit {
   ); 
     this.symptom.patient=this.patient;
     this.symptom.date=new Date();
+    this.symptom.id=null;
     console.log(this.symptom);
     this.symptomService.createSymptom(this.symptom).subscribe(
       data => {

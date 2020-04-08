@@ -7,7 +7,7 @@ import { PatientListComponent } from './patient-list/patient-list.component';
 import { CreatePatientComponent } from './create-patient/create-patient.component';
 import { UpdatePatientComponent } from './update-patient/update-patient.component';
 import { CriticalPatientComponent } from './critical-patient/critical-patient.component';
-import { NbInputModule, NbCardModule, NbButtonModule, NbActionsModule, NbUserModule, NbCheckboxModule, NbRadioModule, NbDatepickerModule, NbSelectModule, NbIconModule, NbAlertModule, NbWindowModule, NbTabsetModule } from '@nebular/theme';
+import { NbInputModule, NbCardModule, NbButtonModule, NbActionsModule, NbUserModule, NbCheckboxModule, NbRadioModule, NbDatepickerModule, NbSelectModule, NbIconModule, NbAlertModule, NbWindowModule, NbTabsetModule, NbListModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSortModule, MatPaginatorModule } from '@angular/material';
@@ -19,6 +19,7 @@ import { CreatePatientTabComponent } from './global-patient/create-patient-tab/c
 import { TreatedPatientComponent } from './treated-patient/treated-patient.component';
 import { CreateSymptomComponent } from '../symptom/create-symptom/create-symptom.component';
 import { CreateVitalComponent } from '../vital/create-vital/create-vital.component';
+import { PatientSymptomHistoricComponent } from '../symptom/patient-symptom-historic/patient-symptom-historic.component';
 
 const ENTRY_COMPONENTS = [
   ChangeStatusComponent
@@ -46,6 +47,7 @@ const ENTRY_COMPONENTS = [
       MatPaginatorModule,
       NbWindowModule.forRoot(),
       NbTabsetModule,
+      NbListModule,
     ],
     declarations: [
         PatientComponent, 
@@ -62,6 +64,7 @@ const ENTRY_COMPONENTS = [
         TreatedPatientComponent,
         CreateSymptomComponent,
         CreateVitalComponent,
+        PatientSymptomHistoricComponent
     ],
     entryComponents: [
       ...ENTRY_COMPONENTS,
