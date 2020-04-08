@@ -35,7 +35,6 @@ import { MatSortModule, MatPaginatorModule } from '@angular/material';
         VitalComponent, 
         VitalDetailsComponent,
         VitalListComponent,
-        CreateVitalComponent,
         UpdateVitalComponent,
     ],
   })
