@@ -48,4 +48,14 @@ export class PatientService {
     return this.patients;
   }));
   }
+  getTreatedPatientsList() { 
+    return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
+    for(let p of dataX){
+      if(p.condition!=null && p.condition.toString()==="TREATED"){
+        this.patients.push(p);
+      }
+    }
+    return this.patients;
+  }));
+  }
 }

@@ -17,6 +17,10 @@ export const MENU_ITEM_ADMIN: NbMenuItem[] = [
         title: 'Cas critiques',
         link: '/menu/patients/criticalPatient',
       },
+      {
+        title: 'Cas traités',
+        link: '/menu/patients/treatedPatient',
+      },
     ],
   },
   {
@@ -30,34 +34,6 @@ export const MENU_ITEM_ADMIN: NbMenuItem[] = [
       {
         title: 'Liste des fiches de suivi',
         link: '/menu/interventions/interventionList',
-      },
-    ],
-  },
-  {
-    title: 'Symptômes',
-    icon: 'keypad-outline',
-    children: [
-      {
-        title: 'Ajouter un symptôme',
-        link: '/menu/symptoms/createSymptom',
-      },
-      {
-        title: 'Liste des symptômes',
-        link: '/menu/symptoms/symptomList',
-      },
-    ],
-  },
-  {
-    title: 'Signes vitaux',
-    icon: 'browser-outline',
-    children: [
-      {
-        title: 'Ajouter un signe',
-        link: '/menu/vitals/createVital',
-      },
-      {
-        title: 'Liste des signes',
-        link: '/menu/vitals/vitalList',
       },
     ],
   },
@@ -94,6 +70,10 @@ export const MENU_ITEM_BENEVOLENT: NbMenuItem[] = [
         title: 'Cas critiques',
         link: '/menu/patients/criticalPatient',
       },
+      {
+        title: 'Cas traités',
+        link: '/menu/patients/treatedPatient',
+      },
     ],
   },
   {
@@ -107,34 +87,6 @@ export const MENU_ITEM_BENEVOLENT: NbMenuItem[] = [
       {
         title: 'Liste des fiches de suivi',
         link: '/menu/interventions/interventionList',
-      },
-    ],
-  },
-  {
-    title: 'Symptômes',
-    icon: 'keypad-outline',
-    children: [
-      {
-        title: 'Ajouter un symptôme',
-        link: '/menu/symptoms/createSymptom',
-      },
-      {
-        title: 'Liste des symptômes',
-        link: '/menu/symptoms/symptomList',
-      },
-    ],
-  },
-  {
-    title: 'Signes vitaux',
-    icon: 'browser-outline',
-    children: [
-      {
-        title: 'Ajouter un signe',
-        link: '/menu/vitals/createVital',
-      },
-      {
-        title: 'Liste des signes',
-        link: '/menu/vitals/vitalList',
       },
     ],
   },

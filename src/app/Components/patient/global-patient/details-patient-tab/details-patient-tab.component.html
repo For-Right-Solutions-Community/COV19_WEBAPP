@@ -1,3 +1,572 @@
-<p>
-  details-patient-tab works!
-</p>
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-11">
+        Détails de la fiche patient de {{patient.firstname}} {{patient.lastname}}</div>
+     <div class="col-md-1" >
+      <button  class="btn btn-info" (click)="goBackToList()"  ><i class="fas fa-arrow-left"></i></button>
+    </div>
+    </div>
+  </nb-card-header>
+</nb-card> 
+<nb-card>
+  <form [formGroup]="registerForm" novalidate>
+  <nb-tabset fullWidth>
+    <nb-tab tabTitle="Fiche patient">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Prénom</label>
+            <input formControlName="firstname" type="text" nbInput fullWidth  placeholder="Prénom" 
+            name="firstname" [(ngModel)]="patient.firstname"  
+            [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" required />
+            <div *ngIf="submitted && f.firstname.errors">
+              <div style="color:red;" *ngIf="f.firstname.errors.required">Le prénom est requis !</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label  class="label">Nom</label>
+            <input formControlName="lastname" type="text" nbInput fullWidth 
+            placeholder="Nom" name="lastname" [(ngModel)]="patient.lastname"  
+            [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"required />
+            <div *ngIf="submitted && f.lastname.errors">
+              <div style="color:red;" *ngIf="f.lastname.errors.required">Le nom est requis !</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label  class="label">CIN</label>
+            <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  
+            placeholder="CIN" name="cin" [(ngModel)]="patient.cin">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label  class="label">Téléphone</label>
+            <input type="tel" nbInput fullWidth  placeholder="Téléphone"
+            name="phone" [(ngModel)]="patient.phone" [ngModelOptions]="{standalone: true}"/>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label  class="label">Téléphone proche</label>
+            <input type="tel" nbInput fullWidth  placeholder="Téléphone proche"
+             [(ngModel)]="patient.backupPhone" [ngModelOptions]="{standalone: true}"/>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label  class="label">Ville</label>
+            <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  
+            placeholder="Ville" [(ngModel)]="address.city">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label  class="label">Gouvernorat</label>
+            <input type="text" nbInput fullWidth  placeholder="Gouvernorat"
+             [(ngModel)]="address.state" [ngModelOptions]="{standalone: true}"/>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+              <label  class="label">Genre</label>
+              <nb-select  formControlName="gender" fullWidth  name="gender" [(ngModel)]="patient.gender" required 
+            [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+              <nb-option *ngFor="let key of genderOptions" [value]="key">{{key}}</nb-option>
+            </nb-select>
+            <div *ngIf="submitted && f.gender.errors">
+              <div style="color:red;" *ngIf="f.gender.errors.required">Le genre est requis !</div>
+            </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label  class="label">Age</label>
+            <input formControlName="age" type="number" nbInput fullWidth 
+            placeholder="Age" name="age" [(ngModel)]="patient.age"  
+            [ngClass]="{ 'is-invalid': submitted && f.age.errors }"required />
+            <div *ngIf="submitted && f.age.errors">
+              <div style="color:red;" *ngIf="f.age.errors.required">L'age' est requis !</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label  class="label">Poids</label>
+            <input type="number" nbInput fullWidth  placeholder="Poids" name="weight" 
+            [(ngModel)]="patient.weight" [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label  class="label">Longueur</label>
+            <input type="number" nbInput fullWidth  placeholder="Longueur" name="height" 
+            [(ngModel)]="patient.height" [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="inputLastName" class="label">Etat civil</label>
+            <nb-select  formControlName="civilStatus" fullWidth  name="civilStatus" [(ngModel)]="patient.civilStatus" required 
+            [ngClass]="{ 'is-invalid': submitted && f.civilStatus.errors }">
+              <nb-option *ngFor="let key of civilOptions" [value]="key">{{key}}</nb-option>
+            </nb-select>
+            <div *ngIf="submitted && f.civilStatus.errors">
+              <div style="color:red;" *ngIf="f.civilStatus.errors.required">L'état civil est requis !</div>
+            </div>
+          </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputLastName" class="label">Profession</label>
+          <nb-select  [ngModelOptions]="{standalone: true}" fullWidth  name="profession" [(ngModel)]="patient.profession">
+              <nb-option *ngFor="let key of professionOptions" [value]="key">{{key}}</nb-option>
+            </nb-select>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="handicape" >Handicapé</nb-checkbox>
+        </div>
+      </div>
+      <div *ngIf="handicape" class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="patient.physicalHandicap" >Handicape Physique</nb-checkbox>
+          <nb-checkbox [(checked)]="patient.intellecHandicap" >Handicape intellectuelle</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 label">Est ce que vous habitez ?</label>
+      <div class="col-sm-2">
+        <nb-radio-group name="g1">
+          <nb-radio [(ngModel)]="patient.liveAlone">Seul(e)</nb-radio>
+          <nb-radio [(ngModel)]="patient.liveWithFamily">Avec la famille</nb-radio>
+        </nb-radio-group>  
+      </div>
+      </div>
+      <div class="form-group row">
+        <label class="label col-sm-2 col-form-label">Nombre des personnes du famille:</label>
+        <div class="col-sm-4">
+          <input type="number" nbInput fullWidth  placeholder="Nombre de personnes du famille"
+          [(ngModel)]="patient.familySize" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Est ce que vous avez dans votre maison ?</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="patient.runningWater" >Eau courante</nb-checkbox>
+            <nb-checkbox [(checked)]="patient.hotWater" >Eau chaude</nb-checkbox>
+            <nb-checkbox [(checked)]="patient.sewageDisposal">Evacuation des eaux usées (ONAS)</nb-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 label">Possibilité d’avoir une chambre seule ?</label>
+        <div class="col-sm-4">
+          <nb-radio-group name="g2">
+            <nb-radio [(ngModel)]="patient.singleRoom">Oui (avec porte fermée/fenêtre/douche)</nb-radio>
+            <nb-radio>Non</nb-radio>
+          </nb-radio-group>  
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label class="label">Couverture sociale ?</label>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <nb-select  [ngModelOptions]="{standalone: true}" fullWidth [(ngModel)]="patient.socialCoverage">
+              <nb-option *ngFor="let key of socialOptions" [value]="key">{{key}}</nb-option>
+            </nb-select>
+        </div>
+        </div>
+    </nb-tab>
+    <nb-tab tabTitle="Antécédents">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Maladies associées :</label>
+          </div>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="antecedent.respiratory">Respiratoire</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="antecedent.respiratory" class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="antecedent.respiratoryAsthma">Asthme</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.respiratoryBPCO">Bronchopneumopathies obstructives (BPCO)</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.respiratoryThorax">Opéré sur le thorax</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.respiratoryOther">Autres</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="antecedent.diabetic">Diabète</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="antecedent.diabetic">
+    <div class="form-group row">
+      <label class="label col-sm-2 col-form-label">Nombre de mois :</label>
+      <div class="col-sm-10">
+        <input type="number" nbInput fullWidth  placeholder="Depuis quand ?"
+        [(ngModel)]="antecedent.diabeticMonths" [ngModelOptions]="{standalone: true}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="antecedent.diabeticComplications">Complications</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="antecedent.diabeticComplications" class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="antecedent.diabeticComplicationsEyes">Yeux</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.diabeticComplicationsHeart">Cœur</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.diabeticComplicationsKidneys">Reines</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.diabeticComplicationsFeet">Pieds</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.diabeticComplicationsNerves">Nerfs</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.diabeticComplicationsOther">Autres</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="antecedent.hypertension">Hypertension artérielle</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="antecedent.hypertension" class="form-group row">
+      <label  class="label col-sm-2 col-form-label">Nombre de mois :</label>
+      <div class="col-sm-10">
+        <input type="number" nbInput fullWidth placeholder="Depuis quand ?"
+        [(ngModel)]="antecedent.hypertensionMonths" [ngModelOptions]="{standalone: true}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="antecedent.heartDisease">Cardiaques</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="antecedent.heartDisease" class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="antecedent.heartDiseaseCoronarien">Coronarien</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.heartDiseaseFailure">Insuffisance cardiaque</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.heartDiseaseOther">Autres</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="antecedent.renalFailure">Rénales</nb-checkbox>
+          <nb-checkbox *ngIf="antecedent.renalFailure" [(checked)]="antecedent.renalFailureHemodialysis">Hémodialyse</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="antecedent.cancer">Cancer</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="antecedent.cancer">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="label">Siège :</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="antecedent.cancerTypeLung">Poumon</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.cancerTypeLiver">Foie</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.cancerTypeORL">ORL</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.cancerTypeOther">Autres</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="label">Traitement :</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="antecedent.cancerTreatmentChemotherapy">Chimiothérapie</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.cancerTreatmentRadiotherapy">Radiothérapie</nb-checkbox>
+          <nb-checkbox [(checked)]="antecedent.cancerTreatmentSurgery">Chirurgie</nb-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-checkbox [(checked)]="antecedent.immuneDisease">Maladie immunitaire</nb-checkbox>
+        </div>
+      </div>
+    </div>
+    </nb-tab>
+    <nb-tab tabTitle="Symptômes">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="checkexposure">Exposition</nb-checkbox>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="checkexposure">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.Traveler">J'était en voyage au cours du moi dernier</nb-checkbox>
+            </div>
+          </div>
+          <div *ngIf="exposure.Traveler" class="col-sm-8">
+            <div class="form-group">
+              <input [(ngModel)]="exposure.visitedCoutry" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="Pays">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.contactWithTraveler">J'était en contact avec une personne qui revient d’un voyage</nb-checkbox>
+            </div>
+          </div>
+        </div>
+      <div *ngIf="exposure.contactWithTraveler" class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.sameHomePersonReturningFromTrip">Habite avec vous à la maison</nb-checkbox>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div class="form-group">
+              <input [(ngModel)]="exposure.countryPersonReturningFromTrip" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="du quel pays ?">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.hasmakingtest">J'ai subi (ou la personne contactée) le test de dépistage du virus corona</nb-checkbox>
+            </div>
+          </div>
+          <div *ngIf="exposure.hasmakingtest" class="col-sm-6">
+            <div class="form-group">
+              <nb-select fullWidth  [ngModelOptions]="{standalone: true}" [(ngModel)]="exposure.contactedTravellerTestResult"placeholder="Resultat">
+              <nb-option value="true">Positif</nb-option>
+              <nb-option value="false">Négatif</nb-option>
+            </nb-select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.visitRegion">J'ai voyagé dans une ville qui contient un foyer local</nb-checkbox>
+            </div>
+          </div>
+        </div>
+      <div *ngIf="exposure.visitRegion" class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input nbInput [ngModelOptions]="{standalone: true}"
+                 placeholder="Date de voyage"
+                 [nbDatepicker]="formpicker" fullWidth
+                 [(ngModel)]="exposure.visitDate"/>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input [(ngModel)]="exposure.visitedRegion" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="Quelle ville ?">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.contactWithInfectedPerson">J'ai contacté une personne infectée (dans les deux semaines passées)</nb-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.withSuspiciousGroup">J'ai contacté des personnes qui ont des symptômes (des signes respiratoires,fievre,...)</nb-checkbox>
+            </div>
+          </div>
+        </div>  
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.fever">Fièvre</nb-checkbox>
+          </div>
+        </div>
+        <div *ngIf="symptom.fever" class="col-sm-8">
+          <input type="number" nbInput fullWidth  placeholder="Température"
+          [(ngModel)]="symptom.temperature" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.cough">Toux</nb-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.dyspnea">dyspnea</nb-checkbox>
+            <nb-checkbox [(checked)]="symptom.severeDyspnea">dyspnea extrème</nb-checkbox>
+            <nb-checkbox [(checked)]="symptom.unableToSpeak">Ne peut pas parler</nb-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.deteriorationOfGC">Altération de l'état général</nb-checkbox>
+          </div>
+        </div>
+        <div *ngIf="symptom.deteriorationOfGC" class="col-sm-8">
+          <input type="number" nbInput fullWidth  placeholder="Depuis combien de jours ?"
+          [(ngModel)]="symptom.duration" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.diarrhea">Diarrhée</nb-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.nauseaOrVomiting">Nausée/Vomissements</nb-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.chestPain">Douleur thoracique</nb-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.epigastralgia">Epigastralgie</nb-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.soreThroat">Mal de gorge</nb-checkbox>
+          </div>
+        </div>
+      </div> 
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.arthalgia">Arthralgies/Myalgie</nb-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.senseDisorder">Perte du goût/Anosmie</nb-checkbox>
+          </div>
+        </div>
+      </div>
+    </nb-tab>
+    <nb-tab tabTitle="Signes Vitaux">
+      <div class="form-group row">
+        <label  class="label col-sm-2 col-form-label">Température :</label>
+        <div class="col-sm-10">
+          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="temperature" [(ngModel)]="vital.temperature">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="label col-sm-2 col-form-label">Pression artérielle :</label>
+        <div class="col-sm-10">
+          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth placeholder="" name="bloodPressure" [(ngModel)]="vital.bloodPressure">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label  class="label col-sm-2 col-form-label">Impulsion :</label>
+        <div class="col-sm-10">
+          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="pulse" [(ngModel)]="vital.pulse">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label  class="label col-sm-2 col-form-label">Fréquence respiratoire :</label>
+        <div class="col-sm-10">
+          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="respiratoryRate" [(ngModel)]="vital.respiratoryRate">
+        </div>
+      </div>
+    <br>
+    <br>
+    </nb-tab> 
+  </nb-tabset>      
+  </form>
+</nb-card>
+

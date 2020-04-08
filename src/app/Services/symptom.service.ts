@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Symptom } from '../Models/symptom.model';
 import { AppConfig } from '../app.config';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +12,8 @@ export class SymptomService {
   public showedit = false;
   public  showadd = false;
   public showdetails = false;
+  symptoms: Symptom[]=[];
+  symptom: Symptom;
   private baseUrl = AppConfig.settings.apiServer.metadata+'m/symptom';
 
   constructor(private http: HttpClient) { }
@@ -33,5 +36,31 @@ export class SymptomService {
 
   getSymptomsList() {
     return this.http.get<Symptom[]>(`${this.baseUrl}/`);
+  }
+
+  getPatientSymptomsList(id:number) { 
+    return this.http.get<Symptom[]>(`${this.baseUrl}/`).pipe( map((data: Symptom[]) => {
+    for(let s of data){
+      if(s.patient!=null &&s.patient.id===id){
+        this.symptoms.push(s);
+      }
+    }
+    console.log(this.symptoms);
+    return this.symptoms;
+  }));
+  }
+
+  getLastPatientSymptoms(id:number) { 
+    return this.getPatientSymptomsList(id).pipe( map((data: Symptom[]) => {
+      var mostRecentDate = new Date(Math.max.apply(null, data.map( s => {
+      return new Date(s.date);
+
+   })));
+   this.symptom = data.find( s => { 
+    const d = new Date( s.date ); 
+    return d.getTime() == mostRecentDate.getTime();
+   }); 
+    return this.symptom;
+  }));
   }
 }

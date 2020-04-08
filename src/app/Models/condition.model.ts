@@ -1,3 +1,3 @@
 export enum Condition {
-	STABLE, SEVERE
+	STABLE, SEVERE,TREATED
 }

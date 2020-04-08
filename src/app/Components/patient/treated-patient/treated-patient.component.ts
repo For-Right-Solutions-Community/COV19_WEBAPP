@@ -1,19 +1,16 @@
 import { Component, OnInit, ViewChild, Output } from '@angular/core';
-import { LocalDataSource } from 'ng2-smart-table';
 import { Patient } from '../../../Models/patient.model';
 import { MatSort, MatPaginator } from '@angular/material';
+import { LocalDataSource } from 'ng2-smart-table';
 import { PatientService } from '../../../Services/patient.service';
 import Swal from 'sweetalert2';
-import { NbWindowService } from '@nebular/theme';
-import { ChangeStatusComponent } from '../change-status/change-status.component';
 
 @Component({
-  selector: 'ngx-patient-list',
-  templateUrl: './patient-list.component.html',
-  styleUrls: ['./patient-list.component.scss']
+  selector: 'ngx-treated-patient',
+  templateUrl: './treated-patient.component.html',
+  styleUrls: ['./treated-patient.component.scss']
 })
-export class PatientListComponent implements OnInit {
-
+export class TreatedPatientComponent implements OnInit {
   patients: Patient[] = [];
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -73,32 +70,8 @@ export class PatientListComponent implements OnInit {
     hideSubHeader: true,
   };
 
-  constructor(public patientService: PatientService,private windowService: NbWindowService) {
+  constructor(public patientService: PatientService) {
     this.source = new LocalDataSource(this.patients);
-  }
-  onDeleteConfirm(): void {
-    if(this.selectedRows==undefined||this.selectedRows[0] == null )
-   {
-    Swal.fire('','Il faut sélectionner un patient !');
-   } 
-   else 
-   {
-     if (window.confirm('Voulez vous supprimé ce patient ?')) {
-    this.deletePatient(this.selectedRows[0].id);
-  }
-  }
-    
-  }
-  deletePatient(id: number) {
-    this.patientService.deletePatient(id)
-      .subscribe(
-        data => {
-          this.reloadData();      
-        },  
-        error => {
-          console.log(error);
-          Swal.fire('','Vous ne pouvez pas supprimer ce patient car il a des symptomes et/ou des signes vitaux !');
-        });
   }
 
   ngOnInit() {
@@ -106,22 +79,14 @@ export class PatientListComponent implements OnInit {
   }
 
   reloadData() {
-    this.patientService.getPatientsList()
+    this.patientService.getTreatedPatientsList()
       .subscribe(result => {
         if (!result) {
           return;
         }
         this.source = new LocalDataSource(result);
-        console.log(result)
       });
   }
-
-  
-  doRefreshData(event){
-    this.patientService.showlist = true;
-    this.reloadData();
-  }
-
   onSearch(query: string = '') {
     if (query == '') {
       this.reloadData();
@@ -154,22 +119,9 @@ export class PatientListComponent implements OnInit {
       }
     ], false);
   }
-  //edit
-  showedit(event) {  
-    if(this.selectedRows==undefined||this.selectedRows[0] == null )
-   {
-    Swal.fire('','Il faut sélectionner un patient !');
-   } 
-   else 
-   {
-   this.patientService.showedit = true ;
-   this.patientService.showlist = false; 
-   this.patient = this.selectedRows[0];
-   }error => { console.log("Error while gettig Users details") };
-}
 //details
 showdetails() {    
-  if(this.selectedRows==undefined||this.selectedRows[0] == null )
+  if(this.selectedRows[0] == null )
  {
   Swal.fire('','Il faut sélectionner un patient !');
  } 
@@ -185,50 +137,4 @@ onPatientRowSelect(event) {
   this.selectedRows = event.selected;
 }
 
-openWindowForm() {
-  const context = { patient: this.patient };
-  this.windowService.open(ChangeStatusComponent, { title: `Changer l'état du patient`, context}); 
-}
-
-confirmChangeState(){
-  if(this.selectedRows==undefined ||this.selectedRows[0]==null )
- {
-  Swal.fire('','Il faut sélectionner un patient !');
- } 
- else 
- {
- this.patient = this.selectedRows[0];
- this.openWindowForm();
- }
-}
-updatingSymptoms(){
-  if(this.selectedRows==undefined ||this.selectedRows[0]==null )
- {
-  Swal.fire('','Il faut sélectionner un patient !');
- } 
- else 
- {
- this.patient = this.selectedRows[0];
- }
-}
-updatingVitals(){
-  if(this.selectedRows==undefined ||this.selectedRows[0]==null )
- {
-  Swal.fire('','Il faut sélectionner un patient !');
- } 
- else 
- {
- this.patient = this.selectedRows[0];
- }
-}
-showSymptoms(){
-  if(this.selectedRows==undefined ||this.selectedRows[0]==null )
-  {
-   Swal.fire('','Il faut sélectionner un patient !');
-  } 
-  else 
-  {
-  this.patient = this.selectedRows[0];
-  }
-}
 }

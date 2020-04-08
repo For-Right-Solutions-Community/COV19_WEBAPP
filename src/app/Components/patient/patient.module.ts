@@ -16,6 +16,7 @@ import { GlobalPatientComponent } from './global-patient/global-patient.componen
 import { DetailsPatientTabComponent } from './global-patient/details-patient-tab/details-patient-tab.component';
 import { UpdatePatientTabComponent } from './global-patient/update-patient-tab/update-patient-tab.component';
 import { CreatePatientTabComponent } from './global-patient/create-patient-tab/create-patient-tab.component';
+import { TreatedPatientComponent } from './treated-patient/treated-patient.component';
 
 const ENTRY_COMPONENTS = [
   ChangeStatusComponent
@@ -56,6 +57,7 @@ const ENTRY_COMPONENTS = [
         DetailsPatientTabComponent,
         UpdatePatientTabComponent,
         CreatePatientTabComponent,
+        TreatedPatientComponent,
     ],
     entryComponents: [
       ...ENTRY_COMPONENTS,

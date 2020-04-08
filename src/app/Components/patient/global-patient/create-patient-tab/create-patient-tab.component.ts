@@ -25,10 +25,6 @@ import { VitalService } from '../../../../Services/vital.service';
 })
 export class CreatePatientTabComponent implements OnInit {
   checkexposure:boolean=false;
-  visitCountry:boolean=false;
-  covidTest:boolean=false;
-  visitRegion:boolean=false;
-  
   socialOptions : SocialCoverage[]= Object.keys(SocialCoverage).map(key => SocialCoverage[key]).filter(value => typeof(value) === "string");
   handicape:boolean=false;
   patients: Patient[] = [];
@@ -45,9 +41,9 @@ export class CreatePatientTabComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
   @Input()patient:Patient;
-  @Input()vital:Vital;
-  @Input()symptom:Symptom;
-  @Input()antecedent:Antecedent;
+  vital:Vital;
+  symptom:Symptom;
+  antecedent:Antecedent;
   address:Address;
   exposure:Exposure;
   submittedPatient:any;

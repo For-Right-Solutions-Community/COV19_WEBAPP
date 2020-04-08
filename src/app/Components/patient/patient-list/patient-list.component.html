@@ -17,8 +17,17 @@
     </div>
    <br>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-3">
         <button (click)="confirmChangeState()" nbButton>Changer l'état du patient</button>
+      </div>
+      <div class="col-md-3">
+        <button (click)="updatingSymptoms()" nbButton>Mise à jour des symptômes</button>
+      </div>
+      <div class="col-md-3">
+        <button (click)="updatingVitals()" nbButton>Mise à jour des signes vitaux</button>
+      </div>
+      <div class="col-md-3">
+        <button (click)="showSymptoms()" nbButton>évolution des symptômes</button>
       </div>
     </div>
     <br>
@@ -29,8 +38,8 @@
       </ng2-smart-table>
   </nb-card-body>
 </nb-card>
-<ngx-patient-details *ngIf="patientService.showdetails" [patient]="patient"  (createdPatient)='doRefreshData($event)'>
-</ngx-patient-details>
-<ngx-update-patient *ngIf="patientService.showedit" [patient]="patient"  (createdPatient)='doRefreshData($event)'>
-</ngx-update-patient>
+<ngx-details-patient-tab *ngIf="patientService.showdetails" [patient]="patient"  (createdPatient)='doRefreshData($event)'>
+</ngx-details-patient-tab>
+<ngx-update-patient-tab *ngIf="patientService.showedit" [patient]="patient"  (createdPatient)='doRefreshData($event)'>
+</ngx-update-patient-tab>
 

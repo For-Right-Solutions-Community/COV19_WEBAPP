@@ -98,6 +98,7 @@ export class SymptomListComponent implements OnInit {
         if (!result) {
           return;
         }
+        console.log(result);
         this.source = new LocalDataSource(result);
       });
   }

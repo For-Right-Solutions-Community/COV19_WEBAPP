@@ -5,9 +5,12 @@ export class Exposure{
 	sameHomePersonReturningFromTrip:boolean;
 	countryPersonReturningFromTrip:string;
 	contactedTravellerTestResult:string;
+	visitRegion:boolean;
 	visitedRegion:string;
 	visitDate:Date;
 	contactWithInfectedPerson:boolean;
 	withSuspiciousGroup:boolean;
+	Traveler:boolean;
+	hasmakingtest:boolean;
     constructor(){}
 }
