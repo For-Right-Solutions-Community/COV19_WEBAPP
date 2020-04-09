@@ -38,5 +38,6 @@ export class Patient{
     antecedentRecord:Antecedent;
     exposure:Exposure;
     localisatient:Localisation;
+    covidscore:number;
     constructor(){}
 }

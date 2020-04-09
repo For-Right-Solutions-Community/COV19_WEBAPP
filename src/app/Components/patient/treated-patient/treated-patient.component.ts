@@ -4,7 +4,7 @@ import { MatSort, MatPaginator } from '@angular/material';
 import { LocalDataSource } from 'ng2-smart-table';
 import { PatientService } from '../../../Services/patient.service';
 import Swal from 'sweetalert2';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'ngx-treated-patient',
   templateUrl: './treated-patient.component.html',
@@ -65,6 +65,17 @@ export class TreatedPatientComponent implements OnInit {
       condition: {
         title: 'Etat',
         type: 'string',
+      },
+      date: {
+        title: 'Date',
+        type: 'date',
+        valuePrepareFunction: (date) => { 
+          var raw = new Date(date);
+  
+          var formatted = new DatePipe('en_EN').transform(raw, 'dd MMM yyyy  HH:mm');
+          return formatted; 
+        }
+
       },
     },
     hideSubHeader: true,

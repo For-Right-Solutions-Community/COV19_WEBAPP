@@ -6,7 +6,7 @@ import { PatientService } from '../../../Services/patient.service';
 import Swal from 'sweetalert2';
 import { NbWindowService } from '@nebular/theme';
 import { ChangeStatusComponent } from '../change-status/change-status.component';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'ngx-patient-list',
   templateUrl: './patient-list.component.html',
@@ -23,7 +23,6 @@ export class PatientListComponent implements OnInit {
   data: any;
   LocalDataSource: LocalDataSource;
   selectedRows: any;
-
   settings = {
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
@@ -49,9 +48,9 @@ export class PatientListComponent implements OnInit {
         title: 'Nom',
         type: 'string',
       },
-      cin: {
-        title: 'CIN',
-        type: 'string',
+      covidscore: {
+        title: 'COVID Score',
+        type: 'numeric'
       },
       phone: {
         title: 'Téléphone',
@@ -68,6 +67,17 @@ export class PatientListComponent implements OnInit {
       condition: {
         title: 'Etat',
         type: 'string',
+      },
+      date: {
+        title: 'Date',
+        type: 'date',
+        valuePrepareFunction: (date) => { 
+          var raw = new Date(date);
+  
+          var formatted = new DatePipe('en_EN').transform(raw, 'dd MMM yyyy  HH:mm');
+          return formatted; 
+        }
+
       },
     },
     hideSubHeader: true,
