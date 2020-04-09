@@ -36,7 +36,9 @@ export class CreateVitalComponent implements OnInit {
   getLastPatientVitals(id:number) {
     this.vitalService.getLastPatientVitals(id)
     .subscribe(result => {
-     this.vital = result ;
+      if(result!=undefined){
+        this.vital = result ;
+      }
   },
   err => console.log("Message erreur" +  err.message  ))
   }

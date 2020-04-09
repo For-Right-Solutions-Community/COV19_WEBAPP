@@ -40,8 +40,10 @@ export class SymptomService {
 
   getPatientSymptomsList(id:number) { 
     return this.http.get<Symptom[]>(`${this.baseUrl}/`).pipe( map((data: Symptom[]) => {
+    console.log(data);
     for(let s of data){
-      if(s.patient!=null &&s.patient.id===id){
+      if(s.patient!=null &&(s.patient.id===id)){
+        console.log(s);
         this.symptoms.push(s);
       }
     }
@@ -58,7 +60,7 @@ export class SymptomService {
    this.symptom = data.find( s => { 
     const d = new Date( s.date ); 
     return d.getTime() == mostRecentDate.getTime();
-   }); 
+   });
     return this.symptom;
   }));
   }

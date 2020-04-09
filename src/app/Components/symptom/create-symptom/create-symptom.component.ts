@@ -46,7 +46,9 @@ export class CreateSymptomComponent implements OnInit {
   getLastPatientSymptoms(id:number) {
     this.symptomService.getLastPatientSymptoms(id)
     .subscribe(result => {
-     this.symptom = result ;
+      if(result!=undefined){
+        this.symptom = result ;
+      }   
   },
   err => console.log("Message erreur" +  err.message  ))
   }
