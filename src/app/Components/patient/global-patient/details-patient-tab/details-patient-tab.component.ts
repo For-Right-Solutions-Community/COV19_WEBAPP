@@ -103,8 +103,11 @@ export class DetailsPatientTabComponent implements OnInit {
       this.getLastPatientVitals(this.patient.id);
     }
     this.exposure=this.patient.exposure;
-    if(this.exposure!=undefined){
+    if(this.exposure!=undefined&&(this.exposure.contactWithInfectedPerson||this.exposure.withSuspiciousGroup||
+      this.exposure.visitRegion||this.exposure.hasmakingtest||this.exposure.contactWithTraveler||this.exposure.traveler)){
       this.checkexposure=true;
+    }else{
+      this.checkexposure=false;
     }
     this.registerForm = this.formBuilder.group({
     gender: ['', Validators.required],

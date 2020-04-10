@@ -92,12 +92,16 @@ export class CreatePatientTabComponent implements OnInit {
     }
     this.patient.address=this.address;
     this.patient.antecedentRecord=this.antecedent;
-    this.patient.exposure=this.exposure;
-    if(this.testResulttrue){
-      this.patient.exposure.testResult=true;
-    }
-    if(this.travelertestResulttrue){
-      this.patient.exposure.contactedTravellerTestResult=true;
+    if(this.checkexposure){
+      this.patient.exposure=this.exposure;
+      if(this.testResulttrue){
+        this.patient.exposure.testResult=true;
+      }
+      if(this.travelertestResulttrue){
+        this.patient.exposure.contactedTravellerTestResult=true;
+      }
+    }else{
+      this.patient.exposure=new Exposure();
     }
     this.patient.date=new Date();
     return this.patientService.createPatient(this.patient).toPromise()

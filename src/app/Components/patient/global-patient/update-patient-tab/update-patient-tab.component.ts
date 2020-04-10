@@ -100,8 +100,11 @@ export class UpdatePatientTabComponent implements OnInit {
       this.getLastPatientVitals(this.patient.id);
     }
     this.exposure=this.patient.exposure;
-    if(this.exposure!=undefined){
+    if(this.exposure!=undefined&&(this.exposure.contactWithInfectedPerson||this.exposure.withSuspiciousGroup||
+      this.exposure.visitRegion||this.exposure.hasmakingtest||this.exposure.contactWithTraveler||this.exposure.traveler)){
       this.checkexposure=true;
+    }else{
+      this.checkexposure=false;
     }
     this.registerForm = this.formBuilder.group({
     gender: ['', Validators.required],
@@ -129,12 +132,16 @@ export class UpdatePatientTabComponent implements OnInit {
   }
     this.patient.address=this.address;
     this.patient.antecedentRecord=this.antecedent;
-    this.patient.exposure=this.exposure;
-    if(this.testResulttrue){
-      this.patient.exposure.testResult=true;
-    }
-    if(this.travelertestResulttrue){
-      this.patient.exposure.contactedTravellerTestResult=true;
+    if(this.checkexposure){
+      this.patient.exposure=this.exposure;
+      if(this.testResulttrue){
+        this.patient.exposure.testResult=true;
+      }
+      if(this.travelertestResulttrue){
+        this.patient.exposure.contactedTravellerTestResult=true;
+      }
+    }else{
+      this.patient.exposure=new Exposure();
     }
     this.patientService.updatePatient(this.patient.id,this.patient).subscribe(
       data => {
