@@ -442,8 +442,9 @@
             <div class="form-group">
               <input readonly nbInput [ngModelOptions]="{standalone: true}"
                  placeholder="Date de voyage"
-                 [nbDatepicker]="formpicker" fullWidth
+                 [nbDatepicker]="datepicker" fullWidth
                  [(ngModel)]="exposure.visitDate"/>
+                 <nb-datepicker #datepicker></nb-datepicker>
             </div>
           </div>
           <div class="col-sm-6">
