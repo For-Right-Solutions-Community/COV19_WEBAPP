@@ -5,7 +5,6 @@ import { AgmCoreModule } from '@agm/core';
 import { EntryComponent } from './entry.component';
 import { EntryRoutingModule } from './entry-routing.module';
 import { ThemeModule } from '../../@theme/theme.module';
-import { LocalisationComponent } from '../localisation/localisation.component';
 
 
 @NgModule({
@@ -21,7 +20,6 @@ import { LocalisationComponent } from '../localisation/localisation.component';
   ],
   declarations: [
     EntryComponent,
-    LocalisationComponent,
   ],
 })
 export class EntryModule {

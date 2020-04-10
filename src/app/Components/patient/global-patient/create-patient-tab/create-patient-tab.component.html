@@ -359,7 +359,7 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group">
-              <nb-checkbox [(checked)]="exposure.Traveler">J'était en voyage au cours du moi dernier</nb-checkbox>
+              <nb-checkbox [(checked)]="exposure.Traveler">J'était en voyage au cours du mois dernier</nb-checkbox>
             </div>
           </div>
           <div *ngIf="exposure.Traveler" class="col-sm-8">
@@ -387,15 +387,30 @@
             </div>
           </div>
         </div>
+        <div *ngIf="exposure.contactWithTraveler" class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <nb-checkbox [(checked)]="exposure.Travellerhasmakingtest">Elle a subi (la personne contactée) le test de dépistage du virus corona</nb-checkbox>
+            </div>
+          </div>
+          <div *ngIf="exposure.Travellerhasmakingtest" class="col-sm-6">
+            <div class="form-group">
+              <nb-select fullWidth  [ngModelOptions]="{standalone: true}" [(ngModel)]="exposure.contactedTravellerTestResult"placeholder="Resultat">
+              <nb-option value="true">Positif</nb-option>
+              <nb-option value="false">Négatif</nb-option>
+            </nb-select>
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <nb-checkbox [(checked)]="exposure.hasmakingtest">J'ai subi (ou la personne contactée) le test de dépistage du virus corona</nb-checkbox>
+              <nb-checkbox [(checked)]="exposure.hasmakingtest">J'ai subi le test de dépistage du virus corona</nb-checkbox>
             </div>
           </div>
           <div *ngIf="exposure.hasmakingtest" class="col-sm-6">
             <div class="form-group">
-              <nb-select fullWidth  [ngModelOptions]="{standalone: true}" [(ngModel)]="exposure.contactedTravellerTestResult"placeholder="Resultat">
+              <nb-select fullWidth  [ngModelOptions]="{standalone: true}" [(ngModel)]="exposure.TestResult"placeholder="Resultat">
               <nb-option value="true">Positif</nb-option>
               <nb-option value="false">Négatif</nb-option>
             </nb-select>

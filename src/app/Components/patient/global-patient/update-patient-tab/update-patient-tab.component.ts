@@ -56,6 +56,9 @@ export class UpdatePatientTabComponent implements OnInit {
     this.exposure=this.patient.exposure;
     this.antecedent=this.patient.antecedentRecord;
     if(this.patient!=undefined){
+      if(this.patient.physicalHandicap===true||this.patient.intellecHandicap===true){
+        this.handicape=true;
+      }
       this.getLastPatientSymptoms(this.patient.id);
       this.getLastPatientVitals(this.patient.id);
     }

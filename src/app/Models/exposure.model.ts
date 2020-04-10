@@ -12,5 +12,7 @@ export class Exposure{
 	withSuspiciousGroup:boolean;
 	Traveler:boolean;
 	hasmakingtest:boolean;
+	TestResult:boolean;
+	Travellerhasmakingtest:boolean;
     constructor(){}
 }

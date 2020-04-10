@@ -2,7 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { EntryComponent } from './entry.component';
-import { LocalisationComponent } from '../localisation/localisation.component';
 import { AuthGuard } from '../auth/services/auth-guard.service';
 
 const routes: Routes = [{
@@ -23,12 +22,6 @@ const routes: Routes = [{
           .then(m => m.InterventionModule),
     },
     {
-      path: 'antecedents',
-      canActivate: [AuthGuard],
-      loadChildren: () => import('../antecedent/antecedent.module')
-          .then(m => m.AntecedentModule),
-    },
-    {
       path: 'symptoms',
       canActivate: [AuthGuard],
       loadChildren: () => import('../symptom/symptom.module')
@@ -46,11 +39,7 @@ const routes: Routes = [{
       data: { roles: ["ROLE_ADMIN"]},
       loadChildren: () => import('../user/user.module')
           .then(m => m.UserModule),
-    }/*,
-    {
-      path: 'localisation',
-      component: LocalisationComponent,
-    }*/,
+    },
     {
       path: '',
       canActivate: [AuthGuard],
