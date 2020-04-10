@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 import { Intervention } from '../Models/intervention.model';
 import { AppConfig } from '../app.config';
 @Injectable({
@@ -12,6 +12,7 @@ export class InterventionService {
   public showedit = false;
   public showadd = false;
   public showdetails = false;
+  interventions: Intervention[]=[];
   private baseUrl = AppConfig.settings.apiServer.metadata+'m/intervention';
   constructor(private http: HttpClient) { }
 
@@ -32,4 +33,13 @@ export class InterventionService {
   }
   getInterventionsList() {
     return this.http.get<Intervention[]>(`${this.baseUrl}/`);  }
+
+    getPatientInterventionsList(id:number) { 
+      this.interventions=[];
+      return this.getInterventionsList().pipe( map((data: Intervention[]) => {
+        this.interventions=data.filter(element => element.patient.id == id);
+        console.log(this.interventions);
+      return this.interventions;
+    }));
+    }
 }

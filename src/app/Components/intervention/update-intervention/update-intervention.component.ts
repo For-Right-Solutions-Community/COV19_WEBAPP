@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./update-intervention.component.scss']
 })
 export class UpdateInterventionComponent implements OnInit {
-
+  patient: Patient=new Patient();
   patients: Patient[] = [];
   interventions: Intervention[] = [];
   dataSource;
@@ -30,6 +30,10 @@ export class UpdateInterventionComponent implements OnInit {
   constructor(private interventionService: InterventionService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
     this.getInterventionsList();
+    if(this.intervention!=undefined&&this.intervention.patient!=undefined){
+      this.patient=this.intervention.patient;
+      
+    }
     this.getPatientsList();
     this.registerForm = this.formBuilder.group({
     patient: ['', Validators.required],
@@ -86,6 +90,12 @@ export class UpdateInterventionComponent implements OnInit {
     this.patientService.getPatientsList()
     .subscribe(result => {
      this.patients = result ;
+     if(this.patients!=undefined&&this.patients.length>0){
+      let index = this.patients.findIndex(d => d.id === this.patient.id);
+      console.log(index);
+      this.patients.splice(index,1);
+      
+    }
   },
   err => console.log("Message erreur" +  err.message  ))
   }

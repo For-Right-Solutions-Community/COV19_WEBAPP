@@ -107,7 +107,6 @@ export class PatientService {
     return this.symptoms;
   }));
   }
-
   getLastPatientSymptoms(id:number) { 
     return this.getPatientSymptomsList(id).pipe( map((data: Symptom[]) => {
       var mostRecentDate = new Date(Math.max.apply(null, data.map( s => {

@@ -2,7 +2,7 @@
   <nb-card-header>
     <div class="row">
       <div class="col-md-11">
-        Liste des symptômes du patient {{patient.firstname}} {{patient.lastname}}</div>
+        Evolution des symptômes du patient {{patient.firstname}} {{patient.lastname}}</div>
      <div class="col-md-1" >
       <button  class="btn btn-info" (click)="goBackToList()"  ><i class="fas fa-arrow-left"></i></button>
     </div>
@@ -10,9 +10,24 @@
   </nb-card-header>
   <nb-list
     nbInfiniteList>
+    <nb-list-item>
+      <h5 style="color:darkgoldenrod;">Liste des interventions :</h5>
+    </nb-list-item>
+    <nb-list-item *ngFor="let intervention of interventions">
+      <article>
+        <h6>Date : {{intervention.date| date:'yyyy-MM-dd HH:mm'}} </h6>
+        <p>{{intervention.description}}</p>
+      </article>
+    </nb-list-item>
+  </nb-list>
+  <nb-list
+    nbInfiniteList>
+    <nb-list-item>
+      <h5 style="color:darkgoldenrod;">Liste des symptômes :</h5>
+    </nb-list-item>
     <nb-list-item *ngFor="let symptom of symptoms">
       <article>
-        <h6>Date : {{symptom.date| date:'yyyy-MM-dd'}} </h6>
+        <h6>Date : {{symptom.date| date:'yyyy-MM-dd HH:mm'}} </h6>
         <p *ngIf="patient.exposure!=null">Exposution :<br></p>
         <p *ngIf="patient.exposure!=null&&patient.exposure.traveler">Voyage au cours du mois dernier au pays {{patient.exposure.visitedCoutry}}<br></p>
         <p *ngIf="patient.exposure!=null&&patient.exposure.contactWithTraveler">En contact avec une personne qui revient de {{patient.exposure.countryPersonReturningFromTrip}}<br></p>

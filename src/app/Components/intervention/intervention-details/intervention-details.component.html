@@ -13,8 +13,9 @@
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Patient :</label>
         <div class="col-sm-10">
-          <select  class="form-control" selected="intervention.patient" formControlName="patient" fullWidth [(ngModel)]="intervention.patient" required 
+          <select class="form-control" selected="patient" formControlName="patient" fullWidth  name="patient" [(ngModel)]="intervention.patient" required 
           [ngClass]="{ 'is-invalid': submitted && f.patient.errors }">
+          <option [value]="patient">{{patient.firstname}} {{patient.lastname}}</option>
           <option *ngFor="let pat of patients" [value]="pat">{{pat.firstname}} {{pat.lastname}}</option>
         </select>
         <div *ngIf="submitted && f.patient.errors">

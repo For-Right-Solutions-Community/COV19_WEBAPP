@@ -57,9 +57,17 @@ export class InterventionListComponent implements OnInit {
         valuePrepareFunction: (value) => {
           if (!value) return '';
           const date=moment(value);
-          return date.format('DD/MM/YYYY');
+          return date.format('DD/MM/YYYY HH:mm');
       }  
-      }
+      },
+      description: {
+        title: 'Intervention',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined) return '';
+          return value;
+        }
+      },
     },
     hideSubHeader: true,
   };

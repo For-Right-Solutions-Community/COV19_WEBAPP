@@ -13,7 +13,7 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./intervention-details.component.scss']
 })
 export class InterventionDetailsComponent implements OnInit {
-
+  patient: Patient=new Patient();
   patients: Patient[] = [];
   interventions: Intervention[] = [];
   dataSource;
@@ -28,7 +28,11 @@ export class InterventionDetailsComponent implements OnInit {
   registerForm: FormGroup;
   constructor(private interventionService: InterventionService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
-    console.log(this.intervention);
+    this.getInterventionsList();
+    if(this.intervention!=undefined&&this.intervention.patient!=undefined){
+      this.patient=this.intervention.patient;
+      
+    }
     this.getPatientsList();
     
     this.registerForm = this.formBuilder.group({
@@ -50,6 +54,10 @@ export class InterventionDetailsComponent implements OnInit {
     this.patientService.getPatientsList()
     .subscribe(result => {
      this.patients = result ;
+     if(this.patients!=undefined&&this.patients.length>0){
+      let index = this.patients.findIndex(d => d.id === this.patient.id);
+      console.log(index);
+      this.patients.splice(index,1);}
   },
   err => console.log("Message erreur" +  err.message  ))
   }

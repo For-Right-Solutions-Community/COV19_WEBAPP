@@ -4,6 +4,8 @@ import { MatSort, MatPaginator } from '@angular/material';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Symptom } from '../../../Models/symptom.model';
+import { InterventionService } from '../../../Services/intervention.service';
+import { Intervention } from '../../../Models/intervention.model';
 
 @Component({
   selector: 'ngx-patient-symptom-historic',
@@ -13,18 +15,21 @@ import { Symptom } from '../../../Models/symptom.model';
 export class PatientSymptomHistoricComponent implements OnInit {
   patients: Patient[] = [];
   symptoms: Symptom[] = [];
+  interventions: Intervention[]=[];
   dataSource;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   errorMessage = '';
   @Output() createdSymptom = new EventEmitter();
   @Input()patient:Patient;
-  constructor(private patientService: PatientService) { }
+  constructor(private patientService: PatientService,private interventionService:InterventionService) { }
   ngOnInit() {
     this.getPatientsList();
     this.symptoms= [];
+    this.interventions= [];
     if(this.patient!=undefined){
       this.getPatientSymptoms(this.patient.id);
+      this.getPatientInterventions(this.patient.id);
     }
   }
 
@@ -32,6 +37,14 @@ export class PatientSymptomHistoricComponent implements OnInit {
     this.patientService.getPatientSymptomsList(id)
     .subscribe(result => {
      this.symptoms = result ;
+  },
+  err => console.log("Message erreur" +  err.message  ))
+  }
+
+  getPatientInterventions(id:number) {
+    this.interventionService.getPatientInterventionsList(id)
+    .subscribe(result => {
+     this.interventions = result ;
   },
   err => console.log("Message erreur" +  err.message  ))
   }
