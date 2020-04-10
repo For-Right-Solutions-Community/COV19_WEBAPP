@@ -73,7 +73,6 @@ export class PatientListComponent implements OnInit {
         type: 'date',
         valuePrepareFunction: (date) => { 
           var raw = new Date(date);
-  
           var formatted = new DatePipe('en_EN').transform(raw, 'dd MMM yyyy  HH:mm');
           return formatted; 
         }

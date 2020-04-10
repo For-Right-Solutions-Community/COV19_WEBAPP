@@ -43,6 +43,7 @@ export class Patient{
     covidscore:number;
     location:Localisation;
     symptomRecords:Symptom[]=[];
-	vitalsRecords:Vital[]=[];
+    vitalsRecords:Vital[]=[];
+    date:Date;
     constructor(){}
 }

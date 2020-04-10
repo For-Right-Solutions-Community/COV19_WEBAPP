@@ -368,7 +368,7 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="checkexposure">Exposition</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="checkexposure">Exposition</nb-checkbox>
           </div>
         </div>
       </div>
@@ -376,71 +376,71 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group">
-              <nb-checkbox [(checked)]="exposure.traveler">J'était en voyage au cours du mois dernier</nb-checkbox>
+              <nb-checkbox disabled [(checked)]="exposure.traveler">J'était en voyage au cours du mois dernier</nb-checkbox>
             </div>
           </div>
           <div *ngIf="exposure.Traveler" class="col-sm-8">
             <div class="form-group">
-              <input [(ngModel)]="exposure.visitedCoutry" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="Pays">
+              <input readonly [(ngModel)]="exposure.visitedCoutry" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="Pays">
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-8">
             <div class="form-group">
-              <nb-checkbox [(checked)]="exposure.contactWithTraveler">J'était en contact avec une personne qui revient d’un voyage</nb-checkbox>
+              <nb-checkbox disabled [(checked)]="exposure.contactWithTraveler">J'était en contact avec une personne qui revient d’un voyage</nb-checkbox>
             </div>
           </div>
         </div>
       <div *ngIf="exposure.contactWithTraveler" class="row">
           <div class="col-sm-4">
             <div class="form-group">
-              <nb-checkbox [(checked)]="exposure.sameHomePersonReturningFromTrip">Habite avec vous à la maison</nb-checkbox>
+              <nb-checkbox disabled [(checked)]="exposure.sameHomePersonReturningFromTrip">Habite avec vous à la maison</nb-checkbox>
             </div>
           </div>
           <div class="col-sm-8">
             <div class="form-group">
-              <input [(ngModel)]="exposure.countryPersonReturningFromTrip" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="du quel pays ?">
+              <input readonly [(ngModel)]="exposure.countryPersonReturningFromTrip" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="du quel pays ?">
             </div>
           </div>
         </div>
         <div *ngIf="exposure.contactWithTraveler" class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <nb-checkbox [(checked)]="exposure.travellerhasmakingtest">Elle a subi (la personne contactée) le test de dépistage du virus corona</nb-checkbox>
+              <nb-checkbox disabled [(checked)]="exposure.travellerhasmakingtest">Elle a subi (la personne contactée) le test de dépistage du virus corona</nb-checkbox>
             </div>
           </div>
           <div *ngIf="exposure.travellerhasmakingtest" class="col-sm-6">
             <div class="form-group">
-              <nb-checkbox *ngIf="travelertestResulttrue===false" [(checked)]="travelertestResulttrue">Positif</nb-checkbox>
-              <nb-checkbox *ngIf="travelertestResultfalse===false" [(checked)]="travelertestResultfalse">Négatif</nb-checkbox>
+              <nb-checkbox disabled *ngIf="travelertestResulttrue===false" [(checked)]="travelertestResulttrue">Positif</nb-checkbox>
+              <nb-checkbox disabled *ngIf="travelertestResultfalse===false" [(checked)]="travelertestResultfalse">Négatif</nb-checkbox>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <nb-checkbox [(checked)]="exposure.hasmakingtest">J'ai subi le test de dépistage du virus corona</nb-checkbox>
+              <nb-checkbox disabled [(checked)]="exposure.hasmakingtest">J'ai subi le test de dépistage du virus corona</nb-checkbox>
             </div>
           </div>
           <div *ngIf="exposure.hasmakingtest" class="col-sm-6">
             <div class="form-group">
-              <nb-checkbox *ngIf="testResultfalse===false" [(checked)]="testResulttrue">Positif</nb-checkbox>
-              <nb-checkbox *ngIf="testResulttrue===false" [(checked)]="testResultfalse">Négatif</nb-checkbox>
+              <nb-checkbox disabled *ngIf="testResultfalse===false" [(checked)]="testResulttrue">Positif</nb-checkbox>
+              <nb-checkbox disabled *ngIf="testResulttrue===false" [(checked)]="testResultfalse">Négatif</nb-checkbox>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-8">
             <div class="form-group">
-              <nb-checkbox [(checked)]="exposure.visitRegion">J'ai voyagé dans une ville qui contient un foyer local</nb-checkbox>
+              <nb-checkbox disabled [(checked)]="exposure.visitRegion">J'ai voyagé dans une ville qui contient un foyer local</nb-checkbox>
             </div>
           </div>
         </div>
       <div *ngIf="exposure.visitRegion" class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <input nbInput [ngModelOptions]="{standalone: true}"
+              <input readonly nbInput [ngModelOptions]="{standalone: true}"
                  placeholder="Date de voyage"
                  [nbDatepicker]="formpicker" fullWidth
                  [(ngModel)]="exposure.visitDate"/>
@@ -448,21 +448,21 @@
           </div>
           <div class="col-sm-6">
             <div class="form-group">
-              <input [(ngModel)]="exposure.visitedRegion" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="Quelle ville ?">
+              <input readonly [(ngModel)]="exposure.visitedRegion" [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="Quelle ville ?">
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-8">
             <div class="form-group">
-              <nb-checkbox [(checked)]="exposure.contactWithInfectedPerson">J'ai contacté une personne infectée (dans les deux semaines passées)</nb-checkbox>
+              <nb-checkbox disabled [(checked)]="exposure.contactWithInfectedPerson">J'ai contacté une personne infectée (dans les deux semaines passées)</nb-checkbox>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-8">
             <div class="form-group">
-              <nb-checkbox [(checked)]="exposure.withSuspiciousGroup">J'ai contacté des personnes qui ont des symptômes (des signes respiratoires,fievre,...)</nb-checkbox>
+              <nb-checkbox disabled [(checked)]="exposure.withSuspiciousGroup">J'ai contacté des personnes qui ont des symptômes (des signes respiratoires,fievre,...)</nb-checkbox>
             </div>
           </div>
         </div>  
@@ -470,87 +470,87 @@
       <div class="row">
         <div class="col-sm-2">
           <div class="form-group">
-            <nb-checkbox [(checked)]="symptom.fever">Fièvre</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="symptom.fever">Fièvre</nb-checkbox>
           </div>
         </div>
         <div *ngIf="symptom.fever" class="col-sm-8">
-          <input type="number" nbInput fullWidth  placeholder="Température"
+          <input readonly type="number" nbInput fullWidth  placeholder="Température"
           [(ngModel)]="symptom.temperature" [ngModelOptions]="{standalone: true}">
         </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="symptom.cough">Toux</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="symptom.cough">Toux</nb-checkbox>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="symptom.dyspnea">dyspnea</nb-checkbox>
-            <nb-checkbox [(checked)]="symptom.severeDyspnea">dyspnea extrème</nb-checkbox>
-            <nb-checkbox [(checked)]="symptom.unableToSpeak">Ne peut pas parler</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="symptom.dyspnea">dyspnea</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="symptom.severeDyspnea">dyspnea extrème</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="symptom.unableToSpeak">Ne peut pas parler</nb-checkbox>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-3">
           <div class="form-group">
-            <nb-checkbox [(checked)]="symptom.deteriorationOfGC">Altération de l'état général</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="symptom.deteriorationOfGC">Altération de l'état général</nb-checkbox>
           </div>
         </div>
         <div *ngIf="symptom.deteriorationOfGC" class="col-sm-8">
-          <input type="number" nbInput fullWidth  placeholder="Depuis combien de jours ?"
+          <input readonly type="number" nbInput fullWidth  placeholder="Depuis combien de jours ?"
           [(ngModel)]="symptom.duration" [ngModelOptions]="{standalone: true}">
         </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="symptom.diarrhea">Diarrhée</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="symptom.diarrhea">Diarrhée</nb-checkbox>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="symptom.nauseaOrVomiting">Nausée/Vomissements</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="symptom.nauseaOrVomiting">Nausée/Vomissements</nb-checkbox>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="symptom.chestPain">Douleur thoracique</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="symptom.chestPain">Douleur thoracique</nb-checkbox>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="symptom.epigastralgia">Epigastralgie</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="symptom.epigastralgia">Epigastralgie</nb-checkbox>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="symptom.soreThroat">Mal de gorge</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="symptom.soreThroat">Mal de gorge</nb-checkbox>
           </div>
         </div>
       </div> 
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="symptom.arthalgia">Arthralgies/Myalgie</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="symptom.arthalgia">Arthralgies/Myalgie</nb-checkbox>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <nb-checkbox [(checked)]="symptom.senseDisorder">Perte du goût/Anosmie</nb-checkbox>
+            <nb-checkbox disabled [(checked)]="symptom.senseDisorder">Perte du goût/Anosmie</nb-checkbox>
           </div>
         </div>
       </div>
@@ -559,25 +559,25 @@
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Température :</label>
         <div class="col-sm-10">
-          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="temperature" [(ngModel)]="vital.temperature">
+          <input readonly [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="temperature" [(ngModel)]="vital.temperature">
         </div>
       </div>
       <div class="form-group row">
         <label class="label col-sm-2 col-form-label">Pression artérielle :</label>
         <div class="col-sm-10">
-          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth placeholder="" name="bloodPressure" [(ngModel)]="vital.bloodPressure">
+          <input readonly [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth placeholder="" name="bloodPressure" [(ngModel)]="vital.bloodPressure">
         </div>
       </div>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Impulsion :</label>
         <div class="col-sm-10">
-          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="pulse" [(ngModel)]="vital.pulse">
+          <input readonly [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="pulse" [(ngModel)]="vital.pulse">
         </div>
       </div>
       <div class="form-group row">
         <label  class="label col-sm-2 col-form-label">Fréquence respiratoire :</label>
         <div class="col-sm-10">
-          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="respiratoryRate" [(ngModel)]="vital.respiratoryRate">
+          <input readonly [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="respiratoryRate" [(ngModel)]="vital.respiratoryRate">
         </div>
       </div>
     <br>

@@ -143,40 +143,10 @@ export class UpdatePatientTabComponent implements OnInit {
         this.isSignedUp = true;
         this.isSignUpFailed = false;
         this.reloadPatientListData();
+        Swal.fire('','La fiche patient est modifiée avec succés !');
         this.patientService.showedit = false ;
         this.patientService.showlist = true;
-      },
-      error => {
-        console.log(error);
-        this.errorMessage = error.error.message;
-        this.isSignUpFailed = true;
-      }
-    ); 
 
-    if(this.patient!=undefined&&this.patient.id!=null){
-      //add symptom
-    this.symptom.patient=this.patient;
-    this.symptomService.updateSymptom(this.symptom.id,this.symptom).subscribe(
-      data => {
-        console.log(data);
-        this.isSignedUp = true;
-        this.isSignUpFailed = false;
-      },
-      error => {
-        console.log(error);
-        this.errorMessage = error.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
-    //add vital
-    this.vital.patient=this.patient;
-    this.vitalService.updateVital(this.vital.id,this.vital).subscribe(
-      data => {
-        console.log(data);
-        this.isSignedUp = true;
-        this.isSignUpFailed = false;
-        Swal.fire('','La fiche patient est modifiée avec succés !');
-        this.reset();
       },
       error => {
         console.log(error);
@@ -184,7 +154,6 @@ export class UpdatePatientTabComponent implements OnInit {
         this.isSignUpFailed = true;
       }
     ); 
-    }
   }
   reset(){
    this.vital=new Vital();

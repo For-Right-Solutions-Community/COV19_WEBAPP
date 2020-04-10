@@ -99,6 +99,7 @@ export class CreatePatientTabComponent implements OnInit {
     if(this.travelertestResulttrue){
       this.patient.exposure.contactedTravellerTestResult=true;
     }
+    this.patient.date=new Date();
     return this.patientService.createPatient(this.patient).toPromise()
 .then(      data => {
         this.createdPatient.emit(1);
