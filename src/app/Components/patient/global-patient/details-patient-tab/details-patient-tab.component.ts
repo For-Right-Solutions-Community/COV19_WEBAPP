@@ -24,6 +24,9 @@ import { Localisation } from '../../../../Models/localisation.model';
   styleUrls: ['./details-patient-tab.component.scss']
 })
 export class DetailsPatientTabComponent implements OnInit {
+  gouvernorats:string[]=["Ariana","Béja","Ben Arous","Bizerte","Gabès","Gafsa","Jendouba","Kairouan",
+  "Kasserine","Kébili","Kef","Mahdia","Manouba","Médenine","Monastir","Nabeul","Sfax","Sidi Bouzid",
+  "Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouan"];
   localisation:Localisation=new Localisation();
   checkexposure:boolean=false;
   socialOptions : SocialCoverage[]= Object.keys(SocialCoverage).map(key => SocialCoverage[key]).filter(value => typeof(value) === "string");

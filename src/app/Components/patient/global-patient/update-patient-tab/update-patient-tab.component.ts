@@ -24,6 +24,9 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./update-patient-tab.component.scss']
 })
 export class UpdatePatientTabComponent implements OnInit {
+  gouvernorats:string[]=["Ariana","Béja","Ben Arous","Bizerte","Gabès","Gafsa","Jendouba","Kairouan",
+  "Kasserine","Kébili","Kef","Mahdia","Manouba","Médenine","Monastir","Nabeul","Sfax","Sidi Bouzid",
+  "Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouan"];
   checkexposure:boolean=false;
   socialOptions : SocialCoverage[]= Object.keys(SocialCoverage).map(key => SocialCoverage[key]).filter(value => typeof(value) === "string");
   handicape:boolean=false;
