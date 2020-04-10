@@ -14,23 +14,23 @@
       <article>
         <h6>Date : {{symptom.date| date:'yyyy-MM-dd'}} </h6>
         <p *ngIf="patient.exposure!=null">Exposution :<br></p>
-        <p *ngIf="patient.exposure.traveler">Voyage au cours du mois dernier au pays {{patient.exposure.visitedCoutry}}<br></p>
-        <p *ngIf="patient.exposure.contactWithTraveler">En contact avec une personne qui revient de {{patient.exposure.countryPersonReturningFromTrip}}<br></p>
-        <p *ngIf="patient.exposure.contactWithTraveler&&patient.exposure.sameHomePersonReturningFromTrip">Cette personne est un membre de famille et ils habitent ensemble<br></p>
+        <p *ngIf="patient.exposure!=null&&patient.exposure.traveler">Voyage au cours du mois dernier au pays {{patient.exposure.visitedCoutry}}<br></p>
+        <p *ngIf="patient.exposure!=null&&patient.exposure.contactWithTraveler">En contact avec une personne qui revient de {{patient.exposure.countryPersonReturningFromTrip}}<br></p>
+        <p *ngIf="patient.exposure!=null&&patient.exposure.contactWithTraveler&&patient.exposure.sameHomePersonReturningFromTrip">Cette personne est un membre de famille et ils habitent ensemble<br></p>
 
-        <p *ngIf="patient.exposure.contactWithTraveler&&patient.exposure.travellerhasmakingtest">La personne contactée a subi le test de dépistage du virus corona<br> </p>
-        <div *ngIf="patient.exposure.contactWithTraveler&&patient.exposure.travellerhasmakingtest&&patient.exposure.contactedTravellerTestResult">Le résultat est positif <br></div>
-        <div *ngIf="patient.exposure.contactWithTraveler&&patient.exposure.travellerhasmakingtest&&patient.exposure.contactedTravellerTestResult===false">Le résultat est négatif <br></div>
+        <p *ngIf="patient.exposure!=null&&patient.exposure.contactWithTraveler&&patient.exposure.travellerhasmakingtest">La personne contactée a subi le test de dépistage du virus corona<br> </p>
+        <div *ngIf="patient.exposure!=null&&patient.exposure.contactWithTraveler&&patient.exposure.travellerhasmakingtest&&patient.exposure.contactedTravellerTestResult">Le résultat est positif <br></div>
+        <div *ngIf="patient.exposure!=null&&patient.exposure.contactWithTraveler&&patient.exposure.travellerhasmakingtest&&patient.exposure.contactedTravellerTestResult===false">Le résultat est négatif <br></div>
 
-        <p *ngIf="patient.exposure.hasmakingtest">Subi le test de dépistage du virus corona<br> </p>
-        <div *ngIf="patient.exposure.hasmakingtest&&patient.exposure.testResult">Le résultat est positif <br></div>
-        <div *ngIf="patient.exposure.hasmakingtest&&patient.exposure.testResult===false">Le résultat est négatif <br></div>
+        <p *ngIf="patient.exposure!=null&&patient.exposure.hasmakingtest">Subi le test de dépistage du virus corona<br> </p>
+        <div *ngIf="patient.exposure!=null&&patient.exposure.hasmakingtest&&patient.exposure.testResult">Le résultat est positif <br></div>
+        <div *ngIf="patient.exposure!=null&&patient.exposure.hasmakingtest&&patient.exposure.testResult===false">Le résultat est négatif <br></div>
 
 
-        <p *ngIf="patient.exposure.visitRegion"> Voyage dans une ville qui contient un foyer local, 
+        <p *ngIf="patient.exposure!=null&&patient.exposure.visitRegion"> Voyage dans une ville qui contient un foyer local, 
           la ville est {{patient.exposure.visitedRegion}}, pour la date de {{patient.exposure.visitDate| date:'yyyy-MM-dd'}} <br></p>
-        <p *ngIf="patient.exposure.contactWithInfectedPerson">Contacté une personne infectée (dans les deux semaines passées)<br></p>
-        <p *ngIf="patient.exposure.withSuspiciousGroup">contacté des personnes qui ont des symptômes (des signes respiratoires,fievre,...)<br></p>
+        <p *ngIf="patient.exposure!=null&&patient.exposure.contactWithInfectedPerson">Contacté une personne infectée (dans les deux semaines passées)<br></p>
+        <p *ngIf="patient.exposure!=null&&patient.exposure.withSuspiciousGroup">contacté des personnes qui ont des symptômes (des signes respiratoires,fievre,...)<br></p>
         <p *ngIf="symptom.fever">Fièvre<br>
         Tompérature : {{symptom.temperature}}<br></p>
         <p *ngIf="symptom.cough">Toux<br></p>

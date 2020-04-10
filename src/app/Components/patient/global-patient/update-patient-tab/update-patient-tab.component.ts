@@ -119,6 +119,11 @@ export class UpdatePatientTabComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (this.registerForm.invalid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Vérifier les champs à remplir !'
+      });
       return;
   }
   if(this.selfhometrue){
