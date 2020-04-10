@@ -65,18 +65,19 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <label  class="label">Ville</label>
-            <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  
-            placeholder="Ville" [(ngModel)]="address.city">
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
             <label  class="label">Gouvernorat</label>
-            <input type="text" nbInput fullWidth  placeholder="Gouvernorat"
-             [(ngModel)]="address.state" [ngModelOptions]="{standalone: true}"/>
+            <nb-select   [ngModelOptions]="{standalone: true}" fullWidth  name="gender" [(ngModel)]="address.state">
+            <nb-option *ngFor="let key of gouvernorats" [value]="key">{{key}}</nb-option>
+          </nb-select>
           </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label  class="label">Ville</label>
+          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  
+          placeholder="Ville" [(ngModel)]="address.city">
         </div>
+      </div>
       </div>
 
       <div class="row">

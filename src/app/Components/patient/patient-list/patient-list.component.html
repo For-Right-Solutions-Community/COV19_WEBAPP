@@ -43,12 +43,12 @@
 <ngx-update-patient-tab *ngIf="patientService.showedit" [patient]="patient"  (createdPatient)='doRefreshData($event)'>
 </ngx-update-patient-tab>
 
-<ngx-create-symptom *ngIf="patientService.showcreatesymptom" [patient]="patient">
+<ngx-create-symptom *ngIf="patientService.showcreatesymptom" [patient]="patient" (createdSymptom)='doRefreshData($event)'>
 </ngx-create-symptom>
 
-<ngx-create-vital *ngIf="patientService.showcreatevital" [patient]="patient">
+<ngx-create-vital *ngIf="patientService.showcreatevital" [patient]="patient" (createdVital)='doRefreshData($event)'>
 </ngx-create-vital>
 
-<ngx-patient-symptom-historic *ngIf="patientService.showlistsymptom" [patient]="patient">
+<ngx-patient-symptom-historic *ngIf="patientService.showlistsymptom" [patient]="patient" (createdSymptom)='doRefreshData($event)'>
 </ngx-patient-symptom-historic>
 

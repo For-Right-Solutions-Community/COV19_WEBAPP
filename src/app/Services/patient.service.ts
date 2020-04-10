@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Patient } from '../Models/patient.model';
 import { map } from 'rxjs/operators';
 import { AppConfig } from '../app.config';
+import { Vital } from '../Models/vital.model';
+import { Symptom } from '../Models/symptom.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,11 @@ export class PatientService {
   public  showcreatevital = false;
   public showlistsymptom = false;
   patients: Patient[]=[];
+  patient: Patient;
+  vitals: Vital[]=[];
+  vital: Vital;
+  symptoms: Symptom[]=[];
+  symptom: Symptom;
   private baseUrl = AppConfig.settings.apiServer.metadata+'m/patient';
   private baseUrlRest = AppConfig.settings.apiServer.metadata+'patients';
   constructor(private http: HttpClient) { }
@@ -42,6 +49,7 @@ export class PatientService {
   }
 
   getCriticalPatientsList() { 
+    this.patients=[];
     return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
     for(let p of dataX){
       if(p.condition!=null && p.condition.toString()==="SEVERE"){
@@ -52,6 +60,7 @@ export class PatientService {
   }));
   }
   getTreatedPatientsList() { 
+    this.patients=[];
     return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
     for(let p of dataX){
       if(p.condition!=null && p.condition.toString()==="TREATED"){
@@ -59,6 +68,55 @@ export class PatientService {
       }
     }
     return this.patients;
+  }));
+  }
+
+  getPatientVitalsList(id:number) { 
+    
+    return this.getPatientsList().pipe( map((data: Patient[]) => {
+      this.patient=data.find(element => element.id == id);
+      if(this.patient!=null&&this.patient.vitalsRecords!=null){
+        this.vitals=this.patient.vitalsRecords;
+      }
+    return this.vitals;
+  }));
+  }
+
+  getLastPatientVitals(id:number) { 
+    return this.getPatientVitalsList(id).pipe( map((data: Vital[]) => {
+      var mostRecentDate = new Date(Math.max.apply(null, data.map( s => {
+      return new Date(s.measurementDate);
+
+   })));
+   this.vital = data.find( s => { 
+    const d = new Date( s.measurementDate ); 
+    return d.getTime() == mostRecentDate.getTime();
+   }); 
+    return this.vital;
+  }));
+  }
+
+  getPatientSymptomsList(id:number) { 
+    return this.getPatientsList().pipe( map((data: Patient[]) => {
+      this.patient=data.find(element => element.id == id);
+      if(this.patient!=null&&this.patient.symptomRecords!=null){
+        this.symptoms=this.patient.symptomRecords;
+      }
+    return this.symptoms;
+  }));
+  }
+
+  getLastPatientSymptoms(id:number) { 
+    return this.getPatientSymptomsList(id).pipe( map((data: Symptom[]) => {
+      var mostRecentDate = new Date(Math.max.apply(null, data.map( s => {
+      return new Date(s.date);
+
+   })));
+   this.symptom = data.find( s => { 
+    const d = new Date( s.date ); 
+    return d.getTime() == mostRecentDate.getTime();
+   });
+    return this.symptom;
   }));
   }
 }

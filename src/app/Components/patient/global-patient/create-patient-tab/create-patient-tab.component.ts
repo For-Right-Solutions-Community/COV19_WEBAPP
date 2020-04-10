@@ -24,7 +24,7 @@ import { VitalService } from '../../../../Services/vital.service';
   styleUrls: ['./create-patient-tab.component.scss']
 })
 export class CreatePatientTabComponent implements OnInit {
-  gouvernorat:string[]=["Ariana","Béja","Ben Arous","Bizerte","Gabès","Gafsa","Jendouba","Kairouan",
+  gouvernorats:string[]=["Ariana","Béja","Ben Arous","Bizerte","Gabès","Gafsa","Jendouba","Kairouan",
   "Kasserine","Kébili","Kef","Mahdia","Manouba","Médenine","Monastir","Nabeul","Sfax","Sidi Bouzid",
   "Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouan"];
   checkexposure:boolean=false;
@@ -54,7 +54,7 @@ export class CreatePatientTabComponent implements OnInit {
   registerForm: FormGroup;
   constructor(private vitalService: VitalService,private symptomService: SymptomService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
-    this.getPatientsList();
+    this.reloadPatientListData();
     this.patient=new Patient();
     this.address=new Address();
     this.exposure=new Exposure();

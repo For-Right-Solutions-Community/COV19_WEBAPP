@@ -8,6 +8,8 @@ import { AppUser } from './user.model';
 import { Antecedent } from './antecedent.model';
 import { Exposure } from './exposure.model';
 import { Localisation } from './localisation.model';
+import { Symptom } from './symptom.model';
+import { Vital } from './vital.model';
 
 export class Patient{
     id:number;
@@ -40,5 +42,7 @@ export class Patient{
     exposure:Exposure;
     covidscore:number;
     location:Localisation;
+    symptomRecords:Symptom[]=[];
+	vitalsRecords:Vital[]=[];
     constructor(){}
 }

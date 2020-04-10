@@ -27,14 +27,14 @@ export class CreateVitalComponent implements OnInit {
   submitted = false;
   constructor(private vitalService: VitalService,private patientService: PatientService) { }
   ngOnInit() {
-    this.getVitalsList();
-    this.getPatientsList();
+    this.reloadPatientListData();
+    this.vital=new Vital();
     if(this.patient!=undefined){
       this.getLastPatientVitals(this.patient.id);
     }
   }
   getLastPatientVitals(id:number) {
-    this.vitalService.getLastPatientVitals(id)
+    this.patientService.getLastPatientVitals(id)
     .subscribe(result => {
       if(result!=undefined){
         this.vital = result ;
@@ -44,7 +44,6 @@ export class CreateVitalComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
-    
     this.vital.patient=this.patient;
     this.vital.measurementDate=new Date();
     this.vital.id=null;
@@ -57,9 +56,9 @@ export class CreateVitalComponent implements OnInit {
         this.isSignUpFailed = false;
         Swal.fire('','Les signes vitaux du patient sont mises à jour avec succés !');
         this.reset();
-        this.reloadVitalListData();
         this.patientService.showcreatevital = false ;
         this.patientService.showlist = true;
+        this.reloadPatientListData();
       },
       error => {
         console.log(error);
@@ -71,25 +70,12 @@ export class CreateVitalComponent implements OnInit {
   reset(){
    this.vital=new Vital();
    this.submitted = false;
+   this.reloadPatientListData();
   }
-  getVitalsList() {
-    this.vitalService.getVitalsList()
-    .subscribe(result => {
-     this.vitals = result ;
-  },
-  err => console.log("Message erreur" +  err.message  ))
-  }
-  getPatientsList() {
+  reloadPatientListData() {
     this.patientService.getPatientsList()
-    .subscribe(result => {
-     this.patients = result ;
-  },
-  err => console.log("Message erreur" +  err.message  ))
-  }
-  reloadVitalListData() {
-    this.vitalService.getVitalsList()
       .subscribe(result => {
-        this.vitals = result;
+        this.patients = result;
         this.dataSource = new LocalDataSource(result);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -99,6 +85,11 @@ export class CreateVitalComponent implements OnInit {
   goBackToList(){
     this.patientService.showlist = true;
     this.patientService.showcreatevital = false ;
+  }
+  doRefreshData(){
+    this.patientService.showlist = true;
+    this.patientService.showcreatevital = false ;
+    this.reloadPatientListData();
   }
 
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { Patient } from '../../../Models/patient.model';
 import { MatSort, MatPaginator } from '@angular/material';
-import { SymptomService } from '../../../Services/symptom.service';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Symptom } from '../../../Models/symptom.model';
@@ -18,17 +17,19 @@ export class PatientSymptomHistoricComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   errorMessage = '';
+  @Output() createdSymptom = new EventEmitter();
   @Input()patient:Patient;
-  constructor(private symptomService: SymptomService,private patientService: PatientService) { }
+  constructor(private patientService: PatientService) { }
   ngOnInit() {
     this.getPatientsList();
+    this.symptoms= [];
     if(this.patient!=undefined){
       this.getPatientSymptoms(this.patient.id);
     }
   }
 
   getPatientSymptoms(id:number) {
-    this.symptomService.getPatientSymptomsList(id)
+    this.patientService.getPatientSymptomsList(id)
     .subscribe(result => {
      this.symptoms = result ;
   },
@@ -54,7 +55,7 @@ export class PatientSymptomHistoricComponent implements OnInit {
 
   doRefreshData(){
     this.patientService.showlist = true;
-    this.patientService.showdetails = false ;
+    this.patientService.showlistsymptom = false ;
     this.reloadPatientListData();
   }
   goBackToList(){

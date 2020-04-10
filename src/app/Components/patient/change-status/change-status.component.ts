@@ -13,6 +13,7 @@ import { MatSort, MatPaginator } from '@angular/material';
 export class ChangeStatusComponent {
   @Input()patient:Patient;
   dataSource;
+  patients:Patient[]=[];
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   condition:Condition;
@@ -24,9 +25,11 @@ export class ChangeStatusComponent {
     this.windowRef.close();
   }
   reloadPatientListData() {
+    this.patients=[];
     this.patientService.getPatientsList()
       .subscribe(result => {
-        this.dataSource = new LocalDataSource(result);
+        this.patients=result;
+        this.dataSource = new LocalDataSource(this.patients);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });

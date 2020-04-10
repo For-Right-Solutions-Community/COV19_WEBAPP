@@ -24,6 +24,9 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./update-patient-tab.component.scss']
 })
 export class UpdatePatientTabComponent implements OnInit {
+  gouvernorats:string[]=["Ariana","Béja","Ben Arous","Bizerte","Gabès","Gafsa","Jendouba","Kairouan",
+  "Kasserine","Kébili","Kef","Mahdia","Manouba","Médenine","Monastir","Nabeul","Sfax","Sidi Bouzid",
+  "Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouan"];
   checkexposure:boolean=false;
   socialOptions : SocialCoverage[]= Object.keys(SocialCoverage).map(key => SocialCoverage[key]).filter(value => typeof(value) === "string");
   handicape:boolean=false;
@@ -51,7 +54,7 @@ export class UpdatePatientTabComponent implements OnInit {
   registerForm: FormGroup;
   constructor(private vitalService: VitalService,private symptomService: SymptomService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
-    this.getPatientsList();
+    this.reloadPatientListData();
     this.address=this.patient.address;
     this.exposure=this.patient.exposure;
     this.antecedent=this.patient.antecedentRecord;
@@ -145,7 +148,7 @@ export class UpdatePatientTabComponent implements OnInit {
   }
 
   getLastPatientSymptoms(id:number) {
-    this.symptomService.getLastPatientSymptoms(id)
+    this.patientService.getLastPatientSymptoms(id)
     .subscribe(result => {
       if(result!= undefined){
         this.symptom = result;
@@ -155,7 +158,7 @@ export class UpdatePatientTabComponent implements OnInit {
   }
 
   getLastPatientVitals(id:number) {
-    this.vitalService.getLastPatientVitals(id)
+    this.patientService.getLastPatientVitals(id)
     .subscribe(result => {
       if(result!= undefined){
         this.vital = result ;

@@ -116,17 +116,17 @@ export class PatientListComponent implements OnInit {
   }
 
   reloadData() {
+    this.patients=[];
     this.patientService.getPatientsList()
       .subscribe(result => {
         if (!result) {
           return;
         }
-        this.source = new LocalDataSource(result);
+        this.patients=result;
+        this.source = new LocalDataSource(this.patients);
         console.log(result)
       });
   }
-
-  
   doRefreshData(event){
     this.patientService.showlist = true;
     this.reloadData();

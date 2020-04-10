@@ -24,6 +24,9 @@ import { Localisation } from '../../../../Models/localisation.model';
   styleUrls: ['./details-patient-tab.component.scss']
 })
 export class DetailsPatientTabComponent implements OnInit {
+  gouvernorats:string[]=["Ariana","Béja","Ben Arous","Bizerte","Gabès","Gafsa","Jendouba","Kairouan",
+  "Kasserine","Kébili","Kef","Mahdia","Manouba","Médenine","Monastir","Nabeul","Sfax","Sidi Bouzid",
+  "Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouan"];
   localisation:Localisation=new Localisation();
   checkexposure:boolean=false;
   socialOptions : SocialCoverage[]= Object.keys(SocialCoverage).map(key => SocialCoverage[key]).filter(value => typeof(value) === "string");
@@ -52,7 +55,7 @@ export class DetailsPatientTabComponent implements OnInit {
   registerForm: FormGroup;
   constructor(private vitalService: VitalService,private symptomService: SymptomService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
-    this.getPatientsList();
+    this.reloadPatientListData();
     this.address=this.patient.address;
     this.exposure=this.patient.exposure;
     this.antecedent=this.patient.antecedentRecord;
@@ -81,7 +84,7 @@ export class DetailsPatientTabComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   getLastPatientSymptoms(id:number) {
-    this.symptomService.getLastPatientSymptoms(id)
+    this.patientService.getLastPatientSymptoms(id)
     .subscribe(result => {
       if(result!= undefined){
         this.symptom = result;
@@ -91,7 +94,7 @@ export class DetailsPatientTabComponent implements OnInit {
   }
 
   getLastPatientVitals(id:number) {
-    this.vitalService.getLastPatientVitals(id)
+    this.patientService.getLastPatientVitals(id)
     .subscribe(result => {
       if(result!= undefined){
         this.vital = result ;

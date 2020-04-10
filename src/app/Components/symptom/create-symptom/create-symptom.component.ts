@@ -30,9 +30,9 @@ export class CreateSymptomComponent implements OnInit {
   submitted = false;
   constructor(private symptomService: SymptomService,private patientService: PatientService) { }
   ngOnInit() {
-    this.getSymptomsList();
+    this.reloadPatientListData();
+    this.symptom=new Symptom();
     this.exposure=this.patient.exposure;
-    this.getPatientsList();
     if(this.patient!=undefined){
       this.getLastPatientSymptoms(this.patient.id);
     }
@@ -41,10 +41,9 @@ export class CreateSymptomComponent implements OnInit {
       this.checkexposure=true;
     }
   }
-
   
   getLastPatientSymptoms(id:number) {
-    this.symptomService.getLastPatientSymptoms(id)
+    this.patientService.getLastPatientSymptoms(id)
     .subscribe(result => {
       if(result!=undefined){
         this.symptom = result ;
@@ -52,8 +51,6 @@ export class CreateSymptomComponent implements OnInit {
   },
   err => console.log("Message erreur" +  err.message  ))
   }
-
-  
   onSubmit() {
   this.submitted = true;
   this.patient.exposure=this.exposure;
@@ -81,7 +78,7 @@ export class CreateSymptomComponent implements OnInit {
         this.isSignUpFailed = false;
         Swal.fire('','Les symptômes du patient sont mises à jour avec succés !');
         this.reset();
-        this.reloadSymptomListData();
+        this.reloadPatientListData();
         this.patientService.showcreatesymptom = false ;
         this.patientService.showlist = true;
       },
@@ -92,39 +89,30 @@ export class CreateSymptomComponent implements OnInit {
       }
     ); 
   }
-
-
   reset(){
    this.symptom=new Symptom();
    this.submitted = false;
-  } 
-  getSymptomsList() {
-    this.symptomService.getSymptomsList()
-    .subscribe(result => {
-     this.symptoms = result ;
-  },
-  err => console.log("Message erreur" +  err.message  ))
+   this.reloadPatientListData();
   }
-  getPatientsList() {
+  goBackToList(){
+    this.patientService.showlist = true;
+    this.patientService.showcreatesymptom = false ;
+  }
+
+  reloadPatientListData() {
     this.patientService.getPatientsList()
-    .subscribe(result => {
-     this.patients = result ;
-  },
-  err => console.log("Message erreur" +  err.message  ))
-  }
-  reloadSymptomListData() {
-    this.symptomService.getSymptomsList()
       .subscribe(result => {
-        this.symptoms = result;
+        this.patients = result;
         this.dataSource = new LocalDataSource(result);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
   }
 
-  goBackToList(){
+  doRefreshData(){
     this.patientService.showlist = true;
     this.patientService.showcreatesymptom = false ;
+    this.reloadPatientListData();
   }
 
 }
