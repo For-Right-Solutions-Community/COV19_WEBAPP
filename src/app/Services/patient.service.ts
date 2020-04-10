@@ -49,6 +49,7 @@ export class PatientService {
   }
 
   getCriticalPatientsList() { 
+    this.patients=[];
     return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
     for(let p of dataX){
       if(p.condition!=null && p.condition.toString()==="SEVERE"){
@@ -59,6 +60,7 @@ export class PatientService {
   }));
   }
   getTreatedPatientsList() { 
+    this.patients=[];
     return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
     for(let p of dataX){
       if(p.condition!=null && p.condition.toString()==="TREATED"){

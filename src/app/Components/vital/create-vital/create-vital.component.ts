@@ -27,6 +27,8 @@ export class CreateVitalComponent implements OnInit {
   submitted = false;
   constructor(private vitalService: VitalService,private patientService: PatientService) { }
   ngOnInit() {
+    this.reloadPatientListData();
+    this.vital=new Vital();
     if(this.patient!=undefined){
       this.getLastPatientVitals(this.patient.id);
     }
@@ -42,7 +44,6 @@ export class CreateVitalComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
-    
     this.vital.patient=this.patient;
     this.vital.measurementDate=new Date();
     this.vital.id=null;
@@ -57,6 +58,7 @@ export class CreateVitalComponent implements OnInit {
         this.reset();
         this.patientService.showcreatevital = false ;
         this.patientService.showlist = true;
+        this.reloadPatientListData();
       },
       error => {
         console.log(error);
@@ -68,14 +70,26 @@ export class CreateVitalComponent implements OnInit {
   reset(){
    this.vital=new Vital();
    this.submitted = false;
+   this.reloadPatientListData();
   }
-  reloadVitalListData() {
-
+  reloadPatientListData() {
+    this.patientService.getPatientsList()
+      .subscribe(result => {
+        this.patients = result;
+        this.dataSource = new LocalDataSource(result);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
   }
 
   goBackToList(){
     this.patientService.showlist = true;
     this.patientService.showcreatevital = false ;
+  }
+  doRefreshData(){
+    this.patientService.showlist = true;
+    this.patientService.showcreatevital = false ;
+    this.reloadPatientListData();
   }
 
 }

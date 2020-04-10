@@ -80,12 +80,15 @@ export class CriticalPatientComponent implements OnInit {
   }
 
   reloadData() {
+    this.patients=[];
     this.patientService.getCriticalPatientsList()
       .subscribe(result => {
         if (!result) {
           return;
         }
-        this.source = new LocalDataSource(result);
+        this.patients=result;
+        this.source = new LocalDataSource(this.patients);
+        console.log(this.patients);
       });
   }
   onSearch(query: string = '') {
@@ -136,6 +139,11 @@ showdetails() {
 }
 onPatientRowSelect(event) {
   this.selectedRows = event.selected;
+}
+
+doRefreshData(event){
+  this.patientService.showlist = true;
+  this.reloadData();
 }
 
 }
