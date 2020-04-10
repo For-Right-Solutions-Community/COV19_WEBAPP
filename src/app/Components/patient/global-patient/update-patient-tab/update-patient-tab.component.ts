@@ -24,6 +24,16 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./update-patient-tab.component.scss']
 })
 export class UpdatePatientTabComponent implements OnInit {
+  testResulttrue:boolean=false;
+  testResultfalse:boolean=false;
+  travelertestResulttrue:boolean=false;
+  travelertestResultfalse:boolean=false;
+
+  liveonly:boolean=false;
+  livefamily:boolean=false;
+  selfhometrue:boolean=false;
+  selfhomefalse:boolean=false;
+
   gouvernorats:string[]=["Ariana","Béja","Ben Arous","Bizerte","Gabès","Gafsa","Jendouba","Kairouan",
   "Kasserine","Kébili","Kef","Mahdia","Manouba","Médenine","Monastir","Nabeul","Sfax","Sidi Bouzid",
   "Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouan"];
@@ -56,16 +66,40 @@ export class UpdatePatientTabComponent implements OnInit {
   ngOnInit() {
     this.reloadPatientListData();
     this.address=this.patient.address;
-    this.exposure=this.patient.exposure;
+    
     this.antecedent=this.patient.antecedentRecord;
     if(this.patient!=undefined){
+      if(this.patient.exposure!=null&&this.patient.exposure.testResult){
+        this.testResulttrue=true;
+      }else{
+        this.testResultfalse=true;
+      }
+      if(this.patient.exposure!=null&&this.patient.exposure.contactedTravellerTestResult){
+        this.travelertestResulttrue=true;
+      }else{
+        this.travelertestResultfalse=true;
+      }
+
+      if(this.patient.singleRoom ){
+        this.selfhometrue=true;
+      }else{
+        this.selfhomefalse=true;
+      }
+
+      if(this.patient.liveAlone){
+        this.liveonly=true;
+      }
+      if(this.patient.liveWithFamily){
+        this.livefamily=true;
+      }
+
       if(this.patient.physicalHandicap===true||this.patient.intellecHandicap===true){
         this.handicape=true;
       }
       this.getLastPatientSymptoms(this.patient.id);
       this.getLastPatientVitals(this.patient.id);
     }
-    
+    this.exposure=this.patient.exposure;
     if(this.exposure!=undefined){
       this.checkexposure=true;
     }
@@ -84,9 +118,24 @@ export class UpdatePatientTabComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
   }
+  if(this.selfhometrue){
+    this.patient.singleRoom=true;
+  }
+  if(this.liveonly){
+    this.patient.liveAlone=true;
+  }
+  if(this.livefamily){
+    this.patient.liveWithFamily=true;
+  }
     this.patient.address=this.address;
     this.patient.antecedentRecord=this.antecedent;
     this.patient.exposure=this.exposure;
+    if(this.testResulttrue){
+      this.patient.exposure.testResult=true;
+    }
+    if(this.travelertestResulttrue){
+      this.patient.exposure.contactedTravellerTestResult=true;
+    }
     this.patientService.updatePatient(this.patient.id,this.patient).subscribe(
       data => {
         console.log(data);

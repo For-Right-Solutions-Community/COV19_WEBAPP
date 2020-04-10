@@ -24,6 +24,16 @@ import { Localisation } from '../../../../Models/localisation.model';
   styleUrls: ['./details-patient-tab.component.scss']
 })
 export class DetailsPatientTabComponent implements OnInit {
+  testResulttrue:boolean=false;
+  testResultfalse:boolean=false;
+  travelertestResulttrue:boolean=false;
+  travelertestResultfalse:boolean=false;
+
+  liveonly:boolean=false;
+  livefamily:boolean=false;
+  selfhometrue:boolean=false;
+  selfhomefalse:boolean=false;
+
   gouvernorats:string[]=["Ariana","Béja","Ben Arous","Bizerte","Gabès","Gafsa","Jendouba","Kairouan",
   "Kasserine","Kébili","Kef","Mahdia","Manouba","Médenine","Monastir","Nabeul","Sfax","Sidi Bouzid",
   "Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouan"];
@@ -57,19 +67,42 @@ export class DetailsPatientTabComponent implements OnInit {
   ngOnInit() {
     this.reloadPatientListData();
     this.address=this.patient.address;
-    this.exposure=this.patient.exposure;
+    
     this.antecedent=this.patient.antecedentRecord;
     if(this.patient!=undefined){
+      if(this.patient.exposure!=null&&this.patient.exposure.testResult){
+        this.testResulttrue=true;
+      }else{
+        this.testResultfalse=true;
+      }
+      if(this.patient.exposure!=null&&this.patient.exposure.contactedTravellerTestResult){
+        this.travelertestResulttrue=true;
+      }else{
+        this.travelertestResultfalse=true;
+      }
       if(this.patient.physicalHandicap===true||this.patient.intellecHandicap===true){
         this.handicape=true;
       }
+      if(this.patient.singleRoom ){
+        this.selfhometrue=true;
+      }else{
+        this.selfhomefalse=true;
+      }
+
+      if(this.patient.liveAlone){
+        this.liveonly=true;
+      }
+      if(this.patient.liveWithFamily){
+        this.livefamily=true;
+      }
+
       if(this.patient.location!=undefined&&this.patient.location.lat!=null&&this.patient.location.lng!=null){
         this.localisation=this.patient.location;
       }
       this.getLastPatientSymptoms(this.patient.id);
       this.getLastPatientVitals(this.patient.id);
     }
-    
+    this.exposure=this.patient.exposure;
     if(this.exposure!=undefined){
       this.checkexposure=true;
     }

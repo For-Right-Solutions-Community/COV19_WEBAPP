@@ -4,15 +4,15 @@ export class Exposure{
 	contactWithTraveler:boolean;
 	sameHomePersonReturningFromTrip:boolean;
 	countryPersonReturningFromTrip:string;
-	contactedTravellerTestResult:string;
+	contactedTravellerTestResult:boolean;
 	visitRegion:boolean;
 	visitedRegion:string;
 	visitDate:Date;
 	contactWithInfectedPerson:boolean;
 	withSuspiciousGroup:boolean;
-	Traveler:boolean;
+	traveler:boolean;
 	hasmakingtest:boolean;
-	TestResult:boolean;
-	Travellerhasmakingtest:boolean;
+	testResult:boolean;
+	travellerhasmakingtest:boolean;
     constructor(){}
 }
