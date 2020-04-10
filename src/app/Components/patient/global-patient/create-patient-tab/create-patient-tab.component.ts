@@ -24,6 +24,16 @@ import { VitalService } from '../../../../Services/vital.service';
   styleUrls: ['./create-patient-tab.component.scss']
 })
 export class CreatePatientTabComponent implements OnInit {
+  testResulttrue:boolean=false;
+  testResultfalse:boolean=false;
+  travelertestResulttrue:boolean=false;
+  travelertestResultfalse:boolean=false;
+
+  liveonly:boolean=false;
+  livefamily:boolean=false;
+  selfhometrue:boolean=false;
+  selfhomefalse:boolean=false;
+
   gouvernorats:string[]=["Ariana","Béja","Ben Arous","Bizerte","Gabès","Gafsa","Jendouba","Kairouan",
   "Kasserine","Kébili","Kef","Mahdia","Manouba","Médenine","Monastir","Nabeul","Sfax","Sidi Bouzid",
   "Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouan"];
@@ -71,9 +81,24 @@ export class CreatePatientTabComponent implements OnInit {
   }
   get f() { return this.registerForm.controls; }
   createPatient(){
+    if(this.selfhometrue){
+      this.patient.singleRoom=true;
+    }
+    if(this.liveonly){
+      this.patient.liveAlone=true;
+    }
+    if(this.livefamily){
+      this.patient.liveWithFamily=true;
+    }
     this.patient.address=this.address;
     this.patient.antecedentRecord=this.antecedent;
     this.patient.exposure=this.exposure;
+    if(this.testResulttrue){
+      this.patient.exposure.testResult=true;
+    }
+    if(this.travelertestResulttrue){
+      this.patient.exposure.contactedTravellerTestResult=true;
+    }
     return this.patientService.createPatient(this.patient).toPromise()
 .then(      data => {
         this.createdPatient.emit(1);

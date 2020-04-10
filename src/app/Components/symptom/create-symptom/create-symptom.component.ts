@@ -14,6 +14,10 @@ import { Exposure } from '../../../Models/exposure.model';
   styleUrls: ['./create-symptom.component.scss']
 })
 export class CreateSymptomComponent implements OnInit {
+  testResulttrue:boolean=false;
+  testResultfalse:boolean=false;
+  travelertestResulttrue:boolean=false;
+  travelertestResultfalse:boolean=false;
   @Input()patient:Patient;
   checkexposure:boolean=false;
   exposure:Exposure;
@@ -32,11 +36,21 @@ export class CreateSymptomComponent implements OnInit {
   ngOnInit() {
     this.reloadPatientListData();
     this.symptom=new Symptom();
-    this.exposure=this.patient.exposure;
+    
     if(this.patient!=undefined){
+      if(this.patient.exposure!=null&&this.patient.exposure.testResult){
+        this.testResulttrue=true;
+      }else{
+        this.testResultfalse=true;
+      }
+      if(this.patient.exposure!=null&&this.patient.exposure.contactedTravellerTestResult){
+        this.travelertestResulttrue=true;
+      }else{
+        this.travelertestResultfalse=true;
+      }
       this.getLastPatientSymptoms(this.patient.id);
     }
-    
+    this.exposure=this.patient.exposure;
     if(this.exposure!=undefined){
       this.checkexposure=true;
     }
@@ -54,6 +68,12 @@ export class CreateSymptomComponent implements OnInit {
   onSubmit() {
   this.submitted = true;
   this.patient.exposure=this.exposure;
+  if(this.testResulttrue){
+    this.patient.exposure.testResult=true;
+  }
+  if(this.travelertestResulttrue){
+    this.patient.exposure.contactedTravellerTestResult=true;
+  }
   this.patientService.updatePatient(this.patient.id,this.patient).subscribe(
     data => {
       console.log(data);

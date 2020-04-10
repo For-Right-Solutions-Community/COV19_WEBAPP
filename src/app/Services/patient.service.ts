@@ -72,7 +72,7 @@ export class PatientService {
   }
 
   getPatientVitalsList(id:number) { 
-    
+    this.vitals=[];
     return this.getPatientsList().pipe( map((data: Patient[]) => {
       this.patient=data.find(element => element.id == id);
       if(this.patient!=null&&this.patient.vitalsRecords!=null){
@@ -97,11 +97,13 @@ export class PatientService {
   }
 
   getPatientSymptomsList(id:number) { 
+    this.symptoms=[];
     return this.getPatientsList().pipe( map((data: Patient[]) => {
       this.patient=data.find(element => element.id == id);
       if(this.patient!=null&&this.patient.symptomRecords!=null){
         this.symptoms=this.patient.symptomRecords;
       }
+      console.log(this.symptoms);
     return this.symptoms;
   }));
   }

@@ -175,14 +175,16 @@
         </div>
       </div>
     </div>
-    <div class="form-group row">
-      <label class="col-sm-4 label">Est ce que vous habitez ?</label>
-      <div class="col-sm-2">
-        <nb-radio-group name="g1">
-          <nb-radio [(ngModel)]="patient.liveAlone">Seul(e)</nb-radio>
-          <nb-radio [(ngModel)]="patient.liveWithFamily">Avec la famille</nb-radio>
-        </nb-radio-group>  
+    <div class="row">
+      <div class="col-sm-3">
+        <label class="label">Est ce que vous habitez ?</label>
       </div>
+      <div class="col-sm-9">
+        <div class="form-group">
+          <nb-checkbox *ngIf="livefamily===false" [(checked)]="liveonly">Seul(e)</nb-checkbox>
+          <nb-checkbox *ngIf="liveonly===false" [(checked)]="livefamily">Avec la famille</nb-checkbox> 
+        </div>
+      </div>   
       </div>
       <div class="form-group row">
         <label class="label col-sm-2 col-form-label">Nombre des personnes du famille:</label>
@@ -207,14 +209,16 @@
           </div>
         </div>
       </div>
-      <div class="form-group row">
-        <label class="col-sm-4 label">Possibilité d’avoir une chambre seule ?</label>
-        <div class="col-sm-4">
-          <nb-radio-group name="g2">
-            <nb-radio [(ngModel)]="patient.singleRoom">Oui (avec porte fermée/fenêtre/douche)</nb-radio>
-            <nb-radio>Non</nb-radio>
-          </nb-radio-group>  
+      <div class="row">
+        <div class="col-sm-3">
+          <label class="label">Possibilité d’avoir une chambre seule ?</label>
         </div>
+        <div class="col-sm-9">
+          <div class="form-group">
+        <nb-checkbox *ngIf="selfhomefalse===false" [(checked)]="selfhometrue">Oui (avec porte fermée/fenêtre/douche)</nb-checkbox>
+        <nb-checkbox *ngIf="selfhometrue===false" [(checked)]="selfhomefalse">Non</nb-checkbox>  
+          </div>
+        </div>   
         </div>
         <div class="row">
           <div class="col-sm-2">
@@ -389,7 +393,7 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group">
-              <nb-checkbox [(checked)]="exposure.Traveler">J'était en voyage au cours du mois dernier</nb-checkbox>
+              <nb-checkbox [(checked)]="exposure.traveler">J'était en voyage au cours du mois dernier</nb-checkbox>
             </div>
           </div>
           <div *ngIf="exposure.Traveler" class="col-sm-8">
@@ -420,15 +424,13 @@
         <div *ngIf="exposure.contactWithTraveler" class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <nb-checkbox [(checked)]="exposure.Travellerhasmakingtest">Elle a subi (la personne contactée) le test de dépistage du virus corona</nb-checkbox>
+              <nb-checkbox [(checked)]="exposure.travellerhasmakingtest">Elle a subi (la personne contactée) le test de dépistage du virus corona</nb-checkbox>
             </div>
           </div>
-          <div *ngIf="exposure.Travellerhasmakingtest" class="col-sm-6">
+          <div *ngIf="exposure.travellerhasmakingtest" class="col-sm-6">
             <div class="form-group">
-              <nb-select fullWidth  [ngModelOptions]="{standalone: true}" [(ngModel)]="exposure.contactedTravellerTestResult"placeholder="Resultat">
-              <nb-option value="true">Positif</nb-option>
-              <nb-option value="false">Négatif</nb-option>
-            </nb-select>
+              <nb-checkbox *ngIf="travelertestResulttrue===false" [(checked)]="travelertestResulttrue">Positif</nb-checkbox>
+              <nb-checkbox *ngIf="travelertestResultfalse===false" [(checked)]="travelertestResultfalse">Négatif</nb-checkbox>
             </div>
           </div>
         </div>
@@ -440,10 +442,8 @@
           </div>
           <div *ngIf="exposure.hasmakingtest" class="col-sm-6">
             <div class="form-group">
-              <nb-select fullWidth  [ngModelOptions]="{standalone: true}" [(ngModel)]="exposure.TestResult"placeholder="Resultat">
-              <nb-option value="true">Positif</nb-option>
-              <nb-option value="false">Négatif</nb-option>
-            </nb-select>
+              <nb-checkbox *ngIf="testResultfalse===false" [(checked)]="testResulttrue">Positif</nb-checkbox>
+              <nb-checkbox *ngIf="testResulttrue===false" [(checked)]="testResultfalse">Négatif</nb-checkbox>
             </div>
           </div>
         </div>
