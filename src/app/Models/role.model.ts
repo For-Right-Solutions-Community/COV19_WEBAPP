@@ -1,3 +1,3 @@
 export enum Role {
-	SAMU, BENEVOLENT, ADMIN
+	PATIENT, SAMU, BENEVOLENT, ADMIN
 }

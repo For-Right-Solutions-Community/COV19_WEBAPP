@@ -16,6 +16,7 @@ import { VitalService } from '../../../../Services/vital.service';
 import { SymptomService } from '../../../../Services/symptom.service';
 import { PatientService } from '../../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import { Localisation } from '../../../../Models/localisation.model';
 
 @Component({
   selector: 'ngx-details-patient-tab',
@@ -23,6 +24,7 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./details-patient-tab.component.scss']
 })
 export class DetailsPatientTabComponent implements OnInit {
+  localisation:Localisation=new Localisation();
   checkexposure:boolean=false;
   socialOptions : SocialCoverage[]= Object.keys(SocialCoverage).map(key => SocialCoverage[key]).filter(value => typeof(value) === "string");
   handicape:boolean=false;
@@ -55,6 +57,12 @@ export class DetailsPatientTabComponent implements OnInit {
     this.exposure=this.patient.exposure;
     this.antecedent=this.patient.antecedentRecord;
     if(this.patient!=undefined){
+      if(this.patient.physicalHandicap===true||this.patient.intellecHandicap===true){
+        this.handicape=true;
+      }
+      if(this.patient.location!=undefined&&this.patient.location.lat!=null&&this.patient.location.lng!=null){
+        this.localisation=this.patient.location;
+      }
       this.getLastPatientSymptoms(this.patient.id);
       this.getLastPatientVitals(this.patient.id);
     }
@@ -75,7 +83,9 @@ export class DetailsPatientTabComponent implements OnInit {
   getLastPatientSymptoms(id:number) {
     this.symptomService.getLastPatientSymptoms(id)
     .subscribe(result => {
-     this.symptom = result ;
+      if(result!= undefined){
+        this.symptom = result;
+      }   
   },
   err => console.log("Message erreur" +  err.message  ))
   }
@@ -83,7 +93,9 @@ export class DetailsPatientTabComponent implements OnInit {
   getLastPatientVitals(id:number) {
     this.vitalService.getLastPatientVitals(id)
     .subscribe(result => {
-     this.vital = result ;
+      if(result!= undefined){
+        this.vital = result ;
+      } 
   },
   err => console.log("Message erreur" +  err.message  ))
   }

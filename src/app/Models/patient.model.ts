@@ -31,13 +31,14 @@ export class Patient{
     sewageDisposal:boolean;
     singleRoom:boolean;
     physicalHandicap:boolean;
+    intellecHandicap:boolean;
 	socialCoverage:SocialCoverage;
     backupPhone:string;
     address:Address;
     user:AppUser;
     antecedentRecord:Antecedent;
     exposure:Exposure;
-    localisatient:Localisation;
     covidscore:number;
+    location:Localisation;
     constructor(){}
 }

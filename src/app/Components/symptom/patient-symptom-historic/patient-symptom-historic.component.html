@@ -14,12 +14,19 @@
       <article>
         <h6>Date : {{symptom.date| date:'yyyy-MM-dd'}} </h6>
         <p *ngIf="patient.exposure!=null">Exposution :<br></p>
-        <p *ngIf="patient.exposure.Traveler">Voyage au cours du moi dernier au pays {{patient.exposure.visitedCoutry}}<br></p>
-        <p *ngIf="patient.exposure.Traveler">En contact avec une personne qui revient de {{patient.exposure.countryPersonReturningFromTrip}}<br></p>
-        <p *ngIf="patient.exposure.sameHomePersonReturningFromTrip">Cette personne est un membre de famille et ils habitent ensemble<br></p>
-        <p *ngIf="patient.exposure.hasmakingtest">Subi (ou la personne contactée) le test de dépistage du virus corona<br> </p>
-        <div *ngIf="patient.exposure.hasmakingtest&&patient.exposure.contactedTravellerTestResult">Le résultat est positif <br></div>
-        <div *ngIf="patient.exposure.hasmakingtest&&patient.exposure.contactedTravellerTestResult===false">Le résultat est négatif <br></div>
+        <p *ngIf="patient.exposure.Traveler">Voyage au cours du mois dernier au pays {{patient.exposure.visitedCoutry}}<br></p>
+        <p *ngIf="patient.exposure.contactWithTraveler">En contact avec une personne qui revient de {{patient.exposure.countryPersonReturningFromTrip}}<br></p>
+        <p *ngIf="patient.exposure.contactWithTraveler&&patient.exposure.sameHomePersonReturningFromTrip">Cette personne est un membre de famille et ils habitent ensemble<br></p>
+
+        <p *ngIf="patient.exposure.contactWithTraveler&&patient.exposure.Travellerhasmakingtest">La personne contactée a subi le test de dépistage du virus corona<br> </p>
+        <div *ngIf="patient.exposure.contactWithTraveler&&patient.exposure.Travellerhasmakingtest&&patient.exposure.contactedTravellerTestResult">Le résultat est positif <br></div>
+        <div *ngIf="patient.exposure.contactWithTraveler&&patient.exposure.Travellerhasmakingtest&&patient.exposure.contactedTravellerTestResult===false">Le résultat est négatif <br></div>
+
+        <p *ngIf="patient.exposure.hasmakingtest">Subi le test de dépistage du virus corona<br> </p>
+        <div *ngIf="patient.exposure.hasmakingtest&&patient.exposure.TestResult">Le résultat est positif <br></div>
+        <div *ngIf="patient.exposure.hasmakingtest&&patient.exposure.TestResult===false">Le résultat est négatif <br></div>
+
+
         <p *ngIf="patient.exposure.visitRegion"> Voyage dans une ville qui contient un foyer local, 
           la ville est {{patient.exposure.visitedRegion}}, pour la date de {{patient.exposure.visitDate| date:'yyyy-MM-dd'}} <br></p>
         <p *ngIf="patient.exposure.contactWithInfectedPerson">Contacté une personne infectée (dans les deux semaines passées)<br></p>

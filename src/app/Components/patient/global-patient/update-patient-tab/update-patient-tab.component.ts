@@ -56,6 +56,9 @@ export class UpdatePatientTabComponent implements OnInit {
     this.exposure=this.patient.exposure;
     this.antecedent=this.patient.antecedentRecord;
     if(this.patient!=undefined){
+      if(this.patient.physicalHandicap===true||this.patient.intellecHandicap===true){
+        this.handicape=true;
+      }
       this.getLastPatientSymptoms(this.patient.id);
       this.getLastPatientVitals(this.patient.id);
     }
@@ -144,7 +147,9 @@ export class UpdatePatientTabComponent implements OnInit {
   getLastPatientSymptoms(id:number) {
     this.symptomService.getLastPatientSymptoms(id)
     .subscribe(result => {
-     this.symptom = result ;
+      if(result!= undefined){
+        this.symptom = result;
+      }   
   },
   err => console.log("Message erreur" +  err.message  ))
   }
@@ -152,7 +157,9 @@ export class UpdatePatientTabComponent implements OnInit {
   getLastPatientVitals(id:number) {
     this.vitalService.getLastPatientVitals(id)
     .subscribe(result => {
-     this.vital = result ;
+      if(result!= undefined){
+        this.vital = result ;
+      } 
   },
   err => console.log("Message erreur" +  err.message  ))
   }
