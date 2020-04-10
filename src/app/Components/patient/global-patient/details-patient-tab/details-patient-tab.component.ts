@@ -60,8 +60,8 @@ export class DetailsPatientTabComponent implements OnInit {
       if(this.patient.physicalHandicap===true||this.patient.intellecHandicap===true){
         this.handicape=true;
       }
-      if(this.patient.localisation!=undefined&&this.patient.localisation.lat!=null&&this.patient.localisation.lng!=null){
-        this.localisation=this.patient.localisation;
+      if(this.patient.location!=undefined&&this.patient.location.lat!=null&&this.patient.location.lng!=null){
+        this.localisation=this.patient.location;
       }
       this.getLastPatientSymptoms(this.patient.id);
       this.getLastPatientVitals(this.patient.id);
@@ -83,7 +83,9 @@ export class DetailsPatientTabComponent implements OnInit {
   getLastPatientSymptoms(id:number) {
     this.symptomService.getLastPatientSymptoms(id)
     .subscribe(result => {
-     this.symptom = result ;
+      if(result!= undefined){
+        this.symptom = result;
+      }   
   },
   err => console.log("Message erreur" +  err.message  ))
   }
@@ -91,7 +93,9 @@ export class DetailsPatientTabComponent implements OnInit {
   getLastPatientVitals(id:number) {
     this.vitalService.getLastPatientVitals(id)
     .subscribe(result => {
-     this.vital = result ;
+      if(result!= undefined){
+        this.vital = result ;
+      } 
   },
   err => console.log("Message erreur" +  err.message  ))
   }

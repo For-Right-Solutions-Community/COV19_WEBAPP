@@ -38,6 +38,6 @@ export class Patient{
     user:AppUser;
     antecedentRecord:Antecedent;
     exposure:Exposure;
-    localisation:Localisation;
+    location:Localisation;
     constructor(){}
 }
