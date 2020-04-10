@@ -28,7 +28,7 @@ export class PatientSymptomHistoricComponent implements OnInit {
   }
 
   getPatientSymptoms(id:number) {
-    this.symptomService.getPatientSymptomsList(id)
+    this.patientService.getPatientSymptomsList(id)
     .subscribe(result => {
      this.symptoms = result ;
   },

@@ -54,7 +54,7 @@ export class CreatePatientTabComponent implements OnInit {
   registerForm: FormGroup;
   constructor(private vitalService: VitalService,private symptomService: SymptomService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
-    this.getPatientsList();
+    this.reloadPatientListData();
     this.patient=new Patient();
     this.address=new Address();
     this.exposure=new Exposure();

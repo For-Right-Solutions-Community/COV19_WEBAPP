@@ -27,14 +27,12 @@ export class CreateVitalComponent implements OnInit {
   submitted = false;
   constructor(private vitalService: VitalService,private patientService: PatientService) { }
   ngOnInit() {
-    this.getVitalsList();
-    this.getPatientsList();
     if(this.patient!=undefined){
       this.getLastPatientVitals(this.patient.id);
     }
   }
   getLastPatientVitals(id:number) {
-    this.vitalService.getLastPatientVitals(id)
+    this.patientService.getLastPatientVitals(id)
     .subscribe(result => {
       if(result!=undefined){
         this.vital = result ;
@@ -57,7 +55,6 @@ export class CreateVitalComponent implements OnInit {
         this.isSignUpFailed = false;
         Swal.fire('','Les signes vitaux du patient sont mises à jour avec succés !');
         this.reset();
-        this.reloadVitalListData();
         this.patientService.showcreatevital = false ;
         this.patientService.showlist = true;
       },
@@ -72,28 +69,8 @@ export class CreateVitalComponent implements OnInit {
    this.vital=new Vital();
    this.submitted = false;
   }
-  getVitalsList() {
-    this.vitalService.getVitalsList()
-    .subscribe(result => {
-     this.vitals = result ;
-  },
-  err => console.log("Message erreur" +  err.message  ))
-  }
-  getPatientsList() {
-    this.patientService.getPatientsList()
-    .subscribe(result => {
-     this.patients = result ;
-  },
-  err => console.log("Message erreur" +  err.message  ))
-  }
   reloadVitalListData() {
-    this.vitalService.getVitalsList()
-      .subscribe(result => {
-        this.vitals = result;
-        this.dataSource = new LocalDataSource(result);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      });
+
   }
 
   goBackToList(){

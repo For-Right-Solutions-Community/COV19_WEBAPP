@@ -30,7 +30,7 @@ export class CreateSymptomComponent implements OnInit {
   submitted = false;
   constructor(private symptomService: SymptomService,private patientService: PatientService) { }
   ngOnInit() {
-    this.getSymptomsList();
+    this.reloadSymptomListData();
     this.exposure=this.patient.exposure;
     this.getPatientsList();
     if(this.patient!=undefined){
@@ -44,7 +44,7 @@ export class CreateSymptomComponent implements OnInit {
 
   
   getLastPatientSymptoms(id:number) {
-    this.symptomService.getLastPatientSymptoms(id)
+    this.patientService.getLastPatientSymptoms(id)
     .subscribe(result => {
       if(result!=undefined){
         this.symptom = result ;

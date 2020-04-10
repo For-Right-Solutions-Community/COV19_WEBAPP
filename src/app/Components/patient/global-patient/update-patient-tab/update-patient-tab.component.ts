@@ -51,7 +51,7 @@ export class UpdatePatientTabComponent implements OnInit {
   registerForm: FormGroup;
   constructor(private vitalService: VitalService,private symptomService: SymptomService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
-    this.getPatientsList();
+    this.reloadPatientListData();
     this.address=this.patient.address;
     this.exposure=this.patient.exposure;
     this.antecedent=this.patient.antecedentRecord;
@@ -145,7 +145,7 @@ export class UpdatePatientTabComponent implements OnInit {
   }
 
   getLastPatientSymptoms(id:number) {
-    this.symptomService.getLastPatientSymptoms(id)
+    this.patientService.getLastPatientSymptoms(id)
     .subscribe(result => {
       if(result!= undefined){
         this.symptom = result;
@@ -155,7 +155,7 @@ export class UpdatePatientTabComponent implements OnInit {
   }
 
   getLastPatientVitals(id:number) {
-    this.vitalService.getLastPatientVitals(id)
+    this.patientService.getLastPatientVitals(id)
     .subscribe(result => {
       if(result!= undefined){
         this.vital = result ;
