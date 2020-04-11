@@ -46,9 +46,9 @@ export class TreatedPatientComponent implements OnInit {
         title: 'Nom',
         type: 'string',
       },
-      cin: {
-        title: 'CIN',
-        type: 'string',
+      covidscore: {
+        title: 'COVID Score',
+        type: 'numeric'
       },
       phone: {
         title: 'Téléphone',
@@ -66,12 +66,15 @@ export class TreatedPatientComponent implements OnInit {
         title: 'Etat',
         type: 'string',
       },
+      priseencharge: {
+        title: 'Prise en charge',
+        type: 'string',
+      },
       date: {
         title: 'Date',
         type: 'date',
         valuePrepareFunction: (date) => { 
           var raw = new Date(date);
-  
           var formatted = new DatePipe('en_EN').transform(raw, 'dd MMM yyyy  HH:mm');
           return formatted; 
         }

@@ -1,0 +1,3 @@
+export enum PriseEnCharge {
+	AUCUNE, SAMU,CIRCUIT_COVID,CIRCUIT_NORMAL
+}

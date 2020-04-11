@@ -68,6 +68,10 @@ export class PatientListComponent implements OnInit {
         title: 'Etat',
         type: 'string',
       },
+      priseencharge: {
+        title: 'Prise en charge',
+        type: 'string',
+      },
       date: {
         title: 'Date',
         type: 'date',
@@ -196,7 +200,7 @@ onPatientRowSelect(event) {
 
 openWindowForm() {
   const context = { patient: this.patient };
-  this.windowService.open(ChangeStatusComponent, { title: `Changer l'état du patient`, context}); 
+  this.windowService.open(ChangeStatusComponent, { title: `Prise en charge du patient`, context}); 
 }
 
 confirmChangeState(){

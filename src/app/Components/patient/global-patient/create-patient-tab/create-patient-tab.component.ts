@@ -17,6 +17,7 @@ import { Symptom } from '../../../../Models/symptom.model';
 import { Antecedent } from '../../../../Models/antecedent.model';
 import { SymptomService } from '../../../../Services/symptom.service';
 import { VitalService } from '../../../../Services/vital.service';
+import { PriseEnCharge } from '../../../../Models/prise-en-charge.model';
 
 @Component({
   selector: 'ngx-create-patient-tab',
@@ -131,6 +132,7 @@ export class CreatePatientTabComponent implements OnInit {
       return;
   }
     //add patient
+    this.patient.priseencharge=PriseEnCharge.AUCUNE;
     this.createPatient().then(  
       data=>{
         this.submittedPatient=data;

@@ -5,6 +5,8 @@ import { MatSort, MatPaginator } from '@angular/material';
 import { PatientService } from '../../../Services/patient.service';
 import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
+import { ChangeStatusComponent } from '../change-status/change-status.component';
+import { NbWindowService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-critical-patient',
@@ -48,9 +50,9 @@ export class CriticalPatientComponent implements OnInit {
         title: 'Nom',
         type: 'string',
       },
-      cin: {
-        title: 'CIN',
-        type: 'string',
+      covidscore: {
+        title: 'COVID Score',
+        type: 'numeric'
       },
       phone: {
         title: 'Téléphone',
@@ -68,22 +70,24 @@ export class CriticalPatientComponent implements OnInit {
         title: 'Etat',
         type: 'string',
       },
+      priseencharge: {
+        title: 'Prise en charge',
+        type: 'string',
+      },
       date: {
         title: 'Date',
         type: 'date',
         valuePrepareFunction: (date) => { 
           var raw = new Date(date);
-  
           var formatted = new DatePipe('en_EN').transform(raw, 'dd MMM yyyy  HH:mm');
           return formatted; 
         }
-
       },
     },
     hideSubHeader: true,
   };
 
-  constructor(public patientService: PatientService) {
+  constructor(public patientService: PatientService,private windowService: NbWindowService) {
     this.source = new LocalDataSource(this.patients);
   }
 
@@ -156,6 +160,23 @@ onPatientRowSelect(event) {
 doRefreshData(event){
   this.patientService.showlist = true;
   this.reloadData();
+}
+
+openWindowForm() {
+  const context = { patient: this.patient };
+  this.windowService.open(ChangeStatusComponent, { title: `Prise en charge du patient`, context}); 
+}
+
+confirmChangeState(){
+  if(this.selectedRows==undefined ||this.selectedRows[0]==null )
+ {
+  Swal.fire('','Il faut sélectionner un patient !');
+ } 
+ else 
+ {
+ this.patient = this.selectedRows[0];
+ this.openWindowForm();
+ }
 }
 
 }

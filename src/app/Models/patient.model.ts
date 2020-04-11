@@ -10,6 +10,7 @@ import { Exposure } from './exposure.model';
 import { Localisation } from './localisation.model';
 import { Symptom } from './symptom.model';
 import { Vital } from './vital.model';
+import { PriseEnCharge } from './prise-en-charge.model';
 
 export class Patient{
     id:number;
@@ -45,5 +46,6 @@ export class Patient{
     symptomRecords:Symptom[]=[];
     vitalsRecords:Vital[]=[];
     date:Date;
+    priseencharge:PriseEnCharge;
     constructor(){}
 }

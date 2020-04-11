@@ -16,7 +16,7 @@ export class PatientService {
   public  showadd = false;
   public showdetails = false;
   public showcreatesymptom = false;
-  public  showcreatevital = false;
+  public showcreatevital = false;
   public showlistsymptom = false;
   patients: Patient[]=[];
   patient: Patient;
@@ -63,7 +63,7 @@ export class PatientService {
     this.patients=[];
     return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
     for(let p of dataX){
-      if(p.condition!=null && p.condition.toString()==="TREATED"){
+      if(p.priseencharge!=null && p.priseencharge.toString()!="AUCUNE"){
         this.patients.push(p);
       }
     }

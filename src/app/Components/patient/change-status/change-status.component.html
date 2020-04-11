@@ -1,11 +1,11 @@
 <form class="form">
     <div class="row">
-      <div class="col-sm-1">
-        <label  class="label">Etat</label>
+      <div class="col-sm-3">
+        <label  class="label">Prise en charge</label>
       </div>
-      <div class="col-sm-6">
-        <nb-select name="condition" required fullWidth [(ngModel)]="condition">
-          <nb-option *ngFor="let key of conditionOptions" [value]="key">{{key}}</nb-option>
+      <div class="col-sm-5">
+        <nb-select name="priseencharge" required fullWidth [(ngModel)]="priseencharge">
+          <nb-option *ngFor="let key of priseenchargeOptions" [value]="key">{{key}}</nb-option>
         </nb-select>
       </div>  
       <div class="col-sm-2">
