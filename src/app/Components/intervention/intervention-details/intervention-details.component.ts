@@ -37,7 +37,6 @@ export class InterventionDetailsComponent implements OnInit {
     
     this.registerForm = this.formBuilder.group({
     patient: ['', Validators.required],
-    date: ['', Validators.required],
     description: ['', Validators.required]
 });
   }

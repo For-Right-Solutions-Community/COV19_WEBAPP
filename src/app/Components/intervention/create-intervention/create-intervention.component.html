@@ -14,20 +14,6 @@
         </div>
         </div>
       </div>
-      <div class="form-group row">
-        <label class="label col-sm-2 col-form-label">Date de l'intervention :</label>
-        <div class="col-sm-10">
-          <input formControlName="date" nbInput
-               placeholder=""
-               [nbDatepicker]="formpicker" fullWidth
-               name="date" [(ngModel)]="intervention.date"
-              [ngClass]="{ 'is-invalid': submitted && f.date.errors }"  required/>
-            <nb-datepicker #formpicker></nb-datepicker>
-            <div *ngIf="submitted && f.date.errors">
-              <div style="color:red;" *ngIf="f.date.errors.required">La date est requise !</div>
-            </div>
-        </div>
-      </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">

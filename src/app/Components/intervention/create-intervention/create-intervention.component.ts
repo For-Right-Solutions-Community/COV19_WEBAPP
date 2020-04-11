@@ -14,7 +14,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./create-intervention.component.scss']
 })
 export class CreateInterventionComponent implements OnInit {
-
   patients: Patient[] = [];
   interventions: Intervention[] = [];
   dataSource;
@@ -35,7 +34,6 @@ export class CreateInterventionComponent implements OnInit {
     this.getPatientsList();
     this.registerForm = this.formBuilder.group({
     patient: ['', Validators.required],
-    date: ['', Validators.required],
     description: ['', Validators.required]
 });
   }
@@ -52,6 +50,7 @@ export class CreateInterventionComponent implements OnInit {
       });
       return;
   }
+  this.intervention.date=new Date();
     this.interventionService.createIntervention(this.intervention).subscribe(
       data => {
         console.log(data);

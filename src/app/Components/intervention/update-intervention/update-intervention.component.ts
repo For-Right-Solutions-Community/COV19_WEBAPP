@@ -37,7 +37,6 @@ export class UpdateInterventionComponent implements OnInit {
     this.getPatientsList();
     this.registerForm = this.formBuilder.group({
     patient: ['', Validators.required],
-    date: ['', Validators.required],
     description: ['', Validators.required]
 });
   }
@@ -53,7 +52,7 @@ export class UpdateInterventionComponent implements OnInit {
       });
       return;
   }
-    console.log(this.intervention);
+    this.intervention.date=new Date();
     this.interventionService.updateIntervention(this.intervention.id,this.intervention).subscribe(
       data => {
         console.log(data);
