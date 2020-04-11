@@ -28,7 +28,7 @@
     <nb-list-item *ngFor="let symptom of symptoms">
       <article>
         <h6>Date : {{symptom.date| date:'yyyy-MM-dd HH:mm'}} </h6>
-        <p *ngIf="patient.exposure!=null">Exposution :<br></p>
+        <p *ngIf="patient.exposure!=null">Exposition :<br></p>
         <p *ngIf="patient.exposure!=null&&patient.exposure.traveler">Voyage au cours du mois dernier au pays {{patient.exposure.visitedCoutry}}<br></p>
         <p *ngIf="patient.exposure!=null&&patient.exposure.contactWithTraveler">En contact avec une personne qui revient de {{patient.exposure.countryPersonReturningFromTrip}}<br></p>
         <p *ngIf="patient.exposure!=null&&patient.exposure.contactWithTraveler&&patient.exposure.sameHomePersonReturningFromTrip">Cette personne est un membre de famille et ils habitent ensemble<br></p>
@@ -37,27 +37,27 @@
         <div *ngIf="patient.exposure!=null&&patient.exposure.contactWithTraveler&&patient.exposure.travellerhasmakingtest&&patient.exposure.contactedTravellerTestResult">Le résultat est positif <br></div>
         <div *ngIf="patient.exposure!=null&&patient.exposure.contactWithTraveler&&patient.exposure.travellerhasmakingtest&&patient.exposure.contactedTravellerTestResult===false">Le résultat est négatif <br></div>
 
-        <p *ngIf="patient.exposure!=null&&patient.exposure.hasmakingtest">Subi le test de dépistage du virus corona<br> </p>
+        <p *ngIf="patient.exposure!=null&&patient.exposure.hasmakingtest">Le patient a subi le test de dépistage du virus corona<br> </p>
         <div *ngIf="patient.exposure!=null&&patient.exposure.hasmakingtest&&patient.exposure.testResult">Le résultat est positif <br></div>
         <div *ngIf="patient.exposure!=null&&patient.exposure.hasmakingtest&&patient.exposure.testResult===false">Le résultat est négatif <br></div>
 
 
         <p *ngIf="patient.exposure!=null&&patient.exposure.visitRegion"> Voyage dans une ville qui contient un foyer local, 
           la ville est {{patient.exposure.visitedRegion}}, pour la date de {{patient.exposure.visitDate| date:'yyyy-MM-dd'}} <br></p>
-        <p *ngIf="patient.exposure!=null&&patient.exposure.contactWithInfectedPerson">Contacté une personne infectée (dans les deux semaines passées)<br></p>
-        <p *ngIf="patient.exposure!=null&&patient.exposure.withSuspiciousGroup">contacté des personnes qui ont des symptômes (des signes respiratoires,fievre,...)<br></p>
+        <p *ngIf="patient.exposure!=null&&patient.exposure.contactWithInfectedPerson">Il a contacté une personne infectée (dans les deux semaines passées)<br></p>
+        <p *ngIf="patient.exposure!=null&&patient.exposure.withSuspiciousGroup">Il a  contacté des personnes qui ont des symptômes (des signes respiratoires,fievre,...)<br></p>
         <p *ngIf="symptom.fever">Fièvre<br>
         Tompérature : {{symptom.temperature}}<br></p>
         <p *ngIf="symptom.cough">Toux<br></p>
-        <p *ngIf="symptom.dyspnea">Dyspnea<br></p>
-        <p *ngIf="symptom.severeDyspnea">Dyspnea extrème<br></p>
+        <p *ngIf="symptom.dyspnea">Dyspnée <br></p>
+        <p *ngIf="symptom.severeDyspnea">Dyspnée  extrème<br></p>
         <p *ngIf="symptom.unableToSpeak">Ne peux pas parler<br></p>
         <p *ngIf="symptom.deteriorationOfGC">Altération de l'état général depuis {{symptom.duration}}<br></p>
         <p *ngIf="symptom.diarrhea">Diarrhée<br></p>
         <p *ngIf="symptom.nauseaOrVomiting">Nausée/Vomissements<br></p>
-        <p *ngIf="symptom.soreThroat">Douleur thoracique<br></p>
+        <p *ngIf="symptom.soreThroat">Mal de gorge<br></p>
         <p *ngIf="symptom.epigastralgia">Epigastralgie<br></p>
-        <p *ngIf="symptom.chestPain">Mal de gorge<br></p>
+        <p *ngIf="symptom.chestPain"> Douleur thoracique<br></p>
         <p *ngIf="symptom.arthalgia">Arthralgies/Myalgie<br></p>
         <p *ngIf="symptom.senseDisorder">Perte du goût/Anosmie<br></p>
       </article>
