@@ -27,26 +27,24 @@ export class ChangeStatusComponent {
   reloadPatientListData() {
     this.patients=[];
     this.patientService.getPatientsList()
-      .subscribe(result => {
+    .subscribe(result => {
         this.patients=result;
         this.dataSource = new LocalDataSource(this.patients);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
   }
-
   onSubmit() {
-    console.log(this.priseencharge);
     this.patient.priseencharge=this.priseencharge;
     this.patientService.updatePatient(this.patient.id,this.patient).subscribe(
       data => {
         this.reloadPatientListData();
-        this.patientService.showlist = true;
+        this.patientService.showlist=true;
         this.close();
       },
       error => {
         console.log(error);
       }
-    ); 
+    );  
   }
 }

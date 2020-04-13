@@ -26,7 +26,7 @@
           <div class="form-group">
             <textarea formControlName="description" rows="20" nbInput fullWidth shape="round"  placeholder="Détails de l'intervention..." 
             name="description" [(ngModel)]="intervention.description"
-              [ngClass]="{ 'is-invalid': submitted && f.date.errors }"  required></textarea>
+              [ngClass]="{ 'is-invalid': submitted && f.description.errors }"  required></textarea>
             <div *ngIf="submitted && f.description.errors">
               <div style="color:red;" *ngIf="f.description.errors.required">La description est requise !</div>
             </div>

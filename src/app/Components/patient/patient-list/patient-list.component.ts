@@ -106,7 +106,8 @@ export class PatientListComponent implements OnInit {
     this.patientService.deletePatient(id)
       .subscribe(
         data => {
-          this.reloadData();      
+          this.reloadData();   
+          Swal.fire('','Patient supprimé avec succés !');   
         },  
         error => {
           console.log(error);
