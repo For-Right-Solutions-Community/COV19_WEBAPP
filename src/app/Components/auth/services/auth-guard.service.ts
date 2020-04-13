@@ -12,10 +12,10 @@ export class AuthGuard implements CanActivate{
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     
-    this.roles = this.tokenStorage.getAuthorities();
-   
+    
     if (this.tokenStorage.getToken()) {
       // check if route is restricted by role
+      this.roles = [this.tokenStorage.getRole()];
       this.roles.every(role => {
       if (route.data.roles && route.data.roles.indexOf(role) === -1) {
         // role not authorised so redirect to home page

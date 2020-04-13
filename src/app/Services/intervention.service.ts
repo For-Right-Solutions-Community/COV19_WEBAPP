@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Intervention } from '../Models/intervention.model';
 import { AppConfig } from '../app.config';
+
+const httpOptions = {
+  headers : new HttpHeaders({'Content-Type': 'application/json'})
+ };
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,11 +26,11 @@ export class InterventionService {
   }
 
   createIntervention(intervention: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/create`, intervention);
+    return this.http.post(`${this.baseUrl}/create`, intervention, httpOptions);
   }
 
   updateIntervention(id: number, intervention: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/${id}`, intervention);
+    return this.http.put(`${this.baseUrl}/${id}`, intervention, httpOptions);
   }
 
   deleteIntervention(id: number): Observable<any> {

@@ -7,6 +7,8 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { TokenStorageService } from '../../../Components/auth/services/token-storage.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../Components/auth/services/auth.service';
+import { removeSummaryDuplicates } from '@angular/compiler';
 
 @Component({
   selector: 'ngx-header',
@@ -48,6 +50,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService,
               private tokenservice: TokenStorageService,
+              private authService: AuthService,
               private router:Router) {
   }
 
@@ -90,7 +93,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return false;
   }
   Logout(){
-    this.tokenservice.signOut();
-    this.router.navigate(["/login"]);
-    }
+    this.authService.logOut().subscribe(
+      done => {
+        this.tokenservice.signOut();
+        this.router.navigate(["/login"]);
+    });
+  }
 }

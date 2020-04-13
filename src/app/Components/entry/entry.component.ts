@@ -19,7 +19,7 @@ export class EntryComponent implements OnInit {
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
-      this.roles = this.tokenStorage.getAuthorities();
+      this.roles = ['ROLE_BENEVOLENT'];
       this.roles.every(role => {
         if (role === 'ROLE_ADMIN') {
           this.menu=MENU_ITEM_ADMIN;

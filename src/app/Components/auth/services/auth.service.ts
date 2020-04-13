@@ -18,12 +18,17 @@ observe:'body'},
 export class AuthService {
   //dev mode
   private loginUrl = AppConfig.settings.apiServer.metadata+'v2/register';
+  private logoutUrl = AppConfig.settings.apiServer.metadata+'v2/logout';
   
   constructor(private http: HttpClient,private storage:TokenStorageService) {
     
   }
   attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
+  }
+
+  logOut(){
+    return this.http.get<any>(this.logoutUrl, httpOptions);
   }
 
 }
