@@ -33,7 +33,6 @@ export class CreateInterventionComponent implements OnInit {
     this.intervention=new Intervention();
     this.getPatientsList();
     this.registerForm = this.formBuilder.group({
-    patient: ['', Validators.required],
     description: ['', Validators.required]
 });
   }

@@ -24,20 +24,6 @@ export const MENU_ITEM_ADMIN: NbMenuItem[] = [
     ],
   },
   {
-    title: 'Suivi des patients',
-    icon: 'browser-outline',
-    children: [
-      {
-        title: 'Ajouter une fiche de suivi',
-        link: '/menu/interventions/createIntervention',
-      },
-      {
-        title: 'Liste des fiches de suivi',
-        link: '/menu/interventions/interventionList',
-      },
-    ],
-  },
-  {
     title: 'Utilisateurs',
     icon: 'people-outline',
     children: [
@@ -73,20 +59,6 @@ export const MENU_ITEM_BENEVOLENT: NbMenuItem[] = [
       {
         title: 'Cas traités',
         link: '/menu/patients/treatedPatient',
-      },
-    ],
-  },
-  {
-    title: 'Suivi des patients',
-    icon: 'browser-outline',
-    children: [
-      {
-        title: 'Ajouter une fiche de suivi',
-        link: '/menu/interventions/createIntervention',
-      },
-      {
-        title: 'Liste des fiches de suivi',
-        link: '/menu/interventions/interventionList',
       },
     ],
   },

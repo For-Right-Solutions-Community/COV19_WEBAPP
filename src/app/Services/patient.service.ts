@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { AppConfig } from '../app.config';
 import { Vital } from '../Models/vital.model';
 import { Symptom } from '../Models/symptom.model';
+import { InterventionService } from './intervention.service';
+import { Intervention } from '../Models/intervention.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,8 @@ export class PatientService {
   vital: Vital;
   symptoms: Symptom[]=[];
   symptom: Symptom;
+  interventions: Intervention[]=[];
+  intervention: Intervention;
   private baseUrl = AppConfig.settings.apiServer.metadata+'m/patient';
   private baseUrlRest = AppConfig.settings.apiServer.metadata+'patients';
   constructor(private http: HttpClient) { }
@@ -51,22 +55,27 @@ export class PatientService {
   getCriticalPatientsList() { 
     this.patients=[];
     return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
-    for(let p of dataX){
-      if(p.condition!=null && p.condition.toString()==="SEVERE"){
-        this.patients.push(p);
+      if(dataX!=null){
+        for(let p of dataX){
+          if(p.condition!=null && p.condition.toString()==="SEVERE"){
+            this.patients.push(p);
+          }
+        }
       }
-    }
+    
     return this.patients;
   }));
   }
   getTreatedPatientsList() { 
     this.patients=[];
     return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
-    for(let p of dataX){
-      if(p.priseencharge!=null && p.priseencharge.toString()!="AUCUNE"){
-        this.patients.push(p);
+      if(dataX!=null){
+        for(let p of dataX){
+          if(p.priseencharge!=null && p.priseencharge.toString()!="AUCUNE"){
+            this.patients.push(p);
+          }
+        }
       }
-    }
     return this.patients;
   }));
   }
@@ -118,6 +127,31 @@ export class PatientService {
     return d.getTime() == mostRecentDate.getTime();
    });
     return this.symptom;
+  }));
+  }
+
+  getPatientInterventionsList(id:number) { 
+    this.interventions=[];
+    return this.getPatientsList().pipe( map((data: Patient[]) => {
+      this.patient=data.find(element => element.id == id);
+      if(this.patient!=null&&this.patient.interventions!=null){
+        this.interventions=this.patient.interventions;
+      }
+    return this.interventions;
+  }));
+  }
+
+  getLastPatientInterventions(id:number) { 
+    return this.getPatientInterventionsList(id).pipe( map((data: Intervention[]) => {
+      var mostRecentDate = new Date(Math.max.apply(null, data.map( s => {
+      return new Date(s.date);
+
+   })));
+   this.intervention = data.find( s => { 
+    const d = new Date( s.date ); 
+    return d.getTime() == mostRecentDate.getTime();
+   }); 
+    return this.intervention;
   }));
   }
 }

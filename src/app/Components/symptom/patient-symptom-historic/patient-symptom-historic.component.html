@@ -48,7 +48,8 @@
         <p *ngIf="patient.exposure!=null&&patient.exposure.withSuspiciousGroup">Il a  contacté des personnes qui ont des symptômes (des signes respiratoires,fievre,...)<br></p>
         <p *ngIf="symptom.fever">Fièvre<br>
         Tompérature : {{symptom.temperature}}<br></p>
-        <p *ngIf="symptom.cough">Toux<br></p>
+        <p *ngIf="symptom.cough && symptom.dryCough">Toux sèche<br></p>
+        <p *ngIf="symptom.cough && symptom.oilyCough">Toux grasse<br></p>
         <p *ngIf="symptom.dyspnea">Dyspnée <br></p>
         <p *ngIf="symptom.severeDyspnea">Dyspnée  extrème<br></p>
         <p *ngIf="symptom.unableToSpeak">Ne peux pas parler<br></p>

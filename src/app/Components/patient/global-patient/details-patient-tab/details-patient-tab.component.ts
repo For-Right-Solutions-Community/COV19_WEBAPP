@@ -17,6 +17,7 @@ import { SymptomService } from '../../../../Services/symptom.service';
 import { PatientService } from '../../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Localisation } from '../../../../Models/localisation.model';
+import { Intervention } from '../../../../Models/intervention.model';
 
 @Component({
   selector: 'ngx-details-patient-tab',
@@ -55,7 +56,8 @@ export class DetailsPatientTabComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
   @Input()patient:Patient;
-  vital:Vital=new Vital();;
+  intervention=new Intervention();
+  vital:Vital=new Vital();
   symptom:Symptom=new Symptom();
   antecedent:Antecedent;
   address:Address;
@@ -101,6 +103,7 @@ export class DetailsPatientTabComponent implements OnInit {
       }
       this.getLastPatientSymptoms(this.patient.id);
       this.getLastPatientVitals(this.patient.id);
+      this.getLastPatientInterventions(this.patient.id);
     }
     this.exposure=this.patient.exposure;
     if(this.exposure!=undefined&&(this.exposure.contactWithInfectedPerson||this.exposure.withSuspiciousGroup||
@@ -118,6 +121,16 @@ export class DetailsPatientTabComponent implements OnInit {
 });
   }
   get f() { return this.registerForm.controls; }
+
+  getLastPatientInterventions(id:number) {
+    this.patientService.getLastPatientInterventions(id)
+    .subscribe(result => {
+      if(result!= undefined){
+        this.intervention = result ;
+      } 
+  },
+  err => console.log("Message erreur" +  err.message  ))
+  }
 
   getLastPatientSymptoms(id:number) {
     this.patientService.getLastPatientSymptoms(id)

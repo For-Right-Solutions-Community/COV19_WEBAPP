@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InterventionComponent } from './intervention.component';
 import { CreateInterventionComponent } from './create-intervention/create-intervention.component';
-import { InterventionListComponent } from './intervention-list/intervention-list.component';
 const routes: Routes = [
     {
       path: '',
@@ -11,11 +10,7 @@ const routes: Routes = [
         {
           path: 'createIntervention',
           component: CreateInterventionComponent,
-        },
-        {
-          path: 'interventionList',
-          component: InterventionListComponent,
-        },
+        }
       ],
     },
   ];

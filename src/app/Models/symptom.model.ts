@@ -20,5 +20,7 @@ export class Symptom{
 	duration:number;
     date:Date;
     patient:Patient;
+    dryCough:boolean;
+    oilyCough:boolean;
     constructor(){}
 }

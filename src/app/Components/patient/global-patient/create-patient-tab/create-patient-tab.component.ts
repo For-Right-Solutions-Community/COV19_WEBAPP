@@ -18,6 +18,8 @@ import { Antecedent } from '../../../../Models/antecedent.model';
 import { SymptomService } from '../../../../Services/symptom.service';
 import { VitalService } from '../../../../Services/vital.service';
 import { PriseEnCharge } from '../../../../Models/prise-en-charge.model';
+import { Intervention } from '../../../../Models/intervention.model';
+import { InterventionService } from '../../../../Services/intervention.service';
 
 @Component({
   selector: 'ngx-create-patient-tab',
@@ -55,6 +57,7 @@ export class CreatePatientTabComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
   @Input()patient:Patient;
+  intervention:Intervention;
   vital:Vital;
   symptom:Symptom;
   antecedent:Antecedent;
@@ -63,7 +66,7 @@ export class CreatePatientTabComponent implements OnInit {
   submittedPatient:any;
   submitted = false;
   registerForm: FormGroup;
-  constructor(private vitalService: VitalService,private symptomService: SymptomService,private patientService: PatientService,private formBuilder: FormBuilder) { }
+  constructor(private interventionService: InterventionService,private vitalService: VitalService,private symptomService: SymptomService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
     this.reloadPatientListData();
     this.patient=new Patient();
@@ -72,6 +75,7 @@ export class CreatePatientTabComponent implements OnInit {
     this.symptom=new Symptom();
     this.antecedent=new Antecedent();
     this.vital=new Vital();
+    this.intervention=new Intervention();
     this.registerForm = this.formBuilder.group({
     gender: ['', Validators.required],
     firstname: ['', Validators.required],
@@ -160,6 +164,22 @@ export class CreatePatientTabComponent implements OnInit {
             console.log(data);
             this.isSignedUp = true;
             this.isSignUpFailed = false;
+          },
+          error => {
+            console.log(error);
+            this.errorMessage = error.error.message;
+            this.isSignUpFailed = true;
+          }
+        ); 
+
+        //add intervention
+        this.intervention.patient=this.submittedPatient;
+        this.intervention.date=new Date();
+        this.interventionService.createIntervention(this.intervention).subscribe(
+          data => {
+            console.log(data);
+            this.isSignedUp = true;
+            this.isSignUpFailed = false;
             Swal.fire('','La fiche patient est ajoutée avec succés !');
             this.reset();
           },
@@ -183,6 +203,7 @@ export class CreatePatientTabComponent implements OnInit {
    this.patient=new Patient();
    this.address=new Address();
    this.antecedent=new Antecedent();
+   this.intervention=new Intervention();
    this.submitted = false;
    this.registerForm.reset();
   }

@@ -8,5 +8,6 @@ export class Vital{
     respiratoryRate:number;
     measurementDate:Date;
     patient:Patient;
+    saturation:number;
     constructor(){}
 }

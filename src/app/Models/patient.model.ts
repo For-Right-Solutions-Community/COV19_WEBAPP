@@ -11,6 +11,7 @@ import { Localisation } from './localisation.model';
 import { Symptom } from './symptom.model';
 import { Vital } from './vital.model';
 import { PriseEnCharge } from './prise-en-charge.model';
+import { Intervention } from './intervention.model';
 
 export class Patient{
     id:number;
@@ -45,7 +46,12 @@ export class Patient{
     location:Localisation;
     symptomRecords:Symptom[]=[];
     vitalsRecords:Vital[]=[];
+    interventions:Intervention[]=[];
     date:Date;
     priseencharge:PriseEnCharge;
+    autonomy:boolean;
+    autonomous:boolean;
+    dependant:boolean;
+    alteredCompletely:boolean;
     constructor(){}
 }

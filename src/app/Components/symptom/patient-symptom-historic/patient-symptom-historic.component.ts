@@ -22,7 +22,7 @@ export class PatientSymptomHistoricComponent implements OnInit {
   errorMessage = '';
   @Output() createdSymptom = new EventEmitter();
   @Input()patient:Patient;
-  constructor(private patientService: PatientService,private interventionService:InterventionService) { }
+  constructor(private patientService: PatientService) { }
   ngOnInit() {
     this.getPatientsList();
     this.symptoms= [];
@@ -42,7 +42,7 @@ export class PatientSymptomHistoricComponent implements OnInit {
   }
 
   getPatientInterventions(id:number) {
-    this.interventionService.getPatientInterventionsList(id)
+    this.patientService.getPatientInterventionsList(id)
     .subscribe(result => {
      this.interventions = result ;
   },

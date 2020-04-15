@@ -12,11 +12,11 @@ import { Symptom } from '../../../../Models/symptom.model';
 import { Antecedent } from '../../../../Models/antecedent.model';
 import { Exposure } from '../../../../Models/exposure.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { VitalService } from '../../../../Services/vital.service';
-import { SymptomService } from '../../../../Services/symptom.service';
 import { PatientService } from '../../../../Services/patient.service';
 import Swal from 'sweetalert2';
 import { LocalDataSource } from 'ng2-smart-table';
+import { Intervention } from '../../../../Models/intervention.model';
+import { InterventionService } from '../../../../Services/intervention.service';
 
 @Component({
   selector: 'ngx-update-patient-tab',
@@ -54,7 +54,8 @@ export class UpdatePatientTabComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
   @Input()patient:Patient;
-  vital:Vital=new Vital();;
+  intervention=new Intervention();
+  vital:Vital=new Vital();
   symptom:Symptom=new Symptom();
   antecedent:Antecedent;
   address:Address;
@@ -62,7 +63,7 @@ export class UpdatePatientTabComponent implements OnInit {
   submittedPatient:any;
   submitted = false;
   registerForm: FormGroup;
-  constructor(private vitalService: VitalService,private symptomService: SymptomService,private patientService: PatientService,private formBuilder: FormBuilder) { }
+  constructor(private interventionService: InterventionService,private patientService: PatientService,private formBuilder: FormBuilder) { }
   ngOnInit() {
     this.reloadPatientListData();
     this.address=this.patient.address;
@@ -98,6 +99,7 @@ export class UpdatePatientTabComponent implements OnInit {
       }
       this.getLastPatientSymptoms(this.patient.id);
       this.getLastPatientVitals(this.patient.id);
+      this.getLastPatientInterventions(this.patient.id);
     }
     this.exposure=this.patient.exposure;
     if(this.exposure!=undefined&&(this.exposure.contactWithInfectedPerson||this.exposure.withSuspiciousGroup||
@@ -154,10 +156,6 @@ export class UpdatePatientTabComponent implements OnInit {
         this.createdPatient.emit(1);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
-        this.reloadPatientListData();
-        Swal.fire('','La fiche patient est modifiée avec succés !');
-        this.patientService.showedit = false ;
-        this.patientService.showlist = true;
 
       },
       error => {
@@ -165,7 +163,27 @@ export class UpdatePatientTabComponent implements OnInit {
         this.errorMessage = error.error.message;
         this.isSignUpFailed = true;
       }
+    );
+    // 
+    //update intervention
+    this.intervention.patient=this.patient;
+    this.interventionService.updateIntervention(this.intervention.id,this.intervention).subscribe(
+      data => {
+        console.log(data);
+        this.isSignedUp = true;
+        this.isSignUpFailed = false;
+        this.reloadPatientListData();
+        Swal.fire('','La fiche patient est modifiée avec succés !');
+        this.patientService.showedit = false ;
+        this.patientService.showlist = true;
+      },
+      error => {
+        console.log(error);
+        this.errorMessage = error.error.message;
+        this.isSignUpFailed = true;
+      }
     ); 
+
   }
   reset(){
    this.vital=new Vital();
@@ -173,6 +191,7 @@ export class UpdatePatientTabComponent implements OnInit {
    this.patient=new Patient();
    this.address=new Address();
    this.antecedent=new Antecedent();
+   this.intervention=new Intervention();
    this.submitted = false;
    this.registerForm.reset();
   }
@@ -197,6 +216,15 @@ export class UpdatePatientTabComponent implements OnInit {
   err => console.log("Message erreur" +  err.message  ))
   }
 
+  getLastPatientInterventions(id:number) {
+    this.patientService.getLastPatientInterventions(id)
+    .subscribe(result => {
+      if(result!= undefined){
+        this.intervention = result ;
+      } 
+  },
+  err => console.log("Message erreur" +  err.message  ))
+  }
 
   getPatientsList() {
     this.patientService.getPatientsList()

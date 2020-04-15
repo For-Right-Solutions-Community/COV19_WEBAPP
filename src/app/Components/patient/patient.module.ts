@@ -17,6 +17,7 @@ import { TreatedPatientComponent } from './treated-patient/treated-patient.compo
 import { CreateSymptomComponent } from '../symptom/create-symptom/create-symptom.component';
 import { CreateVitalComponent } from '../vital/create-vital/create-vital.component';
 import { PatientSymptomHistoricComponent } from '../symptom/patient-symptom-historic/patient-symptom-historic.component';
+import { CreateInterventionComponent } from '../intervention/create-intervention/create-intervention.component';
 
 const ENTRY_COMPONENTS = [
   ChangeStatusComponent
@@ -58,7 +59,8 @@ const ENTRY_COMPONENTS = [
         TreatedPatientComponent,
         CreateSymptomComponent,
         CreateVitalComponent,
-        PatientSymptomHistoricComponent
+        PatientSymptomHistoricComponent,
+        CreateInterventionComponent,
     ],
     entryComponents: [
       ...ENTRY_COMPONENTS,

@@ -125,9 +125,15 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-1">
           <div class="form-group">
             <nb-checkbox [(checked)]="symptom.cough">Toux</nb-checkbox>
+          </div>
+        </div>
+        <div *ngIf="symptom.cough" class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.dryCough">Toux sèche </nb-checkbox>
+            <nb-checkbox [(checked)]="symptom.oilyCough">Toux grasse</nb-checkbox>
           </div>
         </div>
       </div>

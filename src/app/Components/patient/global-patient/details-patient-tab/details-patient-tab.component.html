@@ -165,13 +165,14 @@
     <div class="row">
       <div class="col-sm-2">
         <div class="form-group">
-          <nb-checkbox [(checked)]="handicape" >Handicapé</nb-checkbox>
+          <nb-checkbox [(checked)]="patient.autonomy" >Autonomie</nb-checkbox>
         </div>
       </div>
-      <div *ngIf="handicape" class="col-sm-6">
+      <div *ngIf="patient.autonomy" class="col-sm-10">
         <div class="form-group">
-          <nb-checkbox [(checked)]="patient.physicalHandicap" >Handicape Physique</nb-checkbox>
-          <nb-checkbox [(checked)]="patient.intellecHandicap" >Handicape intellectuelle</nb-checkbox>
+          <nb-checkbox [(checked)]="patient.autonomous" >Autonome</nb-checkbox>
+          <nb-checkbox [(checked)]="patient.dependant" >Dépendant</nb-checkbox>
+          <nb-checkbox [(checked)]="patient.alteredCompletely" >Alté complètement</nb-checkbox>
         </div>
       </div>
     </div>
@@ -497,9 +498,15 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-1">
           <div class="form-group">
             <nb-checkbox [(checked)]="symptom.cough">Toux</nb-checkbox>
+          </div>
+        </div>
+        <div *ngIf="symptom.cough" class="col-sm-6">
+          <div class="form-group">
+            <nb-checkbox [(checked)]="symptom.dryCough">Toux sèche </nb-checkbox>
+            <nb-checkbox [(checked)]="symptom.oilyCough">Toux grasse</nb-checkbox>
           </div>
         </div>
       </div>
@@ -598,9 +605,32 @@
           <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="respiratoryRate" [(ngModel)]="vital.respiratoryRate">
         </div>
       </div>
+      <div class="form-group row">
+        <label  class="label col-sm-2 col-form-label">Saturation :</label>
+        <div class="col-sm-10">
+          <input [ngModelOptions]="{standalone: true}" type="text" nbInput fullWidth  placeholder="" name="saturation" [(ngModel)]="vital.saturation">
+        </div>
+      </div>
     <br>
     <br>
     </nb-tab> 
+    <nb-tab tabTitle="Intervention">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Détails de l'intervention :</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <textarea [ngModelOptions]="{standalone: true}" rows="20" nbInput fullWidth shape="round"  placeholder="Détails de l'intervention..." 
+            name="description" [(ngModel)]="intervention.description"></textarea>
+          </div>
+        </div>
+      </div>
+    </nb-tab>
   </nb-tabset>      
   </form>
 </nb-card>
