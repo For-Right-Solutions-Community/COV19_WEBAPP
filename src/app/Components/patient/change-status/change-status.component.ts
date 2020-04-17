@@ -41,6 +41,7 @@ export class ChangeStatusComponent {
         this.reloadPatientListData();
         this.patientService.showlist=true;
         this.close();
+        this.reloadPatientListData();
       },
       error => {
         console.log(error);

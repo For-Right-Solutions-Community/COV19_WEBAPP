@@ -57,9 +57,9 @@ export class UpdatePatientTabComponent implements OnInit {
   intervention=new Intervention();
   vital:Vital=new Vital();
   symptom:Symptom=new Symptom();
-  antecedent:Antecedent;
-  address:Address;
-  exposure:Exposure;
+  antecedent:Antecedent=new Antecedent();
+  address:Address=new Address();
+  exposure:Exposure=new Exposure();
   submittedPatient:any;
   submitted = false;
   registerForm: FormGroup;
@@ -212,6 +212,7 @@ export class UpdatePatientTabComponent implements OnInit {
    this.address=new Address();
    this.antecedent=new Antecedent();
    this.intervention=new Intervention();
+   this.exposure=new Exposure();
    this.submitted = false;
    this.registerForm.reset();
   }

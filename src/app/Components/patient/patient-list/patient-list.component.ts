@@ -64,6 +64,41 @@ export class PatientListComponent implements OnInit {
         title: 'Genre',
         type: 'string',
       },
+      exposure: {
+        title: 'COVID Test',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value==undefined){ return '';}else{
+            if(value.hasmakingtest){
+              if(value.testResult===true){
+                return 'Test positif';
+              }else{
+                return 'Test négatif';
+              }
+            }else{
+              return 'Aucun test';
+            }
+          }; 
+        }
+      },/*
+      exposure: {
+        title: 'Cluster',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value == undefined) {
+            return '';
+          }
+          else {
+            if (value.contactWithInfectedPerson || value.withSuspiciousGroup) {
+              return 'Oui';
+            }
+            else {
+              return 'Non';
+            }
+          }
+          ;
+        }
+      },*/
       condition: {
         title: 'Etat',
         type: 'string',
