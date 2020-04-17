@@ -4,7 +4,6 @@ import { MatSort, MatPaginator } from '@angular/material';
 import { PatientService } from '../../../Services/patient.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Symptom } from '../../../Models/symptom.model';
-import { InterventionService } from '../../../Services/intervention.service';
 import { Intervention } from '../../../Models/intervention.model';
 
 @Component({

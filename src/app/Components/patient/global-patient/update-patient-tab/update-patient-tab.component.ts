@@ -167,22 +167,42 @@ export class UpdatePatientTabComponent implements OnInit {
     // 
     //update intervention
     this.intervention.patient=this.patient;
-    this.interventionService.updateIntervention(this.intervention.id,this.intervention).subscribe(
-      data => {
-        console.log(data);
-        this.isSignedUp = true;
-        this.isSignUpFailed = false;
-        this.reloadPatientListData();
-        Swal.fire('','La fiche patient est modifiée avec succés !');
-        this.patientService.showedit = false ;
-        this.patientService.showlist = true;
-      },
-      error => {
-        console.log(error);
-        this.errorMessage = error.error.message;
-        this.isSignUpFailed = true;
-      }
-    ); 
+    if(this.intervention.id!=null&&this.intervention.id!=undefined){
+      this.interventionService.updateIntervention(this.intervention.id,this.intervention).subscribe(
+        data => {
+          console.log(data);
+          this.isSignedUp = true;
+          this.isSignUpFailed = false;
+          this.reloadPatientListData();
+          Swal.fire('','La fiche patient est modifiée avec succés !');
+          this.patientService.showedit = false ;
+          this.patientService.showlist = true;
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.error.message;
+          this.isSignUpFailed = true;
+        }
+      ); 
+    }else{
+      this.interventionService.createIntervention(this.intervention).subscribe(
+        data => {
+          console.log(data);
+          this.isSignedUp = true;
+          this.isSignUpFailed = false;
+          this.reloadPatientListData();
+          Swal.fire('','La fiche patient est modifiée avec succés !');
+          this.patientService.showedit = false;
+          this.patientService.showlist = true;
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.error.message;
+          this.isSignUpFailed = true;
+        }
+      ); 
+    }
+    
 
   }
   reset(){
