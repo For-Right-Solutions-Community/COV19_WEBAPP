@@ -12,6 +12,7 @@ import { Symptom } from './symptom.model';
 import { Vital } from './vital.model';
 import { PriseEnCharge } from './prise-en-charge.model';
 import { Intervention } from './intervention.model';
+import { PriseEnChargeSAMU } from './prise-en-charge-samu.model';
 
 export class Patient{
     id:number;
@@ -53,5 +54,6 @@ export class Patient{
     autonomous:boolean;
     dependant:boolean;
     alteredCompletely:boolean;
+    priseenchargesamu:PriseEnChargeSAMU
     constructor(){}
 }

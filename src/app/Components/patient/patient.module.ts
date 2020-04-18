@@ -18,9 +18,11 @@ import { CreateSymptomComponent } from '../symptom/create-symptom/create-symptom
 import { CreateVitalComponent } from '../vital/create-vital/create-vital.component';
 import { PatientSymptomHistoricComponent } from '../symptom/patient-symptom-historic/patient-symptom-historic.component';
 import { CreateInterventionComponent } from '../intervention/create-intervention/create-intervention.component';
+import { ChangeStatusSAMUComponent } from './change-status-samu/change-status-samu.component';
+import { EnAttentePatientComponent } from './en-attente-patient/en-attente-patient.component';
 
 const ENTRY_COMPONENTS = [
-  ChangeStatusComponent
+  ChangeStatusComponent,ChangeStatusSAMUComponent
 ];
 
 @NgModule({
@@ -61,6 +63,8 @@ const ENTRY_COMPONENTS = [
         CreateVitalComponent,
         PatientSymptomHistoricComponent,
         CreateInterventionComponent,
+        ChangeStatusSAMUComponent,
+        EnAttentePatientComponent,
     ],
     entryComponents: [
       ...ENTRY_COMPONENTS,

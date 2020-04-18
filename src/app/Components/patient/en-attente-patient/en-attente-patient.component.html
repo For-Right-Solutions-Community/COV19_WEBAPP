@@ -1,6 +1,6 @@
 <nb-card *ngIf="patientService.showlist">
   <nb-card-header>
-    Liste des patients
+    Liste des patients en attente
   </nb-card-header>
   <nb-card-body>
     <div class="row">
@@ -17,6 +17,9 @@
     </div>
    <br>
     <div class="row">
+      <div class="col-md-3">
+        <button (click)="confirmChangeState()" nbButton>Prise en charge du patient</button>
+      </div>
       <div class="col-md-3">
         <button (click)="updatingSymptoms()" nbButton>Mise à jour des symptômes</button>
       </div>

@@ -52,12 +52,30 @@ export class PatientService {
     return this.http.get<Patient[]>(`${this.baseUrl}/`);
   }
 
+  getAttentePatientsList() { 
+    this.patients=[];
+    return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
+      if(dataX!=null){
+        for(let p of dataX){
+          if(((p.condition!=null && p.condition.toString()==="SEVERE")||(p.covidscore!=null && p.covidscore>3)
+          ||(p.exposure!=null&&(p.exposure.testResult===true||p.exposure.contactedTravellerTestResult===true
+            ||p.exposure.withSuspiciousGroup===true||p.exposure.contactWithInfectedPerson===true)))
+            &&p.priseencharge===null&&p.priseenchargesamu===null){
+            this.patients.push(p);
+          }
+        }
+      }
+    
+    return this.patients;
+  }));
+  }
+
   getCriticalPatientsList() { 
     this.patients=[];
     return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
       if(dataX!=null){
         for(let p of dataX){
-          if(p.condition!=null && p.condition.toString()==="SEVERE"){
+          if(p.priseencharge!=null && p.priseencharge.toString()==="SAMU"&&(p.priseenchargesamu===null||p.priseenchargesamu===undefined)){
             this.patients.push(p);
           }
         }
@@ -71,7 +89,7 @@ export class PatientService {
     return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
       if(dataX!=null){
         for(let p of dataX){
-          if(p.priseencharge!=null && p.priseencharge.toString()!="AUCUNE"){
+          if(p.priseencharge!=null && p.priseencharge.toString()==="CONSEIL"||(p.priseenchargesamu!=null&&p.priseenchargesamu!=undefined)){
             this.patients.push(p);
           }
         }

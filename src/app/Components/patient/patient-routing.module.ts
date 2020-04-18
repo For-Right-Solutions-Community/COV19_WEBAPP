@@ -5,6 +5,7 @@ import { PatientListComponent } from './patient-list/patient-list.component';
 import { CriticalPatientComponent } from './critical-patient/critical-patient.component';
 import { CreatePatientTabComponent } from './global-patient/create-patient-tab/create-patient-tab.component';
 import { TreatedPatientComponent } from './treated-patient/treated-patient.component';
+import { EnAttentePatientComponent } from './en-attente-patient/en-attente-patient.component';
 const routes: Routes = [
     {
       path: '',
@@ -25,6 +26,10 @@ const routes: Routes = [
         {
           path: 'treatedPatient',
           component: TreatedPatientComponent,
+        },
+        {
+          path: 'enattentePatient',
+          component: EnAttentePatientComponent,
         },
         {
           path: '',

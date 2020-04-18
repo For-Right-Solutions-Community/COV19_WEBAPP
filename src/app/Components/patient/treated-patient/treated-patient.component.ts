@@ -5,6 +5,8 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { PatientService } from '../../../Services/patient.service';
 import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
+import { NbWindowService } from '@nebular/theme';
+import { ChangeStatusComponent } from '../change-status/change-status.component';
 @Component({
   selector: 'ngx-treated-patient',
   templateUrl: './treated-patient.component.html',
@@ -20,7 +22,6 @@ export class TreatedPatientComponent implements OnInit {
   data: any;
   LocalDataSource: LocalDataSource;
   selectedRows: any;
-
   settings = {
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
@@ -46,28 +47,59 @@ export class TreatedPatientComponent implements OnInit {
         title: 'Nom',
         type: 'string',
       },
-      covidscore: {
-        title: 'COVID Score',
-        type: 'numeric'
-      },
       phone: {
         title: 'Téléphone',
         type: 'string',
       },
-      age: {
-        title: 'Age',
-        type: 'string',
+      covidscore: {
+        title: 'COVID Score',
+        type: 'numeric'
       },
-      gender: {
-        title: 'Genre',
+      exposure: {
+        title: 'COVID Test',
         type: 'string',
-      },
+        valuePrepareFunction: (value) => {
+          if (value==undefined){ return '';}else{
+            if(value.hasmakingtest){
+              if(value.testResult===true){
+                return 'Test positif';
+              }else{
+                return 'Test négatif';
+              }
+            }else{
+              return 'Aucun test';
+            }
+          }; 
+        }
+      },/*
+      exposure: {
+        title: 'Cluster',
+        type: 'string',
+        valuePrepareFunction: (value) => {
+          if (value == undefined) {
+            return '';
+          }
+          else {
+            if (value.contactWithInfectedPerson || value.withSuspiciousGroup) {
+              return 'Oui';
+            }
+            else {
+              return 'Non';
+            }
+          }
+          ;
+        }
+      },*/
       condition: {
         title: 'Etat',
         type: 'string',
       },
       priseencharge: {
         title: 'Prise en charge',
+        type: 'string',
+      },
+      priseenchargesamu: {
+        title: 'Prise en charge SAMU',
         type: 'string',
       },
       date: {
@@ -84,8 +116,33 @@ export class TreatedPatientComponent implements OnInit {
     hideSubHeader: true,
   };
 
-  constructor(public patientService: PatientService) {
+  constructor(public patientService: PatientService,private windowService: NbWindowService) {
     this.source = new LocalDataSource(this.patients);
+  }
+  onDeleteConfirm(): void {
+    if(this.selectedRows==undefined||this.selectedRows[0] == null )
+   {
+    Swal.fire('','Il faut sélectionner un patient !');
+   } 
+   else 
+   {
+     if (window.confirm('Voulez vous supprimé ce patient ?')) {
+    this.deletePatient(this.selectedRows[0].id);
+  }
+  }
+    
+  }
+  deletePatient(id: number) {
+    this.patientService.deletePatient(id)
+      .subscribe(
+        data => {
+          this.reloadData();   
+          Swal.fire('','Patient supprimé avec succés !');   
+        },  
+        error => {
+          console.log(error);
+          Swal.fire('','Vous ne pouvez pas supprimer ce patient car il a des symptomes et/ou des signes vitaux !');
+        });
   }
 
   ngOnInit() {
@@ -101,9 +158,14 @@ export class TreatedPatientComponent implements OnInit {
         }
         this.patients=result;
         this.source = new LocalDataSource(this.patients);
-        console.log(this.patients);
+        console.log(result)
       });
   }
+  doRefreshData(event){
+    this.patientService.showlist = true;
+    this.reloadData();
+  }
+
   onSearch(query: string = '') {
     if (query == '') {
       this.reloadData();
@@ -136,9 +198,22 @@ export class TreatedPatientComponent implements OnInit {
       }
     ], false);
   }
+  //edit
+  showedit(event) {  
+    if(this.selectedRows==undefined||this.selectedRows[0] == null )
+   {
+    Swal.fire('','Il faut sélectionner un patient !');
+   } 
+   else 
+   {
+   this.patientService.showedit = true ;
+   this.patientService.showlist = false; 
+   this.patient = this.selectedRows[0];
+   }error => { console.log("Error while gettig Users details") };
+}
 //details
 showdetails() {    
-  if(this.selectedRows[0] == null )
+  if(this.selectedRows==undefined||this.selectedRows[0] == null )
  {
   Swal.fire('','Il faut sélectionner un patient !');
  } 
@@ -154,9 +229,57 @@ onPatientRowSelect(event) {
   this.selectedRows = event.selected;
 }
 
-doRefreshData(event){
-  this.patientService.showlist = true;
-  this.reloadData();
+openWindowForm() {
+  const context = { patient: this.patient };
+  this.windowService.open(ChangeStatusComponent, { title: `Prise en charge du patient`, context}); 
+}
+
+confirmChangeState(){
+  if(this.selectedRows==undefined ||this.selectedRows[0]==null )
+ {
+  Swal.fire('','Il faut sélectionner un patient !');
+ } 
+ else 
+ {
+ this.patient = this.selectedRows[0];
+ this.openWindowForm();
+ }
+}
+updatingSymptoms(){
+  if(this.selectedRows==undefined ||this.selectedRows[0]==null )
+ {
+  Swal.fire('','Il faut sélectionner un patient !');
+ } 
+ else 
+ {
+ this.patient = this.selectedRows[0];
+ this.patientService.showcreatesymptom = true ;
+ this.patientService.showlist = false;
+ }
+}
+updatingVitals(){
+  if(this.selectedRows==undefined ||this.selectedRows[0]==null )
+ {
+  Swal.fire('','Il faut sélectionner un patient !');
+ } 
+ else 
+ {
+ this.patient = this.selectedRows[0];
+ this.patientService.showcreatevital = true ;
+ this.patientService.showlist = false;
+ }
+}
+showSymptoms(){
+  if(this.selectedRows==undefined ||this.selectedRows[0]==null )
+  {
+   Swal.fire('','Il faut sélectionner un patient !');
+  } 
+  else 
+  {
+  this.patient = this.selectedRows[0];
+  this.patientService.showlistsymptom = true ;
+  this.patientService.showlist = false;
+  }
 }
 
 }

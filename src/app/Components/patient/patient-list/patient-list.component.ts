@@ -5,7 +5,6 @@ import { MatSort, MatPaginator } from '@angular/material';
 import { PatientService } from '../../../Services/patient.service';
 import Swal from 'sweetalert2';
 import { NbWindowService } from '@nebular/theme';
-import { ChangeStatusComponent } from '../change-status/change-status.component';
 import { DatePipe } from '@angular/common';
 @Component({
   selector: 'ngx-patient-list',
@@ -48,21 +47,13 @@ export class PatientListComponent implements OnInit {
         title: 'Nom',
         type: 'string',
       },
-      covidscore: {
-        title: 'COVID Score',
-        type: 'numeric'
-      },
       phone: {
         title: 'Téléphone',
         type: 'string',
       },
-      age: {
-        title: 'Age',
-        type: 'string',
-      },
-      gender: {
-        title: 'Genre',
-        type: 'string',
+      covidscore: {
+        title: 'COVID Score',
+        type: 'numeric'
       },
       exposure: {
         title: 'COVID Test',
@@ -105,6 +96,10 @@ export class PatientListComponent implements OnInit {
       },
       priseencharge: {
         title: 'Prise en charge',
+        type: 'string',
+      },
+      priseenchargesamu: {
+        title: 'Prise en charge SAMU',
         type: 'string',
       },
       date: {
@@ -232,23 +227,6 @@ showdetails() {
 }
 onPatientRowSelect(event) {
   this.selectedRows = event.selected;
-}
-
-openWindowForm() {
-  const context = { patient: this.patient };
-  this.windowService.open(ChangeStatusComponent, { title: `Prise en charge du patient`, context}); 
-}
-
-confirmChangeState(){
-  if(this.selectedRows==undefined ||this.selectedRows[0]==null )
- {
-  Swal.fire('','Il faut sélectionner un patient !');
- } 
- else 
- {
- this.patient = this.selectedRows[0];
- this.openWindowForm();
- }
 }
 updatingSymptoms(){
   if(this.selectedRows==undefined ||this.selectedRows[0]==null )

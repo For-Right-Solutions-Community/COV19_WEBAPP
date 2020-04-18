@@ -1,19 +1,19 @@
 import { Component, OnInit, ViewChild, Output } from '@angular/core';
-import { LocalDataSource } from 'ng2-smart-table';
 import { Patient } from '../../../Models/patient.model';
 import { MatSort, MatPaginator } from '@angular/material';
-import { PatientService } from '../../../Services/patient.service';
+import { LocalDataSource } from 'ng2-smart-table';
 import { DatePipe } from '@angular/common';
-import Swal from 'sweetalert2';
+import { PatientService } from '../../../Services/patient.service';
 import { NbWindowService } from '@nebular/theme';
-import { ChangeStatusSAMUComponent } from '../change-status-samu/change-status-samu.component';
+import Swal from 'sweetalert2';
+import { ChangeStatusComponent } from '../change-status/change-status.component';
 
 @Component({
-  selector: 'ngx-critical-patient',
-  templateUrl: './critical-patient.component.html',
-  styleUrls: ['./critical-patient.component.scss']
+  selector: 'ngx-en-attente-patient',
+  templateUrl: './en-attente-patient.component.html',
+  styleUrls: ['./en-attente-patient.component.scss']
 })
-export class CriticalPatientComponent implements OnInit {
+export class EnAttentePatientComponent implements OnInit {
 
   patients: Patient[] = [];
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -153,7 +153,7 @@ export class CriticalPatientComponent implements OnInit {
 
   reloadData() {
     this.patients=[];
-    this.patientService.getCriticalPatientsList()
+    this.patientService.getAttentePatientsList()
       .subscribe(result => {
         if (!result) {
           return;
@@ -233,7 +233,7 @@ onPatientRowSelect(event) {
 
 openWindowForm() {
   const context = { patient: this.patient };
-  this.windowService.open(ChangeStatusSAMUComponent, { title: `Prise en charge du patient`, context}); 
+  this.windowService.open(ChangeStatusComponent, { title: `Prise en charge du patient`, context}); 
 }
 
 confirmChangeState(){

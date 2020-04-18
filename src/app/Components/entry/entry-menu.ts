@@ -14,11 +14,15 @@ export const MENU_ITEM_ADMIN: NbMenuItem[] = [
         link: '/menu/patients/patientList',
       },
       {
-        title: 'Cas critiques',
+        title: 'Patients en attente',
+        link: '/menu/patients/enattentePatient',
+      },
+      {
+        title: 'Patients critiques',
         link: '/menu/patients/criticalPatient',
       },
       {
-        title: 'Cas traités',
+        title: 'Patients suivis',
         link: '/menu/patients/treatedPatient',
       },
     ],
@@ -53,11 +57,15 @@ export const MENU_ITEM_BENEVOLENT: NbMenuItem[] = [
         link: '/menu/patients/patientList',
       },
       {
-        title: 'Cas critiques',
+        title: 'Patients en attente',
+        link: '/menu/patients/enattentePatient',
+      },
+      {
+        title: 'Patients critiques',
         link: '/menu/patients/criticalPatient',
       },
       {
-        title: 'Cas traités',
+        title: 'Patients suivis',
         link: '/menu/patients/treatedPatient',
       },
     ],
