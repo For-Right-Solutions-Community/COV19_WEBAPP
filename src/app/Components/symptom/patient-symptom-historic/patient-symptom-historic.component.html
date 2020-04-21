@@ -11,6 +11,15 @@
   <nb-list
     nbInfiniteList>
     <nb-list-item>
+      Prise en charge : {{patient.priseencharge}}<br>
+      Prise en charge SAMU : {{patient.priseenchargesamu}}<br>
+      Statut : {{patient.condition}}<br>
+      COVID Score : {{patient.covidscore}}<br>
+    </nb-list-item>
+  </nb-list>
+  <nb-list
+    nbInfiniteList>
+    <nb-list-item>
       <h5 style="color:darkgoldenrod;">Liste des interventions :</h5>
     </nb-list-item>
     <nb-list-item *ngFor="let intervention of interventions">

@@ -38,6 +38,7 @@ export class ChangeStatusSAMUComponent{
   onSubmit() {
     console.log(this.priseencharge);
     this.patient.priseenchargesamu=this.priseencharge;
+    console.log(this.patient);
     this.patientService.updatePatient(this.patient.id,this.patient).subscribe(
       data => {
         this.reloadPatientListData();
