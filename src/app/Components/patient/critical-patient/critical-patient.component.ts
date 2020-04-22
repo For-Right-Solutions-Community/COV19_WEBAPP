@@ -73,16 +73,16 @@ export class CriticalPatientComponent implements OnInit {
             }
           }; 
         }
-      },/*
-      exposure: {
-        title: 'Cluster',
+      },
+      'exposure.cluster': {
+        title: 'Suspicion cluster',
         type: 'string',
-        valuePrepareFunction: (value) => {
-          if (value == undefined) {
+        valuePrepareFunction: (cell,value) => {
+          if (value == undefined||value.exposure==undefined) {
             return '';
           }
           else {
-            if (value.contactWithInfectedPerson || value.withSuspiciousGroup) {
+            if (value.exposure.contactWithInfectedPerson || value.exposure.withSuspiciousGroup||value.exposure.contactedTravellerTestResult) {
               return 'Oui';
             }
             else {
@@ -90,8 +90,8 @@ export class CriticalPatientComponent implements OnInit {
             }
           }
           ;
-        }
-      },*/
+        },
+      },
       condition: {
         title: 'Etat',
         type: 'string',
