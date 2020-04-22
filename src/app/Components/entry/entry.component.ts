@@ -14,21 +14,20 @@ import { MENU_ITEM_ADMIN, MENU_ITEM_BENEVOLENT } from './entry-menu';
 })
 export class EntryComponent implements OnInit {
   menu:any ;
-  private roles: string[];
+  private role: string;
   constructor(private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
-      this.roles = ['ROLE_BENEVOLENT'];
-      this.roles.every(role => {
-        if (role === 'ROLE_ADMIN') {
+      this.role = this.tokenStorage.getRole();
+        console.log(this.role);
+        if (this.role === 'ADMIN') {
           this.menu=MENU_ITEM_ADMIN;
           return true;
         } else{
           this.menu=MENU_ITEM_BENEVOLENT;
           return true;
         }
-      });
     }
   }
 }

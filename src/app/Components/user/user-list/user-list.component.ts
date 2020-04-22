@@ -72,7 +72,7 @@ export class UserListComponent implements OnInit {
   onDeleteConfirm(): void {
     if(this.selectedRows==undefined||this.selectedRows[0] == null )
    {
-    Swal.fire('','Il faut sélectionner un utilsateur !');
+    Swal.fire('','Il faut sélectionner un utilisateur !');
    } 
    else 
    {
@@ -86,9 +86,15 @@ export class UserListComponent implements OnInit {
     this.userService.deleteUser(id)
       .subscribe(
         data => {
-          this.reloadData();      
+          this.reloadData();
+          Swal.fire('','Il faut sélectionner un utilisateur !');      
         },  
-        error => console.log(error));
+        error => {console.log(error)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Vous ne peuvez pas supprimer cet utilisateur, il est associé à une/des fiche(s) patient !'
+          });});
   }
 
   ngOnInit() {

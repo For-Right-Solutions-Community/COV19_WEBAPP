@@ -13,7 +13,7 @@ import { TokenStorageService } from './Components/auth/services/token-storage.se
   template: '<router-outlet></router-outlet>',
 })
 export class AppComponent implements OnInit {
-  private roles: string[];
+  private role: string;
   private authority: string;
   constructor(private analytics: AnalyticsService, private seoService: SeoService,private tokenStorage: TokenStorageService) {
   }
@@ -21,22 +21,18 @@ export class AppComponent implements OnInit {
     this.analytics.trackPageViews();
     this.seoService.trackCanonicalChanges();
     if (this.tokenStorage.getToken()) {
-      this.roles = ['ROLE_BENEVOLENT']
-      this.roles.every(role => {
-        if (role === 'ROLE_ADMIN') {
+      this.role = this.tokenStorage.getRole();
+        console.log(this.role);
+        if (this.role === 'ADMIN') {
           this.authority = 'ADMIN';
-          return false;
-        } else if (role === 'ROLE_BENEVOLENT') {
+        } else if (this.role === 'BENEVOLENT') {
           this.authority = 'BENEVOLENT';
-          return false;
         }
-        else if (role === 'ROLE_SAMU') {
+        else if (this.role === 'SAMU') {
           this.authority = 'SAMU';
-          return false;
-        }
-        this.authority = 'PATIENT';
-        return true;
-      });
+        }else{
+          this.authority = 'PATIENT';
+        } 
     }
   }
 }
