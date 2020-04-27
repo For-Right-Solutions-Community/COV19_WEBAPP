@@ -46,22 +46,59 @@ export class CreateUserComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
   }
-    this.userService.createUser(this.user).subscribe(
-      data => {
-        console.log(data);
-        this.createdUser.emit(1);
-        this.isSignedUp = true;
-        this.isSignUpFailed = false;
-        Swal.fire('','L\'utilisateur est ajouté avec succés !');
-        this.reset();
-        this.reloadUserListData();
-      },
-      error => {
-        console.log(error);
-        this.errorMessage = error.error.message;
-        this.isSignUpFailed = true;
-      }
-    ); 
+    if(this.user.role.toString()==="ADMIN"){
+      this.userService.createAdmin(this.user).subscribe(
+        data => {
+          console.log(data);
+          this.createdUser.emit(1);
+          this.isSignedUp = true;
+          this.isSignUpFailed = false;
+          Swal.fire('','L\'utilisateur est ajouté avec succés !');
+          this.reset();
+          this.reloadUserListData();
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.error.message;
+          this.isSignUpFailed = true;
+        }
+      );
+    }else if(this.user.role.toString()==="BENEVOLENT"||this.user.role.toString()==="SAMU"){
+      this.userService.createBenevolent(this.user).subscribe(
+        data => {
+          console.log(data);
+          this.createdUser.emit(1);
+          this.isSignedUp = true;
+          this.isSignUpFailed = false;
+          Swal.fire('','L\'utilisateur est ajouté avec succés !');
+          this.reset();
+          this.reloadUserListData();
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.error.message;
+          this.isSignUpFailed = true;
+        }
+      );
+    }else{
+      this.userService.createUser(this.user).subscribe(
+        data => {
+          console.log(data);
+          this.createdUser.emit(1);
+          this.isSignedUp = true;
+          this.isSignUpFailed = false;
+          Swal.fire('','L\'utilisateur est ajouté avec succés !');
+          this.reset();
+          this.reloadUserListData();
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.error.message;
+          this.isSignUpFailed = true;
+        }
+      );  
+    }
+     
   }
   reset(){
    this.user=new AppUser();

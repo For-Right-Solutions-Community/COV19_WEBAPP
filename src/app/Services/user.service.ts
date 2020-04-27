@@ -25,6 +25,12 @@ export class UserService {
   createUser(user: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/create`, user);
   }
+  createBenevolent(user: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}/createbenevolent`, user);
+  }
+  createAdmin(user: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}/createadmin`, user);
+  }
 
   updateUser(id: number, user: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/${id}`, user);
