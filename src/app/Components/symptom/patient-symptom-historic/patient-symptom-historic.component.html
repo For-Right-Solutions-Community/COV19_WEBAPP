@@ -56,7 +56,7 @@
         <p *ngIf="patient.exposure!=null&&patient.exposure.contactWithInfectedPerson">Il a contacté une personne infectée (dans les deux semaines passées)<br></p>
         <p *ngIf="patient.exposure!=null&&patient.exposure.withSuspiciousGroup">Il a  contacté des personnes qui ont des symptômes (des signes respiratoires,fievre,...)<br></p>
         <p *ngIf="symptom.fever">Fièvre<br>
-        Tompérature : {{symptom.temperature}}<br></p>
+        Température : {{symptom.temperature}}<br></p>
         <p *ngIf="symptom.cough && symptom.dryCough">Toux sèche<br></p>
         <p *ngIf="symptom.cough && symptom.oilyCough">Toux grasse<br></p>
         <p *ngIf="symptom.dyspnea">Dyspnée <br></p>
