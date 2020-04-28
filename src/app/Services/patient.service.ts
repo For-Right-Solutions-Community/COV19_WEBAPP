@@ -56,11 +56,6 @@ export class PatientService {
     return this.http.get<Patient[]>(`${this.baseUrl}/`).pipe( map((dataX: Patient[]) => {
       if(dataX!=null){
         for(let p of dataX){
-          console.log(p.priseencharge);
-          console.log(p.priseenchargesamu);
-          console.log(p.condition);
-          console.log(p.covidscore);
-          console.log(p.exposure);
           if(((p.condition!=null &&p.condition!=undefined&& p.condition.toString()==="SEVERE")||(p.covidscore!=null &&p.covidscore!=undefined&& p.covidscore>3)
           ||(p.exposure!=null&&p.exposure!=undefined&&(p.exposure.testResult===true||p.exposure.contactedTravellerTestResult===true
             ||p.exposure.withSuspiciousGroup===true||p.exposure.contactWithInfectedPerson===true)))

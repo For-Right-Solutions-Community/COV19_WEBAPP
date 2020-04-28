@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { TokenStorageService } from '../auth/services/token-storage.service';
 import { MENU_ITEM_ADMIN, MENU_ITEM_BENEVOLENT } from './entry-menu';
 

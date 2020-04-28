@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, HostBinding } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Patient } from '../../../Models/patient.model';
 import { MatSort, MatPaginator } from '@angular/material';
 import { PatientService } from '../../../Services/patient.service';
 import Swal from 'sweetalert2';
-import { NbWindowService } from '@nebular/theme';
+import { NbWindowService, NbToastrService } from '@nebular/theme';
 import { DatePipe } from '@angular/common';
 @Component({
   selector: 'ngx-patient-list',
@@ -12,7 +12,6 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./patient-list.component.scss']
 })
 export class PatientListComponent implements OnInit {
-
   patients: Patient[] = [];
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -160,7 +159,7 @@ export class PatientListComponent implements OnInit {
         this.source = new LocalDataSource(this.patients);
         console.log(result)
       });
-  }
+    }
   doRefreshData(event){
     this.patientService.showlist = true;
     this.reloadData();

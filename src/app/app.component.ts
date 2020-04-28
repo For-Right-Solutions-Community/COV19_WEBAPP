@@ -7,15 +7,18 @@ import { Component, OnInit } from '@angular/core';
 import { AnalyticsService } from './@core/utils/analytics.service';
 import { SeoService } from './@core/utils/seo.service';
 import { TokenStorageService } from './Components/auth/services/token-storage.service';
+import { NotificationService } from './Services/notification.service';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-app',
-  template: '<router-outlet></router-outlet>',
+  template: '<router-outlet></router-outlet>'
 })
 export class AppComponent implements OnInit {
   private role: string;
   private authority: string;
-  constructor(private analytics: AnalyticsService, private seoService: SeoService,private tokenStorage: TokenStorageService) {
+  constructor(private analytics: AnalyticsService, private seoService: SeoService,private tokenStorage: TokenStorageService,
+    private toastrService: NbToastrService,private notificationService:NotificationService) {
   }
   ngOnInit(): void {
     this.analytics.trackPageViews();
@@ -34,5 +37,7 @@ export class AppComponent implements OnInit {
           this.authority = 'PATIENT';
         } 
     }
+    
   }
+  
 }
