@@ -63,8 +63,26 @@ export class CreateUserComponent implements OnInit {
           this.isSignUpFailed = true;
         }
       );
-    }else if(this.user.role.toString()==="BENEVOLENT"||this.user.role.toString()==="SAMU"){
+    }else if(this.user.role.toString()==="BENEVOLENT"){
       this.userService.createBenevolent(this.user).subscribe(
+        data => {
+          console.log(data);
+          this.createdUser.emit(1);
+          this.isSignedUp = true;
+          this.isSignUpFailed = false;
+          Swal.fire('','L\'utilisateur est ajouté avec succés !');
+          this.reset();
+          this.reloadUserListData();
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.error.message;
+          this.isSignUpFailed = true;
+        }
+      );
+    }
+    else if(this.user.role.toString()==="SAMU"){
+      this.userService.createSamu(this.user).subscribe(
         data => {
           console.log(data);
           this.createdUser.emit(1);
