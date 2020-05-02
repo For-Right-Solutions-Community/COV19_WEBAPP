@@ -12,6 +12,6 @@ export class NotificationService {
 
   getResponseFromServer() {
     return this.http.get<any>(`${this.baseUrl}`,
-    { headers: new HttpHeaders({timeout: `${this.longpollingtimeout}`,'Access-Control-Allow-Origin':'*'}), responseType: 'text' as 'json'}).toPromise();
+    { headers: new HttpHeaders({timeout: `${this.longpollingtimeout}`,'Access-Control-Allow-Origin':'*'}), responseType: 'json' as 'json'}).toPromise();
   }
 }

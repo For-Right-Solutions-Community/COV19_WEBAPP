@@ -10,9 +10,10 @@ import { NotificationService } from '../../Services/notification.service';
 export class PatientComponent implements OnInit {
   delay = ms => new Promise(res => setTimeout(res, ms));
   audio = new Audio('/assets/images/alert.mp3');
+  audiosamu = new Audio('/assets/images/redalert.mp3');
   position:string='top-right';
   status:string='info';
-  duration:number=120000;
+  duration:number=120000000;
   @HostBinding('class')
   classes = 'example-items-rows';
 
@@ -22,11 +23,14 @@ export class PatientComponent implements OnInit {
     this.monitornews();
   }
 
-  showToast(position,status,duration) {
+  showToast(position,status,duration,data) {
     this.toastrService.show(
       'Consultez les nouveaux changements !',
-      `Notification`,
+      data.msg,
       { position, status,duration });
+      if(data.channel=="SAMU")
+      this.audiosamu.play()
+      else
       this.audio.play();
   }
 
@@ -42,7 +46,7 @@ export class PatientComponent implements OnInit {
                 let reponse = await this.notificationService.getResponseFromServer();
                 console.log("News Captured");
                 console.log(reponse);
-                this.showToast(this.position,this.status,this.duration);
+                this.showToast(this.position,this.status,this.duration,reponse);
            }
            catch(error){
                    console.error(error);
